@@ -1,0 +1,12 @@
+[submodule "dotbot"]
+	path = dotbot
+	url = https://github.com/anishathalye/dotbot
+[submodule "bin/liquidprompt"]
+	path = bin/liquidprompt
+	url = https://github.com/nojhan/liquidprompt.git
+[submodule "bin/liquidprompt"]
+	path = bin/bash-git-prompt
+	url = https://github.com/magicmonty/bash-git-prompt.git
+# [submodule "private"]
+# 	 path = private
+# 	 url = git@gitlab.com:4U6U57/dotfiles.private	

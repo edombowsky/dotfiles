@@ -1,0 +1,6 @@
+cask 'java'
+brew 'git'
+brew 'htop-osx'
+brew 'perl'
+brew 'neovim/neovim/neovim'
+brew 'ripgrep'

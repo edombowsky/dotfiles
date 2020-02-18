@@ -1,0 +1,39 @@
+- defaults:
+  link:
+    create: true
+    relink: true
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
+  - [git submodule sync, Syncing submodule remotes]
+  - ["git submodule foreach git pull origin master, Updating submodule contents]
+  - ["date > ~/.dotfiles_update", Logging last update]
+
+- clean: ['~', '~/.config']
+
+- link:
+    ~/.config/nvim: config/nvim/
+    ~/.bashrc: bashrc
+    ~/.bash_profile: bash_profile
+    ~/.bash_alias: bash_aliases
+    ~/.bash_funtions: bash_funtions
+    ~/.bash_logout: bash_logout
+    ~/.bash_prompt: bash_prompt
+		#~/.config
+		#~/.dircolors.256dark: dircolors.256dark
+		#~/.dircolors: dircolors
+		~/.curlrc: curlrc
+		~/.gitconfig: gitconfig
+		~/.git-prompt.sh: git-prompt.sh
+		~/.gitignore_global: gitignore_global
+		#~/.dircolors.nord: dircolors.nord
+		#~/.multitail.conf: multitail,conf
+		#~/.markdownlintrc: markdownlintrc
+		~/.ripgreprc: ripgreprc
+		~/.psqlc: psqlc
+		~/.profile: profile
+# cp tmux-powerlinerc: tmux-powerlinerc
+# cp tmux.conf: tmux.conf
+		~/.tigrc: tigrc
+    ~/.vimrc: vimrc
+		#~/bin

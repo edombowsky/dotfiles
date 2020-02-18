@@ -1,0 +1,243 @@
+# ====================================================================
+# Functions to set-up prompts
+# ====================================================================
+
+# --------------------------------------------------------------------
+# A few miscellaneous but possibly useful functions
+# --------------------------------------------------------------------
+
+# Change title of window
+title() {
+    # echo -ne "\033]0;"$*"\007"
+    printf '\e]0;%s\a' "$*"
+}
+
+tpwd() {
+    printf '\e]0;%s\a' "${PWD##*/}"
+}
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
+
+# --------------------------------------------------------------------
+# Customise default prompt
+# --------------------------------------------------------------------
+export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+
+# If you want long command lines to wrap to the next line then when preparing
+# the PS1 variable make sure all non-printable bytes in it are contained
+# within \[ \]. Otherwise, bash will count them in the length of the prompt.
+# It uses the length of the prompt to determine when to wrap the line.
+#
+# See: https://askubuntu.com/a/24422
+bash_prompt_command() {
+    local PREV_RET_VAL="$?"
+
+    PS1="$BGREEN\u@\h"
+
+    if [[ $(__git_ps1) =~ \*\)$ ]]
+    then
+        # a file has been modified but not added
+        PS1+="$YELLOW"'$(__git_ps1 " (%s)")'
+    elif [[ $(__git_ps1) =~ \+\)$ ]]
+    then
+        # a file has been added, but not commited
+        PS1+="$MAGENTA"'$(__git_ps1 " (%s)")'
+    else
+        # the state is clean, changes are commited
+        PS1+="$CYAN"'$(__git_ps1 " (%s)")'
+    fi
+
+    PS1+="$BBLUE \w"
+
+    if [[ $PREV_RET_VAL -eq 0 ]]
+    then
+        PS1+="$COLOUR_OFF\n(${SHLVL}:\\!)# "
+    else
+        PS1+="\n$RED[$PREV_RET_VAL] $COLOUR_OFF(${SHLVL}:\\!)# "
+    fi
+
+    export PS1
+}
+
+##
+# This callback function is used to tweak your prompt dynamically.
+#
+# There are two helper functions that can be used within prompt_callback:
+#
+#   - gp_set_window_title <String> - sets the window title to the given
+#                                    string (should work for XTerm type
+#                                    terminals like in OS X or Ubuntu)
+#   - gp_truncate_pwd - a function that returns the current PWD truncated
+#                       to fit the current terminal width. Specify the
+#                       length to truncate to as a parameter. Otherwise
+#                       it defaults to 1/3 of the terminal width.
+#
+# See: https://github.com/magicmonty/bash-git-prompt
+#
+##
+prompt_callback() {
+    gp_set_window_title ${PWD##*/}
+}
+
+if [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]]; then
+    # set variable identifying the chroot you work in (used in the prompt below)
+    if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+        debian_chroot=$(cat /etc/debian_chroot)
+    fi
+
+    # set a fancy prompt (non-color, unless we know we "want" color)
+    case "$TERM" in
+        xterm-color|*-256color) color_prompt=yes;;
+    esac
+fi
+
+
+# --------------------------------------------------------------------
+# Set-up the magicmonty prompt.
+# 
+# See https://github.com/magicmonty/bash-git-prompt for explanation
+# of variables being set
+# --------------------------------------------------------------------
+setup_magicmonty_prompt() {
+    GIT_PROMPT_ONLY_IN_REPO=1
+
+    # GIT_PROMPT_FETCH_REMOTE_STATUS=0   # uncomment to avoid fetching remote status
+    # GIT_PROMPT_IGNORE_SUBMODULES=1 # uncomment to avoid searching for changed files in submodules
+    GIT_PROMPT_WITH_VIRTUAL_ENV=0 # uncomment to avoid setting virtual environment infos for node/python/conda environments
+
+    # GIT_PROMPT_SHOW_UPSTREAM=1 # uncomment to show upstream tracking branch
+    GIT_PROMPT_SHOW_UNTRACKED_FILES=normal # can be no, normal or all; determines counting of untracked files
+
+    # GIT_PROMPT_SHOW_CHANGED_FILES_COUNT=0 # uncomment to avoid printing the number of changed files
+
+    # GIT_PROMPT_START=...    # uncomment for custom prompt start sequence
+    # GIT_PROMPT_END=...      # uncomment for custom prompt end sequence
+
+    # as last entry source the gitprompt script
+    # GIT_PROMPT_THEME=Custom # use custom theme specified in file GIT_PROMPT_THEME_FILE (default ~/.git-prompt-colors.sh)
+    # GIT_PROMPT_THEME_FILE=~/.git-prompt-colors.sh
+    # GIT_PROMPT_THEME=Solarized # use theme optimized for solarized color scheme
+
+    if [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]]; then
+        __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
+        source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+    else
+        source $HOME/bin/bash-git-prompt/gitprompt.sh
+    fi
+
+    export PROMPT_COMMAND="history -a; history -c; history -r; tpwd; $PROMPT_COMMAND"
+    # export PROMPT_COMMAND='history -a && setLastCommandState;setGitPrompt;echo -ne "\033]0;$(basename $PWD)\007"'
+
+    [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
+      && echo "$( date +%T%z ) Prompt formatted by magicmonty/bash-git-prompt..." \
+      || echo "$( date +%T.%N%z ) Prompt formatted by magicmonty/bash-git-prompt..."
+}
+
+# --------------------------------------------------------------------
+# Set-up the magicmonty prompt.
+# 
+# See https://github.com/nojhan/liquidprompt for further details
+# --------------------------------------------------------------------
+setup_liquidprompt() {
+    source $HOME/liquidprompt/liquidprompt
+    export LP_PS1_POSTFIX="\n> "
+    export LP_PS1_PREFIX="$( tpwd )"
+    export PROMPT_COMMAND="$PROMPT_COMMAND $(tpwd)"
+
+    echo "$( date +%T.%N%z ) Prompt formatted by liquidprompt ..."
+
+}
+
+setup_git_prompt() {
+        source ~/.git-prompt.sh
+
+    if [[ "${OSTYPE//[0-9.]/}" != 'darwin' ]]; then
+        # uncomment for a coloured prompt, if the terminal has the capability; turned
+        # off by default to not distract the user: the focus in a terminal window
+        # should be on the output of commands, not on the prompt
+        force_color_prompt=yes
+
+        if [ -n "$force_color_prompt" ]; then
+            if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+            # We have color support; assume it's compliant with Ecma-48
+            # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+            # a case would tend to support setf rather than setaf.)
+            color_prompt=yes
+            else
+                color_prompt=
+            fi
+        fi
+
+        if [ "$color_prompt" = yes ]; then
+            PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+        else
+            PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+        fi
+        unset color_prompt force_color_prompt
+
+        # If this is an xterm set the title to user@host:dir
+        case "$TERM" in
+            xterm*|rxvt*)
+                PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+                ;;
+            *)
+                ;;
+        esac
+    fi
+
+    GIT_PS1_SHOWDIRTYSTATE=true
+
+    # Reset
+    COLOUR_OFF="\[\033[0m\]"       # Text Reset
+
+    # Regular Colours
+    BLACK="\[\033[0;30m\]"
+    LIGHT_GRAY="\[\033[0;37m\]"
+    RED="\[\033[0;31m\]"
+    GREEN="\[\033[0;32m\]"
+    YELLOW="\[\033[0;33m\]"
+    BLUE="\[\033[0;34m\]"
+    PURPLE="\[\033[0;35m\]"
+    CYAN="\[\033[0;36m\]"
+    MAGENTA="\[\033[0;35m\]"
+    WHITE="\[\033[0;37m\]"
+
+    # Bold
+    BBLACK="\[\033[1;30m\]"
+    LIGHT_GRAY="\[\033[1;37m\]"
+    BRED="\[\033[1;31m\]"
+    BGREEN="\[\033[1;32m\]"
+    BYELLOW="\[\033[1;33m\]"
+    BBLUE="\[\033[1;34m\]"
+    BPURPLE="\[\033[1;35m\]"
+    BCYAN="\[\033[1;36m\]"
+    BMAGENTA="\[\033[1;35m\]"
+    BWHITE="\[\033[1;37m\]"
+
+    bash_prompt_command
+    # export PROMPT_COMMAND=bash_prompt_command
+
+    # ESC]0;TITLEBEL :: Set icon name and window title to TITLE
+    # ESC]1;TITLEBEL :: Set icon name to TITLE
+    # ESC]2;TITLEBEL :: Set window title to TITLE
+    #
+    # (ESC is the escape character \033 and BEL is the bell character \007)
+    #
+    # Preserve bash history in multiple terminal windows
+    # http://unix.stackexchange.com/questions/1288/preserve-bash-history-in-multiple-terminal-windows
+    export PROMPT_COMMAND="history -a; history -c; history -r; tpwd"
+
+    # gitprompt.sh
+
+    [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
+        && echo "$( date +%T%z ) Prompt formatted by home grown gitprompt.sh script..." \
+        || echo "$( date +%T.%N%z ) Prompt formatted by home grown gitprompt.sh script..."
+}

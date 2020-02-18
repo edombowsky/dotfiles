@@ -1,0 +1,354 @@
+[user]
+	name = Earl Dombowsky
+	email = earl.dombowsky@ca.abb.com
+
+[core]
+    excludesfile = /Users/caeadom/.gitignore_global
+    editor = vi
+    autocrlf = false
+
+    # Tell Git which whitespace problems it should recognize, namely any
+    # whitespace at the end of a line, as well as mixed spaces and tabs:
+    whitespace = trailing-space,space-before-tab
+
+[init]
+    templatedir = /Applications/SourceTree.app/Contents/Resources/git_local/share/git-core/templates
+
+[branch]
+    # When branching off a remote branch, automatically let the local branch
+    # track the remote branch:
+    autosetupmerge = true
+
+[rerere]
+    # Enable the recording of resolved conflicts, so that identical hunks
+    # can be resolved automatically later on.
+    enabled = true
+
+[filter "lfs"]
+    clean = git-lfs clean %f
+    smudge = git-lfs smudge %f
+    required = true
+
+[push]
+    default = simple
+
+[commit]
+    template = /Users/caeadom/.stCommitMsg
+
+[difftool]
+    prompt = false
+    trustExitCode = true
+    keepBackup = false
+[difftool "bcompare"]
+    cmd = bcomp "$LOCAL" "$REMOTE"
+[difftool "gb-bcompare"]
+    cmd = bcompare "$LOCAL" "$REMOTE"
+[difftool "diffuse"]
+    cmd = diffuse "$LOCAL" "$REMOTE"
+[difftool "bcompare_wsl"]
+    cmd = '/mnt/c/Program Files/Beyond Compare 4/BCompare.exe' $(wslpath -w $LOCAL) $(wslpath -w $REMOTE)
+[difftool "winmerge"]
+    cmd = '/mnt/c/Program Files/WinMerge/WinMergeU.exe' $(wslpath -w $LOCAL) $(wslpath -w $REMOTE)
+[difftool "meld"]
+    cmd = '/mnt/c/Program Files (x86)/Meld/Meld.exe' $(wslpath -w $LOCAL) $(wslpath -w $REMOTE)
+[difftool "sublimerge"]
+    cmd = subl -n --wait "<LEFT>" "<RIGHT>" --command "sublimerge_diff_views {\"left_read_only\": true, \"right_read_only\": true}"
+[difftool "sublimerge_wsl"]
+    cmd = subl -n --wait \"$REMOTE\" \"$LOCAL\" --command \"sublimerge_diff_views {\\\"left_read_only\\\": true, \\\"right_read_only\\\": true}\"
+[difftool "sourcetree"]
+    cmd = /usr/local/bin/bcomp \"$LOCAL\" \"$REMOTE\"
+    path = -ro
+
+# Taken from https://lukas.zapletalovi.com/2012/09/three-way-git-merging-with-meld.html
+#
+# Sometimes it's better to see side-by-side comparison. I call this setup
+# the three-way merge with tabs. This way you can still use Meld with
+# three windows, but it will read lines from the BASE file showing you
+# history. And you can still use tabs to do side-by-side comparison.
+[mergetool "bcompare_wsl"]
+    prompt = false
+    trustExitCode = true
+    #path = bcomp
+    cmd = '/mnt/c/Program Files/Beyond Compare 4/BCompare.exe'
+[mergetool "bcompare"]
+    cmd = bcomp \"$PWD/$LOCAL\" \"$PWD/$REMOTE\" \"$PWD/$BASE\" \"$PWD/$MERGED\"
+    keepBackup = false
+    trustExitCode = false
+[mergetool "gb-bcompare"]
+    cmd = bcompare \"$PWD/$LOCAL\" \"$PWD/$REMOTE\" \"$PWD/$BASE\" \"$PWD/$MERGED\"
+    keepBackup = false
+    trustExitCode = false
+[mergetool "mymeld"]
+    cmd = meld $LOCAL $BASE $REMOTE -o $MERGED --diff $BASE $LOCAL --diff $BASE $REMOTE --auto-merge
+[mergetool "mydiffuse"]
+    cmd = diffuse $LOCAL $BASE $REMOTE -o $MERGED --diff $BASE $LOCAL --diff $BASE $REMOTE --auto-merge
+[mergetool "mywinmerge"]
+    cmd = "'C:/Program Files/WinMerge/WinMergeU.exe'" -e -u -dl "Base" -dr "Mine" $(wslpath -w $LOCAL) $(wslpath -w $REMOTE) $(wslpath -w $MERGED)
+[mergetool "smerge"]
+    cmd = "C:/Program Files/Sublime Merge/smerge.exe" "$BASE $LOCAL" "$REMOTE" -o "$MERGED"
+[mergetool "sublimerge"]
+    cmd = subl -n --wait "<THEIRS>" "<BASE>" "<MINE>" "<MERGED>" --command "sublimerge_diff_views"
+[mergetool "sourcetree"]
+    cmd = /usr/local/bin/bcomp \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+
+# When I want to see plain git marks in the file that is being merged
+# (the middle file). I have a separate merge tool configured and use
+# it explicitly when I want. In rare cases, it can be faster to manually
+# edit the file in the editor visualizing the changes via meld.
+[mergetool "mymeld_plain"]
+    prompt = false
+    cmd = meld --diff $LOCAL $MERGED $REMOTE --diff $BASE $LOCAL --diff $BASE $REMOTE
+[mergetool "mydiffuse_plain"]
+    prompt = false
+    cmd = diffuse $LOCAL $MERGED $REMOTE --diff $BASE $LOCAL --diff $BASE $REMOTE
+
+[diff]
+    # Allow git diff to do basic rename and copy detection:
+    renames = copies
+    # Tell git diff to use mnemonic prefixes (index, work tree, commit, object)
+    # instead of the standard a and b notation:
+    mnemonicprefix = true
+    tool = gb-bcompare
+
+[merge]
+    conflictstyle = diff3
+    stat = true
+    tool = gb-bcompare
+
+[color]
+  ui = auto
+
+  [color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+  [color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
+  [color "status"]
+    header    = white dim
+    branch    = yellow
+    added     = green #yellow
+    changed   = red #green
+    untracked = cyan
+  [color "diff-highlight"]
+    oldNormal = "black #f8cbcb"
+    oldHighlight = "black #ffaaaa"
+    newNormal = "black #cbeecb"
+    newHighlight = "black #aaffaa"
+
+[alias]
+    alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t=> \\2/' | sort
+    alias = config --get-regexp ^alias\\.
+    # http://brettterpstra.com/2014/08/04/shell-tricks-one-git-alias-to-rule-them-all/
+    finda = "!grepalias() { git config --global --get-regexp alias | grep -i \"$1\" | awk -v nr=2 '{sub(/^alias\\./,\"\")};{printf \"\\033[31m%_10s\\033[1;37m\", $1};{sep=FS};{for (x=nr; x<=NF; x++) {printf \"%s%s\", sep, $x; }; print \"\\033[0;39m\"}'; }; grepalias"
+
+    # --------------------------------------------------------------------------
+    #                                                                      basic
+    # --------------------------------------------------------------------------
+    cp = cherry-pick
+    cl = clone
+    br = branch
+    co = checkout
+
+    # ---------------------------------------------------------------------- add
+    a = add .
+    ai = add -i
+    as = !git add . && git status
+
+    # ------------------------------------------------------------------- commit
+    cm = commit -m                    # commit with message
+    ca = commit -am                   # commit all with message
+    ci = commit                       # commit
+
+    # -------------------------------------------------------------------- fetch
+    f = fetch
+    fp = fetch -p
+    fo = fetch origin
+
+    # --------------------------------------------------------------------- pull
+    pl = pull
+    plo = pull origin
+
+    # --------------------------------------------------------------------- push
+    ps = push
+    pom = push origin master
+    pso = push origin
+
+    # -------------------------------------------------------------------- stash
+    sa = stash apply
+    sc = stash clear
+    sd = stash drop
+    sl = stash list
+    sp = stash pop
+    ss = stash save
+    sw = stash show
+    sshow = "!f() { git stash show stash^{/$*} -p; }; f"
+
+    # -------------------------------------------------------------------- reset
+    r = reset
+    r1 = reset HEAD^
+    r2 = reset HEAD^^
+    rh = reset --hard
+    rh1 = reset HEAD^ --hard
+    rh2 = reset HEAD^^ --hard
+
+    # ------------------------------------------------------------------- status
+    s = status
+    st = status
+    stat = status
+
+    # --------------------------- verbose output about tags, branches or remotes
+    tags = tag -l
+    lasttag = describe --tags --abbrev=0
+    lt = describe --tags --abbrev=0
+    branches = branch -a
+    remotes = remote -v
+
+    # Find branches containing commit
+    fb = "!f() { git branch -a --contains $1; }; f"
+    # Find tags containing commit
+    ft = "!f() { git describe --always --contains $1; }; f"
+    # Find commits by source code
+    fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+    # Find commits by commit message
+    fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+    # cleanup merged branches, will remove local branches that have already been merged to master by default, but you can pass a different one if you need to
+    # https://www.atlassian.com/blog/git/advanced-git-aliases
+    bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
+
+    # ------------------------------------------ show changed files for a commit
+    cf = show --pretty="format:" --name-only
+
+    # --------------------------------------------------------------------- misc
+    r = rebase
+    mt = mergetool
+    wc = whatchanged -n 1
+    ls = ls-files
+    refresh = !git fetch -p && git pull
+    gc = !git gc --prune=now
+    
+    # --------------------------------------------------------------------------
+    #                                                                       diff
+    # --------------------------------------------------------------------------
+    di = diff                         # diff unstaged changes
+    dt = difftool
+    d = diff                          # diff unstaged changes
+    dc = diff --cached                # diff staged changes
+    last = diff HEAD^                 # diff last committed change
+    # Show the diff between the latest commit and the current state
+    d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+    # `git di $number` shows the diff between the state `$number` revisions ago and the current state
+    di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+
+    # Show a diff of last commit
+    dlc = diff --cached HEAD^
+
+    # Show only the files that changed between branches (short form)
+    dns = "!f() { git diff --name-status $1 $2; }; f"
+
+    # Show only the files that changed between branches (long form)
+    dnl = "!f() { git diff --stat --color $1 $2; }; f"
+
+    # Show content (full diff) of a commit given a revision:
+    # http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/
+    dr  = "!f() { git diff "$1"^.."$1"; }; f"
+    lcd = "!f() { git ll "$1"^.."$1"; }; f"
+    diffr  = "!f() { git diff "$1"^.."$1"; }; f"
+
+    # --------------------------------------------------------------------------
+    #                                                                        log
+    # --------------------------------------------------------------------------
+    # See: http://yantonov.com/blog/2014/10/31/git-log-aliases/
+    # List of one line commits
+    ls = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset'
+    # List of commits with changed files
+    ll = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset' --decorate --numstat
+    lll = log --stat --abbrev-commit
+    wtf = log --pretty=format:"%C(auto,yellow)%h%C(auto,red)%d%C(auto,reset)\\ by\\ %C(auto,blue)%cn%C(auto,reset),\\ %C(auto,cyan)%ar%C(auto,reset)%n\\ %s%n" --stat
+    changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+    # Commits with dates
+    ldt = log --all --pretty=format:'%Cred%h%Creset %Cgreen%ad%Creset -%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset'
+    # List oneline commits showing dates:
+    lds = "!git ldt --date=short"
+    # list online commits showing relative dates
+    ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+    # Commits with relative dates
+    ldr = "!git ldt --date=relative"
+    # Commits with date and times
+    ldi = "!git ldt --date=iso"
+    # Commit tree
+    lgraph = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci)%Creset %C(bold blue)<%an>%Creset'
+    # Commit tree with relative dates and times
+    lgr = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    # Default look for short git log
+    ldef = log --oneline --decorate
+    # View abbreviated SHA, description, and history graph of the latest 20 commits
+    l = log --pretty=oneline -n 20 --graph --abbrev-commit
+    # Commits related to a file
+    filelog = log -u
+    fl = log -u
+    # Last commit
+    lc = "!git ll -1"
+    overview = "!git log --all --oneline --no-merges"
+    latest = for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short)'
+
+    lh = log --graph
+    la = !git lh --date-order --all 2> /dev/null
+    lb = log --graph --simplify-by-decoration
+    h = !git --no-pager log --graph -n 15
+    a = !git --no-pager la -n 15
+    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+
+    # show what I did today
+    day = "!sh -c 'git log --reverse --no-merges --branches=* --date=local --after=\"yesterday 11:59PM\" --author=\"`git config --get user.name`\"'"
+
+    short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
+    simple = log --pretty=format:\" * %s\"
+    shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
+
+    slog = log --pretty=format:"%C(auto,yellow)%h%C(auto,red)%d\\ %C(auto,reset)%s\\ \\ [%C(auto,blue)%cn%C(auto,reset),\\ %C(auto,cyan)%ar%C(auto,reset)]"
+    glog = log --graph --pretty=format:"%C(auto,yellow)%h%C(auto,red)%d\\ %C(auto,reset)%s\\ \\ [%C(auto,blue)%cn%C(auto,reset),\\ %C(auto,cyan)%ar%C(auto,reset)]"
+    gflog = log -p --cc --graph --decorate
+
+    # show number of commits per contributor, sorted
+    stats = shortlog -sn
+    # Look for unpushed commits in current branch; also determine the current branch.
+    unpushed = !GIT_CURRENT_BRANCH=$(git name-rev --name-only HEAD) && git log origin/$GIT_CURRENT_BRANCH..$GIT_CURRENT_BRANCH --oneline
+
+    # --------------------------------------------------------------------------
+    #                                                                       grep
+    # --------------------------------------------------------------------------
+    # 'diff grep'
+    dg = "!sh -c 'git ls-files -m | grep $1 | xargs git diff' -"
+    # diff grep changes between two commits
+    dgc = "!sh -c 'git ls-files | grep $1 | xargs git diff $2 $3 -- ' -"
+    # 'checkout grep'
+    cg = "!sh -c 'git ls-files -m | grep $1 | xargs git checkout ' -"
+    # add grep
+    ag = "!sh -c 'git ls-files -m -o --exclude-standard | grep $1 | xargs git add' -"
+    # add all
+    aa = !git ls-files -d | xargs git rm && git ls-files -m -o --exclude-standard | xargs git add
+    # remove grep - Remove found files that are NOT under version control
+    rg = "!sh -c 'git ls-files --others --exclude-standard | grep $1 | xargs rm' -"
+
+    # http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/
+    # Find file path in codebase
+    f = "!git ls-files | grep -i"
+    # Search/grep your entire code base for a string
+    grep = grep -Ii
+    gr = grep -Ii
+    # Grep from root folder
+    gra = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
+
+    # http://stackoverflow.com/a/10693888/11543
+    branch-by-date = for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short) %(committerdate:short) %(authorname)'
+    # A little more optimized to get a tabular output
+    branch-by-date-tab = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(authorname) %(refname:short)'
+
+[winUpdater]
+	recentlySeenVersion = 2.25.0.windows.1
+
