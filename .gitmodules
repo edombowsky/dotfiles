@@ -4,7 +4,7 @@
 [submodule "bin/liquidprompt"]
 	path = bin/liquidprompt
 	url = https://github.com/nojhan/liquidprompt.git
-[submodule "bin/liquidprompt"]
+[submodule "bin/bash-git-prompt"]
 	path = bin/bash-git-prompt
 	url = https://github.com/magicmonty/bash-git-prompt.git
 # [submodule "private"]
