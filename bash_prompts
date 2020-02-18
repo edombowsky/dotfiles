@@ -147,7 +147,7 @@ setup_magicmonty_prompt() {
 # See https://github.com/nojhan/liquidprompt for further details
 # --------------------------------------------------------------------
 setup_liquidprompt() {
-    source $HOME/liquidprompt/liquidprompt
+    source $HOME/bin/liquidprompt/liquidprompt
     export LP_PS1_POSTFIX="\n> "
     export LP_PS1_PREFIX="$( tpwd )"
     export PROMPT_COMMAND="$PROMPT_COMMAND $(tpwd)"
