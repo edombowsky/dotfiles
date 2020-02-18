@@ -136,9 +136,6 @@ export PROXY_SERVER_PORT=8080
 #export PROXY_SERVER=geo-cluster125184-swg.ibosscloud.com
 #export PROXY_SERVER_PORT=8082
 
-export no_proxy=localhost,127.0.0.0/8,*.abb.com,::1
-export NO_PROXY=localhost,127.0.0.0/8,*.abb.com,::1
-
 proxy() {
     if [ -z "$1" ]; then
         OUTPUT=$(env | grep -i http_proxy | grep -vi no_proxy | wc -l)
@@ -148,18 +145,10 @@ proxy() {
             echo "Proxy seems to be OFF"
         fi
     elif [ "${1,,}" = "on" ]; then
-        unset {http,https,ftp,socks}_proxy
-        unset {HTTP,HTTPS,FTP,SOCKS}_PROXY
-        export {HTTP,HTTPS,SOCKS}_PROXY=http://${PROXY_SERVER}:${PROXY_SERVER_PORT}/
-        export {http,https,socks}_proxy=http://${PROXY_SERVER}:${PROXY_SERVER_PORT}/
-        export ftp_proxy=ftp://${PROXY_SERVER}:${PROXY_SERVER_PORT}/
-        export FTP_PROXY=ftp://${PROXY_SERVER}:${PROXY_SERVER_PORT}/
-
+        proxyon
         echo "Turned proxy ON"
     elif [ "${1,,}" = "off" ]; then
-        unset {http,https,ftp,socks}_proxy
-        unset {HTTP,HTTPS,FTP,SOCKS}_PROXY
-
+        proxyoff
         echo "Turned proxy OFF"
     elif [ "${1,,}" = "list" ]; then
         env | grep -i proxy | grep -vi no_proxy
@@ -169,6 +158,9 @@ proxy() {
 }
 
 proxyon() {
+    unset {http,https,ftp,socks}_proxy
+    unset {HTTP,HTTPS,FTP,SOCKS}_PROXY
+
     export {HTTP,HTTPS,SOCKS}_PROXY=http://${PROXY_SERVER}:${PROXY_SERVER_PORT}/
     export {http,https,socks}_proxy=http://${PROXY_SERVER}:${PROXY_SERVER_PORT}/
     export ftp_proxy=ftp://${PROXY_SERVER}:${PROXY_SERVER_PORT}/
@@ -184,13 +176,14 @@ proxyoff() {
     export MAVEN_OPTS="$BASE_MAVEN_OPTS"
 }
 
-no_proxy() {
+noproxy() {
     export no_proxy=localhost,127.0.0.0/8,*.abb.com,::1,10.*.*.*
     export NO_PROXY=localhost,127.0.0.0/8,*.abb.com,::1,10.*.*.*
 }
 
 # Turn proxy on by default
 proxyon
+noproxy
 
 # -------------------------------
 # Docker settings
