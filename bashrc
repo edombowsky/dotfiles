@@ -64,6 +64,11 @@ else
     fi
 fi
 
+# A colon-separated list of suffixes to ignore when performing filename completion.
+# A file name whose suffix matches one of the entries in FIGNORE is excluded from
+# the list of matched file names.
+FIGNORE=$FIGNORE:DS_Store:.o:~:.iml:.class
+
 # --------------------------------------------------------------------
 # Better directory navigation
 # --------------------------------------------------------------------
@@ -90,8 +95,6 @@ shopt -s cdable_vars
 # --------------------------------------------------------------------
 # Sane history defaults
 # --------------------------------------------------------------------
-export FIGNORE=$FIGNORE:DS_Store:.o:~:.iml:.class
-
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
 HISTCONTROL=ignoredups:erasedups:ignorespace
@@ -105,7 +108,7 @@ shopt -s histappend
 # Don't record some commands
 # HISTIGNORE is a colon-delimited list of patterns which should be excluded.
 # The '&' is a special pattern which suppresses duplicate entries.
-export HISTIGNORE="&:[ \t]*:exit:ls:bg:fg:history:clear"
+ HISTIGNORE="&:[ \t]*:exit:ls:bg:fg:history:clear"
 
 # Use standard ISO 8601 timestamp
 # %F equivalent to %Y-%m-%d
