@@ -20,8 +20,6 @@
     ~/.bash_prompts: bash_prompts
     ~/.config: config
     ~/.dircolors: dircolors
-    #~/.dircolors.256dark: dircolors.256dark
-    #~/.dircolors.nord: dircolors.nord
     ~/.curlrc: curlrc
     ~/.gitconfig: gitconfig
     ~/.gitignore_global: gitignore_global
