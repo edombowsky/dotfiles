@@ -1,6 +1,6 @@
 [user]
-	name = Earl Dombowsky
-	email = earl.dombowsky@ca.abb.com
+    name = Earl Dombowsky
+    email = earl.dombowsky@ca.abb.com
 
 [core]
     excludesfile = /Users/caeadom/.gitignore_global
@@ -350,5 +350,5 @@
     branch-by-date-tab = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(authorname) %(refname:short)'
 
 [winUpdater]
-	recentlySeenVersion = 2.25.0.windows.1
+    recentlySeenVersion = 2.25.0.windows.1
 

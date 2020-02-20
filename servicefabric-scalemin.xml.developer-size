@@ -174,9 +174,9 @@ WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING 
           <Parameter Name="ProducerType" Value="LttProducer"/>
           <Parameter Name="IsEnabled" Value="false"/>
         </Section>
-		<Section Name="RunAs_DCA">
+        <Section Name="RunAs_DCA">
           <Parameter Name="RunAsAccountType" Value="LocalSystem" />
-		</Section>
+        </Section>
         <!-- SystemSharedLogSizeInMB specifies the size of the log used for the local cluster node database. It is in units of Megabytes.
              SystemSharedLogMaximumRecordSizeInKB  specifies the size of the maximum record that can be stored in the log. It is in units of KB.
              Important Note: The local cluster node log size must be at least 16 times the size of the maximum record. So in the settings below, the log size is 256MB and the maximum record size is 16MB. 16 times 16MB is 256MB. If the log size is less than 16 times the maximum record size, the cluster will not start.-->
