@@ -9,28 +9,27 @@
   - [git submodule foreach git pull origin master, Updating submodule contents]
   - ["date > ~/.dotfiles_update", Logging last update]
 
-- clean: ['~', '~/.123config']
+- clean: ['~', '~/.config']
 
 - link:
-    ~/.123bashrc: bashrc
-    ~/.123bash_profile: bash_profile
-    ~/.123bash_alias: bash_aliases
-    ~/.123bash_functions: bash_functions
-    ~/.123bash_logout: bash_logout
-    ~/.123bash_prompts: bash_prompts
-    ~/.123config: config
-    ~/.123dircolors: dircolors
+    ~/.bashrc: bashrc
+    ~/.bash_profile: bash_profile
+    ~/.bash_alias: bash_aliases
+    ~/.bash_functions: bash_functions
+    ~/.bash_logout: bash_logout
+    ~/.bash_prompts: bash_prompts
+    ~/.config: config
+    ~/.dircolors: dircolors
     #~/.dircolors.256dark: dircolors.256dark
     #~/.dircolors.nord: dircolors.nord
-    ~/.123curlrc: curlrc
-    ~/.123gitconfig: gitconfig
-    ~/.123git-prompt.sh: git-prompt.sh
-    ~/.123gitignore_global: gitignore_global
-    ~/.123multitail.conf: multitail.conf
+    ~/.curlrc: curlrc
+    ~/.gitconfig: gitconfig
+    ~/.gitignore_global: gitignore_global
+    ~/.multitail.conf: multitail.conf
     #~/.markdownlintrc: markdownlintrc
-    ~/.123ripgreprc: ripgreprc
-    ~/.123psqlc: psqlc
-    ~/.123profile: profile
-    ~/.123tigrc: tigrc
-    ~/.123vimrc: vimrc
-    ~/123bin: bin
+    ~/.ripgreprc: ripgreprc
+    ~/.psqlc: psqlc
+    ~/.profile: profile
+    ~/.tigrc: tigrc
+    ~/.vimrc: vimrc
+    ~/bin: bin
