@@ -1,5 +1,6 @@
 brew 'ripgrep'
 brew 'dos2unix'
+brew 'fd'
 brew 'git'
 brew 'htop'
 brew 'maven'
