@@ -29,6 +29,10 @@
     smudge = git-lfs smudge %f
     required = true
 
+[fetch]
+  prune = true              # Always prune when fetching
+  recurseSubmodules = true  # Sync a repository with its submodules
+
 [push]
     default = simple
 
@@ -66,7 +70,7 @@
 # three windows, but it will read lines from the BASE file showing you
 # history. And you can still use tabs to do side-by-side comparison.
 [mergetool "bcompare_wsl"]
-    prompt = false
+    prompt = false   # Don't prompt before each invocation of the merge tool
     trustExitCode = true
     #path = bcomp
     cmd = '/mnt/c/Program Files/Beyond Compare 4/BCompare.exe'
@@ -140,6 +144,20 @@
     newNormal = "black #cbeecb"
     newHighlight = "black #aaffaa"
 
+[pretty]
+  # Custom log format and colors
+  custom = "%Cred%h%Creset -%C(cyan)%d%Creset %s %C(green)(%cr) %Cblue<%an>%Creset"
+  custom1 = "%Cred%h%Creset -%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset"
+  custom2 = "%C(auto,yellow)%h%C(auto,red)%d%C(auto,reset)\\ by\\ %C(auto,blue)%cn%C(auto,reset),\\ %C(auto,cyan)%ar%C(auto,reset)%n\\ %s%n"
+  custom3 = "%Cred%h%Creset %Cgreen%ad%Creset -%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset"
+  custom4 = "%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]"
+  change = "%h %cr %cn %Cgreen%s%Creset\"
+  lgraph = "%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci)%Creset %C(bold blue)<%an>%Creset"
+  lgr = "%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset"
+  quick =  "%Cred%h%Creset -%C(cyan)%d%Creset %s %Cblue<%an>%Creset"
+  gslog = "%C(auto,yellow)%h%C(auto,red)%d\\ %C(auto,reset)%s\\ \\ [%C(auto,blue)%cn%C(auto,reset),\\ %C(auto,cyan)%ar%C(auto,reset)]"
+  my = "%Cred%h%Creset -%C(cyan)%d%Creset %s %C(green)(%cr)%Creset"
+
 [alias]
     alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t=> \\2/' | sort
     alias = config --get-regexp ^alias\\.
@@ -153,6 +171,15 @@
     cl = clone
     br = branch
     co = checkout
+
+    branches = branch -vv
+    remotes = remote -v
+
+    # Switch to a branch, creating it if necessary
+    go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+
+    # Find branches containing commit
+    fb = "!f() { git branch -a --contains $1; }; f"
 
     # ---------------------------------------------------------------------- add
     a = add .
@@ -200,6 +227,11 @@
     s = status
     st = status
     stat = status
+    sh = status -s
+
+    # Display the status and ahead/behind commits for all local branches and their remotes
+    # state = !git for-each-ref --format='%(color:cyan)%(refname:short) %(color:green)%(push:track)' refs/heads && git status -s
+    state = !git branch-status && git status -s
 
     # --------------------------- verbose output about tags, branches or remotes
     tags = tag -l
@@ -230,7 +262,7 @@
     ls = ls-files
     refresh = !git fetch -p && git pull
     gc = !git gc --prune=now
-    
+
     # --------------------------------------------------------------------------
     #                                                                       diff
     # --------------------------------------------------------------------------
@@ -264,26 +296,26 @@
     # --------------------------------------------------------------------------
     # See: http://yantonov.com/blog/2014/10/31/git-log-aliases/
     # List of one line commits
-    ls = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset'
+    ls = log --pretty=custom1
     # List of commits with changed files
-    ll = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset' --decorate --numstat
+    ll = log --pretty=custom1 --decorate --numstat
     lll = log --stat --abbrev-commit
-    wtf = log --pretty=format:"%C(auto,yellow)%h%C(auto,red)%d%C(auto,reset)\\ by\\ %C(auto,blue)%cn%C(auto,reset),\\ %C(auto,cyan)%ar%C(auto,reset)%n\\ %s%n" --stat
-    changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+    wtf = log --pretty=custom2 --stat
+    changes = log --pretty=change --name-status
     # Commits with dates
-    ldt = log --all --pretty=format:'%Cred%h%Creset %Cgreen%ad%Creset -%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset'
+    ldt = log --all --pretty=custom3
     # List oneline commits showing dates:
     lds = "!git ldt --date=short"
     # list online commits showing relative dates
-    ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+    ld = log --pretty=custom4 --decorate --date=relative
     # Commits with relative dates
     ldr = "!git ldt --date=relative"
     # Commits with date and times
     ldi = "!git ldt --date=iso"
     # Commit tree
-    lgraph = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci)%Creset %C(bold blue)<%an>%Creset'
+    lgraph = log --all --graph --pretty=lgraph
     # Commit tree with relative dates and times
-    lgr = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    lgr = log --graph --pretty=lgr --abbrev-commit --date=relative
     # Default look for short git log
     ldef = log --oneline --decorate
     # View abbreviated SHA, description, and history graph of the latest 20 commits
@@ -310,14 +342,20 @@
     simple = log --pretty=format:\" * %s\"
     shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
 
-    slog = log --pretty=format:"%C(auto,yellow)%h%C(auto,red)%d\\ %C(auto,reset)%s\\ \\ [%C(auto,blue)%cn%C(auto,reset),\\ %C(auto,cyan)%ar%C(auto,reset)]"
-    glog = log --graph --pretty=format:"%C(auto,yellow)%h%C(auto,red)%d\\ %C(auto,reset)%s\\ \\ [%C(auto,blue)%cn%C(auto,reset),\\ %C(auto,cyan)%ar%C(auto,reset)]"
+    slog = log --pretty=gslog
+    glog = log --graph --pretty=gslog
     gflog = log -p --cc --graph --decorate
 
     # show number of commits per contributor, sorted
     stats = shortlog -sn
     # Look for unpushed commits in current branch; also determine the current branch.
     unpushed = !GIT_CURRENT_BRANCH=$(git name-rev --name-only HEAD) && git log origin/$GIT_CURRENT_BRANCH..$GIT_CURRENT_BRANCH --oneline
+
+    # --------------------------------------------------------------------------
+    #                                                                       blame
+    # --------------------------------------------------------------------------
+    # https://mislav.net/2014/02/hidden-documentation/
+    who = "!f() { git show $(git blame ${1} -L ${2} | awk '{print $1}'); }; f"
 
     # --------------------------------------------------------------------------
     #                                                                       grep
@@ -352,3 +390,6 @@
 [winUpdater]
     recentlySeenVersion = 2.25.0.windows.1
 
+# External scripts
+    branch-status = !$HOME/bin/git-branch-status
+    changelog = !$HOME/bin/git-changelog

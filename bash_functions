@@ -46,6 +46,51 @@ path_prepend() {
     PATH="$1${PATH:+":$PATH"}"
 }
 
+# Search for a running process
+task () { ps axuf | grep -v grep | grep "$@" -i --color=auto; }
+
+# Creates an archive (*.tar.gz) from given directory
+maketar() { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
+
+# Create a ZIP archive of a file or folder
+makezip() { zip -r "${1%%/}.zip" "$1" ; }
+
+# Find all files with Unix line endings (LF)
+findlf () {
+  find . -not \( \
+    -name .git -prune -o \
+    -name .idea -prune -o \
+    -name node_modules -prune \
+  \) -type f -print0 | xargs -0 unix2dos -ic
+}
+
+# Convert all files with Unix line endings (LF) into Windows line endings (CRLF)
+convertlf () {
+  find . -not \( \
+    -name .git -prune -o \
+    -name .idea -prune -o \
+    -name node_modules -prune \
+  \) -type f -print0 | xargs -0 unix2dos -ic | xargs -d '\n' unix2dos
+}
+
+# Find all files with Windows line endings (CRLF)
+findcrlf () {
+  find . -not \( \
+    -name .git -prune -o \
+    -name .idea -prune -o \
+    -name node_modules -prune \
+  \) -type f -print0 | xargs -0 dos2unix -ic
+}
+
+# Convert all files with Windows line endings (CRLF) into Unix line endings (LF)
+convertcrlf () {
+  find . -not \( \
+    -name .git -prune -o \
+    -name .idea -prune -o \
+    -name node_modules -prune \
+  \) -type f -print0 | xargs -0 dos2unix -ic | xargs -d '\n' dos2unix
+}
+
 ## Mirror stdout to stderr, useful for seeing data going through a pipe
 alias peek='tee >(cat 1>&2)'
 

@@ -182,8 +182,8 @@ noproxy() {
 }
 
 # Turn proxy on by default
-proxyon
-noproxy
+#proxyon
+#noproxy
 
 # -------------------------------
 # Docker settings
