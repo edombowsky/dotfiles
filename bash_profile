@@ -131,10 +131,10 @@ removeFromPath() {
 # -------------------------------------
 # Proxy settings
 # -------------------------------------
-export PROXY_SERVER=access618.cws.sco.cisco.com
-export PROXY_SERVER_PORT=8080
-#export PROXY_SERVER=geo-cluster125184-swg.ibosscloud.com
-#export PROXY_SERVER_PORT=8082
+#export PROXY_SERVER=access618.cws.sco.cisco.com
+#export PROXY_SERVER_PORT=8080
+export PROXY_SERVER=geo-cluster125184-swg.ibosscloud.com
+export PROXY_SERVER_PORT=8082
 
 proxy() {
     if [ -z "$1" ]; then
