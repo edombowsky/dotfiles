@@ -96,8 +96,8 @@ shopt -s cdable_vars
 # Sane history defaults
 # --------------------------------------------------------------------
 # don't put duplicate lines in the history. See bash(1) for more options
-# ... or force ignoredups and ignorespace
-HISTCONTROL=ignoredups:erasedups:ignorespace
+# ... or force ignoredups and ignorespace (ignoreboth => both options)
+HISTCONTROL=ignoreboth:erasedups
 
 # Save multi-line commands as one command
 shopt -s cmdhist
@@ -108,7 +108,7 @@ shopt -s histappend
 # Don't record some commands
 # HISTIGNORE is a colon-delimited list of patterns which should be excluded.
 # The '&' is a special pattern which suppresses duplicate entries.
- HISTIGNORE="&:[ \t]*:exit:ls:bg:fg:history:clear"
+HISTIGNORE="&:[ \t]*:exit:ls:[bf]g:history:clear:ps:cd ~:cd ..:--:pwd:clear:reset:h"
 
 # Use standard ISO 8601 timestamp
 # %F equivalent to %Y-%m-%d
