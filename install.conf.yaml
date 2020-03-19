@@ -14,7 +14,7 @@
 - link:
     ~/.bashrc: bashrc
     ~/.bash_profile: bash_profile
-    ~/.bash_alias: bash_aliases
+    ~/.bash_aliases: bash_aliases
     ~/.bash_functions: bash_functions
     ~/.bash_logout: bash_logout
     ~/.bash_prompts: bash_prompts

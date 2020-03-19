@@ -151,7 +151,7 @@
   custom2 = "%C(auto,yellow)%h%C(auto,red)%d%C(auto,reset)\\ by\\ %C(auto,blue)%cn%C(auto,reset),\\ %C(auto,cyan)%ar%C(auto,reset)%n\\ %s%n"
   custom3 = "%Cred%h%Creset %Cgreen%ad%Creset -%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset"
   custom4 = "%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]"
-  change = "%h %cr %cn %Cgreen%s%Creset\"
+  change = "%h %cr %cn %Cgreen%s%Creset"
   lgraph = "%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci)%Creset %C(bold blue)<%an>%Creset"
   lgr = "%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset"
   quick =  "%Cred%h%Creset -%C(cyan)%d%Creset %s %Cblue<%an>%Creset"
