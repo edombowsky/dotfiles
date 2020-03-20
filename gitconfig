@@ -41,7 +41,7 @@
 
 [difftool]
     prompt = false
-    trustExitCode = true
+    trustExitCode = false
     keepBackup = false
 [difftool "bcompare"]
     cmd = bcomp "$LOCAL" "$REMOTE"
@@ -51,6 +51,8 @@
     cmd = diffuse "$LOCAL" "$REMOTE"
 [difftool "bcompare_wsl"]
     cmd = '/mnt/c/Program Files/Beyond Compare 4/BCompare.exe' $(wslpath -w $LOCAL) $(wslpath -w $REMOTE)
+[difftool "bcompare_gb"]
+    cmd = '/c/Program Files/Beyond Compare 4/BCompare.exe' $LOCAL $REMOTE
 [difftool "winmerge"]
     cmd = '/mnt/c/Program Files/WinMerge/WinMergeU.exe' $(wslpath -w $LOCAL) $(wslpath -w $REMOTE)
 [difftool "meld"]
@@ -112,7 +114,7 @@
     # Tell git diff to use mnemonic prefixes (index, work tree, commit, object)
     # instead of the standard a and b notation:
     mnemonicprefix = true
-    tool = gb-bcompare
+    tool = bcompare_gb
 
 [merge]
     conflictstyle = diff3
