@@ -215,6 +215,12 @@ if [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]]; then
     # export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home
     export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home
     pathmunge $JAVA_HOME/bin before; export PATH
+elif [[ "${OSTYPE//[0-9.]/}" = 'msys' ]]; then
+    #--------------------------------------
+    # JAVA 11
+    #--------------------------------------
+    export JAVA_HOME=/c/jdk-11
+    pathmunge ${JAVA_HOME}/bin before; export PATH
 else
     #--------------------------------------
     # JAVA 11
