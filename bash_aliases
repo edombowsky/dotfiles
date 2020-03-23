@@ -117,7 +117,11 @@ alias octal="stat -c '%A %a %n'"       # file permissions in octal
 alias egrep='egrep --color=auto --exclude-dir=.svn --exclude-dir=.git'       # show differences in colour
 alias fgrep='fgrep --color=auto --exclude-dir=.svn --exclude-dir=.git'       # show differences in colour
 alias grep='grep --color --exclude-dir=.svn --exclude-dir=.git'              # show differences in colour
-alias fd=fdfind
+
+if [ -x "$(command -v fdfind)" ]; then
+  echo 'Error: git is not installed.' >&2
+  alias fd=fdfind
+fi
 
 # Stopwatch
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
