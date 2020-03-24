@@ -48,10 +48,13 @@ alias tcal='cal | sed "s/^/ /;s/$/ /;s/ $(date +%e) / $(date +%e | sed '\''s/./#
 ## Detect which `ls` flavour is in use
 if ls --color > /dev/null 2>&1; then     # GNU `ls`
     colorflag="--color=auto"
-    # [https://securitronlinux.com/bejiitaswrath/linux-mint-ubuntu-dircolors-command/]
-    [ -e "$HOME/.dircolors" ] && DIR_COLORS="$HOME/.dircolors"
-    [ -e "$DIR_COLORS" ] || DIR_COLORS=""
-    eval "$( dircolors -b $DIR_COLORS )"
+    # Colours in Terminus were okay without any extra work
+    if [ ${TERM_PROGRAM} != 'Terminus' ]; then
+        # [https://securitronlinux.com/bejiitaswrath/linux-mint-ubuntu-dircolors-command/]
+        [ -e "$HOME/.dircolors" ] && DIR_COLORS="$HOME/.dircolors"
+        [ -e "$DIR_COLORS" ] || DIR_COLORS=""
+        eval "$( dircolors -b $DIR_COLORS )"
+    fi
 else                                     # OS X `ls`
     colorflag="-G"
     # export LS_OPTIONS='--color=auto'
