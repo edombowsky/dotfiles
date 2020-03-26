@@ -1,4 +1,5 @@
 --smart-case
 --hidden
 --max-columns=150
+--path-separator=/
 
