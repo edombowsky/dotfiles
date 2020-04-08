@@ -1,7 +1,16 @@
 #!/usr/bin/env bash
 
-echo LOCAL=$1  REMOTE=$2
-LOCAL=$(wslpath -w $1)
-REMOTE=$(wslpath -w $2)
+LOCAL=$1
+REMOTE=$2
 
-"/mnt/c/Program Files/Beyond Compare 4/BCompare.exe" $LOCAL $REMOTE
+if [[ "${OSTYPE//[0-9.]/}" = 'linux-gnu' ]]; then
+    echo LOCAL=$LOCAL  REMOTE=$REMOTE
+
+    LOCAL=$(wslpath -w $1)
+    REMOTE=$(wslpath -w $2)
+    "/mnt/c/Program Files/Beyond Compare 4/BCompare.exe" $LOCAL $REMOTE
+else
+    echo LOCAL=$LOCAL  REMOTE=$REMOTE
+    "/c/Program Files/Beyond Compare 4/BCompare.exe" $LOCAL $REMOTE
+fi
+
