@@ -122,7 +122,7 @@ alias fgrep='fgrep --color=auto --exclude-dir=.svn --exclude-dir=.git'       # s
 alias grep='grep --color --exclude-dir=.svn --exclude-dir=.git'              # show differences in colour
 
 if [ -x "$(command -v fdfind)" ]; then
-  echo 'Error: git is not installed.' >&2
+  echo 'Error: fdfind is not installed.' >&2
   alias fd=fdfind
 fi
 
