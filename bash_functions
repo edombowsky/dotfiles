@@ -352,8 +352,10 @@ strerror() {
 vscode() {
     if [[ "$#" -ne 1 ]]; then
         code 2>&1 >/dev/null &
-    else
+    elif [[ "${OSTYPE//[0-9.]/}" = 'linux-gnu' ]]; then
         code $(wslpath -w "$1") 2>&1 >/dev/null &
+    else
+        code "$1" 2>&1 >/dev/null &
     fi
 }
 
