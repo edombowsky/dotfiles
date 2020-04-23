@@ -177,13 +177,13 @@ proxyoff() {
 }
 
 noproxy() {
-    export no_proxy=localhost,127.0.0.0/8,*.abb.com,::1,10.*.*.*
-    export NO_PROXY=localhost,127.0.0.0/8,*.abb.com,::1,10.*.*.*
+    export no_proxy=localhost,127.0.0.0/8,*.abb.com,::1,10.*.*.*,wttr.in
+    export NO_PROXY=localhost,127.0.0.0/8,*.abb.com,::1,10.*.*.*,wttr.in
 }
 
 # Turn proxy on by default
 #proxyon
-#noproxy
+noproxy
 
 # -------------------------------
 # Docker settings
