@@ -222,6 +222,7 @@ alias lu='mvn versions:update-properties -U'
 ## Epiphany cluster connections. Identity files are listed in ~/.ssh/config
 alias dedev1='ssh dev1'
 alias dedev2='ssh dev2'
+alias dedev10='ssh dev10'
 alias deperf1='ssh perf1'
 alias deqa1='ssh qa1'
 alias wfmint='ssh int'
