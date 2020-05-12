@@ -151,15 +151,19 @@ export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 # --------------------------------------------------------------------
 [[ -f ~/.bash_prompts ]] && source ~/.bash_prompts
 
-if [[ -f "$HOME/liquidprompt/liquidprompt1" ]]; then    # liquidprompt seemed too slow so for now don't use it
-    setup_liquidprompt
-elif [[ "${OSTYPE//[0-9.]/}" = 'darwin' && -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]]; then
-    setup_magicmonty_prompt
-elif [[ -f "$HOME/bin/bash-git-prompt/gitprompt.sh" ]]; then
-    setup_magicmonty_prompt
-elif [[ -f "~/.git-prompt.sh" ]]; then
-    setup_git-prompt
-fi
+# if [[ -f "$HOME/liquidprompt/liquidprompt1" ]]; then    # liquidprompt seemed too slow so for now don't use it
+#     setup_liquidprompt
+# elif [[ "${OSTYPE//[0-9.]/}" = 'darwin' && -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]]; then
+#     setup_magicmonty_prompt
+# elif [[ -f "$HOME/bin/bash-git-prompt/gitprompt.sh" ]]; then
+#     setup_magicmonty_prompt
+# elif [[ -f "~/.git-prompt.sh" ]]; then
+#     setup_git-prompt
+# fi
+
+# Use the cross shell prompt "starship" ==> https://starship.rs/
+starship_precmd_user_func="set_win_title"
+eval "$(starship init bash)"
 
 # --------------------------------------------------------------------
 # Neovim configuration

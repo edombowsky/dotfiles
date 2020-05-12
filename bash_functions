@@ -142,6 +142,10 @@ title() {
     echo -en "${esc}]2;${txt}${bel}"
 }
 
+set_win_title() {
+    echo -ne "\033]0;${PWD##*/}\007"
+}
+
 # Sort du output in Human-readable format (http://www.bashoneliners.com/oneliners/97/)
 #
 # The reason to use a for loop is to sort results with G or M or K values
