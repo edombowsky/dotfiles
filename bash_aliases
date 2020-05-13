@@ -49,8 +49,9 @@ alias tcal='cal | sed "s/^/ /;s/$/ /;s/ $(date +%e) / $(date +%e | sed '\''s/./#
 if ls --color > /dev/null 2>&1; then     # GNU `ls`
     colorflag="--color=auto"
     # Colours in Terminus were okay without any extra work
-    if [ " ${TERM_PROGRAM}" != "Terminus" ]; then
+    if [ "${TERM_PROGRAM}" != "Terminus" ] && [ -z ${ALACRITTY_LOG+x} ]; then
         # [https://securitronlinux.com/bejiitaswrath/linux-mint-ubuntu-dircolors-command/]
+        printf "Setting up DIR_COLORS"
         [ -e "$HOME/.dircolors" ] && DIR_COLORS="$HOME/.dircolors"
         [ -e "$DIR_COLORS" ] || DIR_COLORS=""
         eval "$( dircolors -b $DIR_COLORS )"
@@ -196,9 +197,11 @@ if [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]]; then
 elif [[ "${OSTYPE//[0-9.]/}" = "linux-gnu" ]]; then
     alias c='cd /mnt/c'
     alias r='cd /mnt/d/repositories'
+    alias vi=nvim
 elif [[ "${OSTYPE//[0-9.]/}" = "msys" ]]; then
     alias c='cd /c'
     alias r='cd /c/Users/caeadom/Documents/projects'
+    alias vi=nvim
 fi
 
 # what most people want from od (hexdump)
