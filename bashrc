@@ -62,6 +62,9 @@ else
         . /etc/bash_completion
       fi
     fi
+
+    # Enable fzf completion
+    . $HOME/.fzf-completion.bash
 fi
 
 # A colon-separated list of suffixes to ignore when performing filename completion.
@@ -177,6 +180,61 @@ export NVM_DIR="$HOME/.nvm"
 # --------------------------------------------------------------------
 pathmunge $HOME/bin before; export PATH
 [ -s "/home/user/lib/azure-cli/az.completion" ] && source "/home/user/lib/azure-cli/az.completion"
+
+# --------------------------------------------------------------------
+# BAT configuration
+# --------------------------------------------------------------------
+export BAT_PAGER="less -R"
+
+# --------------------------------------------------------------------
+# FZF configuration
+# --------------------------------------------------------------------
+export FZF_DEFAULT_COMMAND="rg --files --hidden --no-ignore-dot --follow"
+if [[ "${OSTYPE//[0-9.]/}" = 'msys' ]]; then
+    export FZF_DEFAULT_OPTS="
+        --multi --cycle --keep-right -1 \
+        --height=50% --layout=reverse --info=default \
+        --preview-window=:hidden:right:70%:wrap \
+        --preview '(bat --style=numbers --color=always {} || cat {}) || echo {} 2> /dev/null | head -200' \
+        --ansi --inline-info \
+        --bind '?:toggle-preview' \
+        --bind 'ctrl-a:select-all' \
+        --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)' \
+        --bind 'ctrl-y:execute-silent(echo {+} | clip)' \
+        --bind 'ctrl-v:execute(code {+})'"
+else
+    export FZF_DEFAULT_OPTS="
+        --multi --cycle --keep-right -1 \
+        --height=50% --layout=reverse --info=default \
+        --preview-window=:hidden:right:70%:wrap \
+        --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200' \
+        --ansi --inline-info \
+        --bind '?:toggle-preview' \
+        --bind 'ctrl-a:select-all' \
+        --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)'
+        --bind 'ctrl-y:execute-silent(echo {+} | clip)'
+        --bind 'ctrl-v:execute(code {+})'"
+fi
+
+
+[[ -f ~/.fzf.sh ]] && source ~/.fzf.sh
+
+# export FZF_DEFAULT_OPTS="
+#     --multi --cycle --keep-right -1 \
+#     --height=50% --layout=reverse --info=default \
+#     --preview-window right:70%:wrap \
+#     --preview '[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2>/dev/null | head -300' \
+#     --bind='ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | clip)' \
+#     --ansi"
+
+# OSX
+# export FZF_DEFAULT_OPTS="
+#     --multi --cycle --keep-right -1 \
+#     --height=80% --layout=reverse --info=default \
+#     --preview-window right:70%:wrap \
+#     --preview '[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2>/dev/null | head -300' \
+#     --bind='ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | pbcopy)' \
+#     --ansi"
 
 # --------------------------------------------------------------------
 # Aliases and functions

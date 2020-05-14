@@ -30,4 +30,6 @@
     ~/.profile: profile
     ~/.tigrc: tigrc
     ~/.vimrc: vimrc
+    ~/.fzf.sh: fzf.sh
+    ~.fzf-completion.bash: fzf-completion.bash
     ~/bin: bin
