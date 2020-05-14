@@ -134,7 +134,7 @@ font:
     style: Bold Italic
 
   # Point size
-  size: 11.0
+  size: 12.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -168,62 +168,94 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-# For more colour schemes: https://github.com/alacritty/alacritty/wiki/Color-schemes
+# For more colour schemes: https://github.com/alacritty/alacritty/wiki/Color-schemes 
+# and https://github.com/eendroroy/alacritty-theme
 #
-# Colors (Cobalt 2)
+
+# Colors (Monokai Pro)
 colors:
-  cursor:
-    text: "#fefff2"
-    cursor: "#f0cc09"
-
-  selection:
-    text: "#b5b5b5"
-    background: "#18354f"
-
+  # Default colors
   primary:
-    background: "#132738"
-    foreground: "#ffffff"
+    background: '#2D2A2E'
+    foreground: '#FCFCFA'
 
+  # Normal colors
   normal:
-    black: "#000000"
-    red: "#ff0000"
-    green: "#38de21"
-    yellow: "#ffe50a"
-    blue: "#1460d2"
-    magenta: "#ff005d"
-    cyan: "#00bbbb"
-    white: "#bbbbbb"
+    black:   '#403E41'
+    red:     '#FF6188'
+    green:   '#A9DC76'
+    yellow:  '#FFD866'
+    blue:    '#FC9867'
+    magenta: '#AB9DF2'
+    cyan:    '#78DCE8'
+    white:   '#FCFCFA'
 
+  # Bright colors
   bright:
-    black: "#555555"
-    red: "#f40e17"
-    green: "#3bd01d"
-    yellow: "#edc809"
-    blue: "#5555ff"
-    magenta: "#ff55ff"
-    cyan: "#6ae3fa"
-    white: "#ffffff"
+    black:   '#727072'
+    red:     '#FF6188'
+    green:   '#A9DC76'
+    yellow:  '#FFD866'
+    blue:    '#FC9867'
+    magenta: '#AB9DF2'
+    cyan:    '#78DCE8'
+    white:   '#FCFCFA'
 
-  # Dim colors
-  # dim:
-  #   black: "#232323"
-  #   red: "#74423f"
-  #   green: "#5e6547"
-  #   yellow: "#8b7653"
-  #   blue: "#556b79"
-  #   magenta: "#6e4962"
-  #   cyan: "#5c8482"
-  #   white: "#828282"
 
-  # Indexed Colors
-  #
-  # The indexed colors include all colors from 16 to 256.
-  # When these are not set, they're filled with sensible defaults.
-  #
-  # Example:
-  #   `- { index: 16, color: '' }`
-  #
-  indexed_colors: []
+# # Colors (Cobalt 2)
+# colors:
+#   cursor:
+#     text: "#fefff2"
+#     cursor: "#f0cc09"
+
+#   selection:
+#     text: "#b5b5b5"
+#     background: "#18354f"
+
+#   primary:
+#     background: "#132738"
+#     foreground: "#ffffff"
+
+#   normal:
+#     black: "#000000"
+#     red: "#ff0000"
+#     green: "#38de21"
+#     yellow: "#ffe50a"
+#     blue: "#1460d2"
+#     magenta: "#ff005d"
+#     cyan: "#00bbbb"
+#     white: "#bbbbbb"
+
+#   bright:
+#     black: "#555555"
+#     red: "#f40e17"
+#     green: "#3bd01d"
+#     yellow: "#edc809"
+#     blue: "#5555ff"
+#     magenta: "#ff55ff"
+#     cyan: "#6ae3fa"
+#     white: "#ffffff"
+
+#   # Dim colors
+#   # dim:
+#   #   black: "#232323"
+#   #   red: "#74423f"
+#   #   green: "#5e6547"
+#   #   yellow: "#8b7653"
+#   #   blue: "#556b79"
+#   #   magenta: "#6e4962"
+#   #   cyan: "#5c8482"
+#   #   white: "#828282"
+
+#   # Indexed Colors
+#   #
+#   # The indexed colors include all colors from 16 to 256.
+#   # When these are not set, they're filled with sensible defaults.
+#   #
+#   # Example:
+#   #   `- { index: 16, color: '' }`
+#   #
+#   indexed_colors: []
 
 # Visual Bell
 #
