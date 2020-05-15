@@ -3,11 +3,14 @@
       create: true
       relink: true
 
+- create:
+  - ~/.dotfiles_update
+
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
   - [git submodule sync, Syncing submodule remotes]
   - [git submodule foreach git pull origin master, Updating submodule contents]
-  - ["date > ~/.dotfiles_update", Logging last update]
+  - [date > ~/.dotfiles_update, Logging last update]
 
 - clean: ['~', '~/.config']
 
@@ -31,5 +34,5 @@
     ~/.tigrc: tigrc
     ~/.vimrc: vimrc
     ~/.fzf.sh: fzf.sh
-    ~.fzf-completion.bash: fzf-completion.bash
+    ~/.fzf-completion.bash: fzf-completion.bash
     ~/bin: bin
