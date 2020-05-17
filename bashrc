@@ -175,6 +175,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+export EDITOR=nvim
+export VISUAL=nvim
+
 # --------------------------------------------------------------------
 # Azure CLI 2.0 settings
 # --------------------------------------------------------------------
@@ -217,7 +220,7 @@ else
 fi
 
 
-[[ -f ~/.fzf.sh ]] && source ~/.fzf.sh
+[[ -f ~/.fzf-functions.sh ]] && source ~/.fzf-functions.sh
 
 # export FZF_DEFAULT_OPTS="
 #     --multi --cycle --keep-right -1 \

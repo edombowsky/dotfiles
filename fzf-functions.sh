@@ -25,7 +25,7 @@ fcd() {
   fi
 }
 
-# # cd to selected parent dir
+# cd to selected parent dir
 fpd() {
   local declare dirs=()
   get_parent_dirs() {
@@ -48,6 +48,25 @@ fe() {
   IFS=$'\n' files=($(fzf --query="$1" --multi --ansi --reverse --select-1 --exit-0))
   [[ -n "$files" ]] && ${EDITOR:-nvim} "${files[@]}"
 }
+
+open_with_fzf() {
+    fd -t f -H -I | fzf -m --preview="xdg-mime query default {}" | xargs -ro -d "\n" xdg-open 2>&-
+}
+
+cd_with_fzf() {
+    cd $HOME && cd "$(fd -t d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)" && echo "$PWD" && tree -L 1
+}
+
+
+fzh() {
+    cd $HOME && cd "$(fd -t d -H | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)" && echo "$PWD" && tree -L 1
+}
+
+
+fzi() {
+    cd $HOME && cd "$(fd -t d -H -I | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)" && echo "$PWD" && tree -L 1
+}
+
 
 # fkill - kill process
 # Similar to "kill -9 **" fzf default completion

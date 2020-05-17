@@ -33,6 +33,6 @@
     ~/.profile: profile
     ~/.tigrc: tigrc
     ~/.vimrc: vimrc
-    ~/.fzf.sh: fzf.sh
+    ~/.fzf-functions.sh: fzf-functions.sh
     ~/.fzf-completion.bash: fzf-completion.bash
     ~/bin: bin
