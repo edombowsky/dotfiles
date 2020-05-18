@@ -62,9 +62,6 @@ else
         . /etc/bash_completion
       fi
     fi
-
-    # Enable fzf completion
-    . $HOME/.fzf-completion.bash
 fi
 
 # A colon-separated list of suffixes to ignore when performing filename completion.
@@ -192,8 +189,24 @@ export BAT_PAGER="less -R"
 # --------------------------------------------------------------------
 # FZF configuration
 # --------------------------------------------------------------------
+case "${OSTYPE//[0-9.]/}" in
+    "msys")         # git-bash
+        [[ -f ~/.fzf-completion.bash ]] && source ~/.fzf-completion.bash
+        ;;
+    "linux-gnu")    # wsl
+        [[ -f ~/.fzf-completion.bash ]] && source ~/.fzf-completion.bash
+        ;;
+    "darwin")       # mac-os
+        [[ -f /usr/local/Cellar/fzf/0.21.1/shell/completion.bash ]]  && \
+            source /usr/local/Cellar/fzf/0.21.1/shell/completion.bash
+        ;;
+esac
+
+
 export FZF_DEFAULT_COMMAND="rg --files --hidden --no-ignore-dot --follow"
+
 if [[ "${OSTYPE//[0-9.]/}" = 'msys' ]]; then
+
     export FZF_DEFAULT_OPTS="
         --multi --cycle --keep-right -1 \
         --height=50% --layout=reverse --info=default \
@@ -205,7 +218,8 @@ if [[ "${OSTYPE//[0-9.]/}" = 'msys' ]]; then
         --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)' \
         --bind 'ctrl-y:execute-silent(echo {+} | clip)' \
         --bind 'ctrl-v:execute(code {+})'"
-else
+elif 
+
     export FZF_DEFAULT_OPTS="
         --multi --cycle --keep-right -1 \
         --height=50% --layout=reverse --info=default \
@@ -215,7 +229,7 @@ else
         --bind '?:toggle-preview' \
         --bind 'ctrl-a:select-all' \
         --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)'
-        --bind 'ctrl-y:execute-silent(echo {+} | clip)'
+        --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
         --bind 'ctrl-v:execute(code {+})'"
 fi
 
