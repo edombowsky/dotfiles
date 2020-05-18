@@ -350,21 +350,18 @@ strerror() {
     python -c "import os,locale as l; l.setlocale(l.LC_ALL, ''); print os.strerror($1)";
 }
 
-#
-# Use some nice to have functions to use in Windows Subsystem for Linux (WSL)
-#
-vscode() {
-    if [[ "$#" -ne 1 ]]; then
-        code 2>&1 >/dev/null &
-    elif [[ "${OSTYPE//[0-9.]/}" = 'linux-gnu' ]]; then
-        code $(wslpath -w "$1") 2>&1 >/dev/null &
-    else
-        code "$1" 2>&1 >/dev/null &
-    fi
-}
+if [[ "${OSTYPE//[0-9.]/}" = 'linux-gnu' ]]; then
+    vscode() {
+        if [[ "$#" -ne 1 ]]; then
+            code 2>&1 >/dev/null &
+        else
+            code $(wslpath -w "$1") 2>&1 >/dev/null &
+        fi
+    }
+fi
 
 if [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]]; then
-    function jdk8 {
+    jdk8() {
         export JAVA_HOME=/Library/Java/JavaVirtualMchines/jdk1.8.0_221.jdk/Contents/Home
         pathmunge $JAVA_HOME/bin before; export PATH
     }
