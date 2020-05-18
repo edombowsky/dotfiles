@@ -197,9 +197,13 @@ case "${OSTYPE//[0-9.]/}" in
         [[ -f ~/.fzf-completion.bash ]] && source ~/.fzf-completion.bash
         ;;
     "darwin")       # mac-os
-        [[ -f /usr/local/Cellar/fzf/0.21.1/shell/completion.bash ]]  && \
+        if [[ -f /usr/local/Cellar/fzf/0.21.1/shell/completion.bash ]]; then
             source /usr/local/Cellar/fzf/0.21.1/shell/completion.bash
+        elif [[ -f ~/.fzf-completion.bash ]]; then
+            source ~/.fzf-completion.bash
+        fi
         ;;
+
 esac
 
 
