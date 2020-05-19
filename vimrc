@@ -6,7 +6,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Setup Vundle - vim bundle manager
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible              " be iMproved, required
+set nocompatible              " be iMproved, required. Use Vim defaults (much better!)
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -29,7 +29,6 @@ filetype plugin indent on    " required
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set encoding=utf-8
 set confirm                 " if unsaved changes, ask if you want to save
-set nocompatible            " Use Vim defaults (much better!)
 set bs=2                    " allow backspacing over everything in insert mode
 set noautoindent            " set autoindenting off as it seems to make pasting
                             " not work

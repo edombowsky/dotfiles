@@ -203,7 +203,6 @@ case "${OSTYPE//[0-9.]/}" in
             source ~/.fzf-completion.bash
         fi
         ;;
-
 esac
 
 
@@ -222,7 +221,7 @@ if [[ "${OSTYPE//[0-9.]/}" = 'msys' ]]; then
         --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)' \
         --bind 'ctrl-y:execute-silent(echo {+} | clip)' \
         --bind 'ctrl-v:execute(code {+})'"
-elif 
+else
 
     export FZF_DEFAULT_OPTS="
         --multi --cycle --keep-right -1 \
