@@ -11,8 +11,9 @@
   - [git submodule sync, Syncing submodule remotes]
   - [git submodule foreach git pull origin master, Updating submodule contents]
   - [date > ~/.dotfiles_update, Logging last update]
+  - [$OSTYPE = 'msys' && cp config/nvim/init.vim /c/Users/caeadom/AppData/Local/nvim/, Git Bash nvim configuration]
 
-- clean: ['~', '~/.config']
+- clean: ['~', '~/.config', '~/.vim']
 
 - link:
     ~/.bashrc: bashrc
@@ -36,3 +37,4 @@
     ~/.fzf-functions.sh: fzf-functions.sh
     ~/.fzf-completion.bash: fzf-completion.bash
     ~/bin: bin
+    ~/.vim: vim

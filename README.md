@@ -12,26 +12,62 @@ You should probably make your own repository, and put your dragons there.
 
 Try bootstraping your dotfiles with [Dotbot](https://github.com/anishathalye/dotbot). If you want a template to get started, you can fork the [dotbot template][https://github.com/anishathalye/dotfiles_template] repo.
 
-Making Local Customizations
-You can make local customizations for some programs by editing these files:
+## Installing
 
-vim : ~/.vimrc_local
-zsh : ~/.zshrc_local_before run before .zshrc
-zsh : ~/.zshrc_local_after run after .zshrc
-git : ~/.gitconfig_local
-tmux : ~/.tmux_local.conf
+Dotbot makes installing your dotfiles as easy as `git clone $url && cd dotfiles && ./install`, even on a freshly installed system!
 
-## Dependencies
+### Prepare repository sub-modules
+
+```bash
+cd vim
+mkdir -p pack/tpope/start
+cd vim/pack/tpope/start
+git submodule add git@github.com:tpope/vim-fugitive.git
+
+cd vim
+mkdir bundle
+cd bundle
+git submodule add git@github.com:VundleVim/Vundle.vim.git
+git submodule add git@github.com:vim-airline/vim-airline.git
+git submodule add git@github.com:vim-airline/vim-airline-themes.git
+```
+
+### Prepare prompt modules
+
+- Homebrew: `brew install starship`
+- Scoop: `scoop install starship`
+
+### Dependencies
+
+- [dotbot](https://github.com/anishathalye/dotbot): A tool that bootstraps your dotfiles
+
+#### Bash prompts
+
+##### Current
+
+- [starship](https://starship.rs/): The minimal, blazing-fast, and infinitely customizable prompt for any shell!
+    + [Github](https://github.com/starship/starship)
+
+##### Obsolete
 
 - [liquidprompt](https://github.com/nojhan/liquidprompt): A full-featured & carefully designed adaptive prompt for Bash & Zsh
 - [bash-git-prompt](https://github.com/magicmonty/bash-git-prompt): An informative and fancy bash prompt for Git users
+
+#### Vim/Nvim plugins
+
+- [Vundle](https://github.com/VundleVim/Vundle.vim): Plug-in manager for Vim
+- [vim-airline](https://github.com/vim-airline/vim-airline): lean & mean status/tabline for vim that's light as air
+- [vim-airline-themes](https://github.com/vim-airline/vim-airline-themes): A collection of themes for vim-airline
+- [vim-fugitive](https://github.com/tpope/vim-fugitive): A Git wrapper so awesome, it should be illegal
+- [inkpot](https://github.com/ciaranm/inkpot): Inkpot 88/256 Colour Scheme for Vim
+
+#### Extras
+
 - [git-extras](https://github.com/tj/git-extras): Little git extras
 
 ## License
 
-This software is hereby released into the public domain. That means you can do
-whatever you want with it without restriction. See `LICENSE.md` for details.
+This software is hereby released into the public domain. That means you can do whatever you want with it without restriction. See `LICENSE.md` for details.
 
-That being said, I would appreciate it if you could maintain a link back to
-Dotbot (or this repository) to help other people discover Dotbot.
+That being said, I would appreciate it if you could maintain a link back to Dotbot (or this repository) to help other people discover Dotbot.
 

@@ -16,13 +16,33 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'vim-airline/vim-airline'
+Plugin 'tpope/vim-fugitive'                " git plugin
+Plugin 'vim-airline/vim-airline'           " make statusline awesome
+Plugin 'vim-airline/vim-airline-themes'    " themes for statusline 
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
+
+" vim-airline
+let g:airline_theme='angr'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_min_count = 0
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline_section_warning = ''
+let g:airline_section_error = ''
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tagbar#enabled = 0
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -89,8 +109,15 @@ endif
 "  n       Name of the viminfo file.  The name must immediately follow the 'n'.
 "  r       Removable media.  The argument is a string
 "  s       Maximum size of an item in Kbyte
-set viminfo=!,'100,\"100,:20,<50,s10,h,n~/.viminfo
-"set viminfo=%,'50,\"100,:100,n~/.viminfo
+set viminfo=!,'100,\"100,:20,<50,s10,h
+
+if !has('nvim')
+  set viminfo+=n~/.viminfo
+else
+  " Do nothing here to use the neovim default
+  " or do something like:
+  set viminfo+=n~/.config/nvim/.shada
+endif
 
 " Uncomment the following to have Vim jump to the last position when reopening a file
 if has("autocmd")
@@ -485,7 +512,7 @@ set statusline+=%*
 set statusline+=[%t]    "tail of the filename
 set statusline+=%*
 
-"display a warning if fileformat isnt unix
+"display a warning if file format isn't Unix
 "set statusline+=%#warningmsg#
 set statusline+=%#error#
 set statusline+=%{&ff!='unix'?'['.&ff.']':''}

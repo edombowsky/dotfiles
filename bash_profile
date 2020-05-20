@@ -7,6 +7,9 @@
 # but return if that's the case.
 [ "$PS1" ] || return
 
+# In case this is not set which is likely in git-bash
+${XDG_CONFIG_HOME=$HOME/.config}
+
 #|+++++++++++++++++++++++++++++++++++++
 #| Permissions encoding used by umask |
 #|+++++++++++++++++++++++++++++++++++++

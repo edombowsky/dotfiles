@@ -105,3 +105,4 @@ modules.xml
 config/configstore/
 config/git/
 config/scoop/
+config/nvim/.shada

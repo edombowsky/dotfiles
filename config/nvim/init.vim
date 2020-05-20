@@ -1,9 +1,32 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Setup Vundle - vim bundle manager
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible              " be iMproved, required. Use Vim defaults (much better!)
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'tpope/vim-fugitive'                " git plugin
+Plugin 'vim-airline/vim-airline'           " make statusline awesome
+Plugin 'vim-airline/vim-airline-themes'    " themes for statusline 
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set encoding=utf-8
 set confirm                 " if unsaved changes, ask if you want to save
-set nocompatible            " Use Vim defaults (much better!)
+set nocompatible            " Use Vim defaults (much better!). Required for Vundle
 set bs=2                    " allow backspacing over everything in insert mode
 set noautoindent            " set autoindenting off as it seems to make pasting not work
 set nocindent               " I indent my code myself.
@@ -48,6 +71,23 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/vendor,*/target,*/test-out
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => User Interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-airline
+let g:airline_theme='angr'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_min_count = 0
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#left_alt_sep = ''
+"let g:airline_section_warning = ''
+"let g:airline_section_error = ''
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#tagbar#enabled = 0
+
 set cursorline
 :hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white
 set visualbell      " terminal's visual bell - turned off to make Vim quiet!
@@ -68,9 +108,10 @@ au BufNewFile,BufReadPost *.md set filetype=markdown
 let g:polyglot_disabled = ['markdown']
 let g:markdown_fenced_languages = ['bash=sh', 'css', 'django', 'javascript', 'js=javascript', 'json=javascript', 'perl', 'php', 'python', 'ruby', 'sass', 'scala', 'xml', 'html', 'vim']
 
+" Configure NVIM's viminfo file
 " Tell vim to remember certain things when we exit
 "  "       Maximum number of lines saved for each register
-"  %       When included, save and restore the buffer lis
+"  %       When included, save and restore the buffer list
 "  '       Maximum number of previously edited files for which the marks are remembered
 "  /       Maximum number of items in the search pattern history to be saved
 "  :       Maximum number of items in the command-line history
@@ -80,7 +121,7 @@ let g:markdown_fenced_languages = ['bash=sh', 'css', 'django', 'javascript', 'js
 "  n       Name of the viminfo file.  The name must immediately follow the 'n'.
 "  r       Removable media.  The argument is a string
 "  s       Maximum size of an item in Kbyte
-set viminfo=!,'100,\"100,:20,<50,s10,h,n~/.viminfo
+set viminfo=!,'100,\"100,:20,<50,s10,h,n~/.config/nvim/.shada
 
 " Uncomment the following to have Vim jump to the last position when reopening a file
 if has("autocmd")
