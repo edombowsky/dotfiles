@@ -26,7 +26,8 @@ ${XDG_CONFIG_HOME=$HOME/.config}
 #|+++++++++++++++++++++++++++++++++++++
 umask 022
 
-export BASE_MAVEN_OPTS="-Xmx1G"
+export BASE_MAVEN_OPTS="-Xmx1G -DargLine=-Djdk.attach.allowAttachSelf=true"
+export BASE_JDK_JAVA_OPTIONS="-Djdk.attach.allowAttachSelf=true"
 
 # Munge the PATH variable. Will not add duplicates and you can add
 # before or after PATH.
@@ -170,18 +171,23 @@ proxyon() {
     export FTP_PROXY=ftp://${PROXY_SERVER}:${PROXY_SERVER_PORT}/
 
     export MAVEN_OPTS="$BASE_MAVEN_OPTS -Dhttp.proxyHost=${PROXY_SERVER} -Dhttp.proxyPort=${PROXY_SERVER_PORT} -Dhttps.proxyHost=${PROXY_SERVER} -Dhttps.proxyPort=${PROXY_SERVER_PORT}"
+    export JDK_JAVA_OPTIONS=$BASE_JDK_JAVA_OPTIONS
 }
 
 proxyoff() {
     unset {http,https,ftp,socks}_proxy
     unset {HTTP,HTTPS,FTP,SOCKS}_PROXY
 
-    export MAVEN_OPTS="$BASE_MAVEN_OPTS"
+    export MAVEN_OPTS=$BASE_MAVEN_OPTS
+    export JDK_JAVA_OPTIONS=$BASE_JDK_JAVA_OPTIONS
 }
 
 noproxy() {
     export no_proxy=localhost,127.0.0.0/8,*.abb.com,::1,10.*.*.*,wttr.in
     export NO_PROXY=localhost,127.0.0.0/8,*.abb.com,::1,10.*.*.*,wttr.in
+
+    export MAVEN_OPTS=$BASE_MAVEN_OPTS
+    export JDK_JAVA_OPTIONS=$BASE_JDK_JAVA_OPTIONS
 }
 
 # Turn proxy on by default
