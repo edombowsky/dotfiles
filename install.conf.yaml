@@ -11,7 +11,6 @@
   - [git submodule sync, Syncing submodule remotes]
   - [git submodule foreach git pull origin master, Updating submodule contents]
   - [date > ~/.dotfiles_update, Logging last update]
-  - [$OSTYPE = 'msys' && cp config/nvim/init.vim /c/Users/caeadom/AppData/Local/nvim/, Git Bash nvim configuration]
 
 - clean: ['~', '~/.config', '~/.vim']
 
@@ -38,3 +37,9 @@
     ~/.fzf-completion.bash: fzf-completion.bash
     ~/bin: bin
     ~/.vim: vim
+    ~/AppData/Roaming/alacritty/alacritty.yml: 
+      if: '[ $(uname -o) = Msys ]'
+      path: alacritty.yml
+    ~/AppData/Local/nvim/init.vim:
+      if: '[ $(uname -o) = Msys ]'
+      path: config/nvim/init.vim
