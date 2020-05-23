@@ -51,7 +51,7 @@ if ls --color > /dev/null 2>&1; then     # GNU `ls`
     # Colours in Terminus were okay without any extra work
     if [ "${TERM_PROGRAM}" != "Terminus" ] && [ -z ${ALACRITTY_LOG+x} ]; then
         # [https://securitronlinux.com/bejiitaswrath/linux-mint-ubuntu-dircolors-command/]
-        printf "Setting up DIR_COLORS"
+        printf "Setting up DIR_COLORS\n"
         [ -e "$HOME/.dircolors" ] && DIR_COLORS="$HOME/.dircolors"
         [ -e "$DIR_COLORS" ] || DIR_COLORS=""
         eval "$( dircolors -b $DIR_COLORS )"
