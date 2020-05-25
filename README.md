@@ -32,6 +32,15 @@ git submodule add git@github.com:vim-airline/vim-airline.git
 git submodule add git@github.com:vim-airline/vim-airline-themes.git
 ```
 
+### Maintaining submodules at latest commits
+
+```bash
+git submodule foreach git pull origin master
+
+# Now the submodules are in the state you want, so
+git commit -am "Pulled down update to sub-modules"
+```
+
 ### Prepare prompt modules
 
 - Homebrew: `brew install starship`
