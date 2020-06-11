@@ -48,8 +48,11 @@ alias tcal='cal | sed "s/^/ /;s/$/ /;s/ $(date +%e) / $(date +%e | sed '\''s/./#
 ## Detect which `ls` flavour is in use
 if ls --color > /dev/null 2>&1; then     # GNU `ls`
     colorflag="--color=auto"
-    # Colours in Terminus were okay without any extra work
-    if [ "${TERM_PROGRAM}" != "Terminus" ] && [ -z ${ALACRITTY_LOG+x} ]; then
+    # Colours in Terminus, vscode, and alacritty were okay without any extra work
+    if [ "${TERM_PROGRAM}" != "Terminus" ] && \
+       [ -z ${ALACRITTY_LOG+x} ] && \
+       [ "${TERM_PROGRAM}" != "vscode" ] && \
+       [ "${TERMINAL_EMULATOR}" != "JetBrains-JediTerm" ]; then
         # [https://securitronlinux.com/bejiitaswrath/linux-mint-ubuntu-dircolors-command/]
         printf "Setting up DIR_COLORS\n"
         [ -e "$HOME/.dircolors" ] && DIR_COLORS="$HOME/.dircolors"
