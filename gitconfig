@@ -11,8 +11,9 @@
     # whitespace at the end of a line, as well as mixed spaces and tabs:
     whitespace = trailing-space,space-before-tab
 
-[init]
-    templatedir = /Applications/SourceTree.app/Contents/Resources/git_local/share/git-core/templates
+# May be un-commented for use on macos
+# [init]
+#     templatedir = /Applications/SourceTree.app/Contents/Resources/git_local/share/git-core/templates
 
 [branch]
     # When branching off a remote branch, automatically let the local branch
