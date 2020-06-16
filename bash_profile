@@ -225,11 +225,21 @@ if [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]]; then
     export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home
     pathmunge $JAVA_HOME/bin before; export PATH
 elif [[ "${OSTYPE//[0-9.]/}" = 'msys' ]]; then
+    # I am going to rely on Windows environment to set up the path I want, which 
+    # for the time being is jdk-14. The following is for reference.
+
     #--------------------------------------
     # JAVA 11
     #--------------------------------------
-    export JAVA_HOME=/c/jdk-11
-    pathmunge ${JAVA_HOME}/bin before; export PATH
+    #export JAVA_HOME=/c/jdk-11
+    #pathmunge ${JAVA_HOME}/bin before; export PATH
+
+    #--------------------------------------
+    # JAVA 14
+    #--------------------------------------
+    #export JAVA_HOME="/c/Program Files/Java/jdk-14.0.1"
+    #echo ${JAVA_HOME}/bin
+    #pathmunge ${JAVA_HOME}/bin before; export PATH
 else
     #--------------------------------------
     # JAVA 11
