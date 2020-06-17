@@ -227,7 +227,8 @@ if [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]]; then
 elif [[ "${OSTYPE//[0-9.]/}" = 'msys' ]]; then
     # I am going to rely on Windows environment to set up the path I want, which 
     # for the time being is jdk-14. The following is for reference.
-
+    :
+    
     #--------------------------------------
     # JAVA 11
     #--------------------------------------
