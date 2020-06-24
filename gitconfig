@@ -12,6 +12,10 @@
     whitespace = trailing-space,space-before-tab
     pager = diff-so-fancy | less --tabs=4 -RFX
 
+[pager]
+    # pre-seed less pager with a search pattern, so you can move between files with n/N keys:
+    diff = diff-so-fancy | less --tabs=4 -RFXS --pattern '^(Date|added|deleted|modified): '
+
 # May be un-commented for use on macos with SourceTree    
 # [init]
 #     templatedir = /Applications/SourceTree.app/Contents/Resources/git_local/share/git-core/templates
@@ -45,6 +49,8 @@
     prompt = false
     trustExitCode = false
     keepBackup = false
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
 [difftool "bcompare"]
     cmd = bcomp $LOCAL $REMOTE
 [difftool "gb-bcompare"]
@@ -78,6 +84,8 @@
     trustExitCode = true
     #path = bcomp
     cmd = '/mnt/c/Program Files/Beyond Compare 4/BCompare.exe'
+[mergetool "vscode"]
+    cmd = code --wait $MERGED
 [mergetool "bcompare"]
     cmd = bcomp \"$PWD/$LOCAL\" \"$PWD/$REMOTE\" \"$PWD/$BASE\" \"$PWD/$MERGED\"
     keepBackup = false
@@ -116,7 +124,7 @@
     # Tell git diff to use mnemonic prefixes (index, work tree, commit, object)
     # instead of the standard a and b notation:
     mnemonicprefix = true
-    tool = bcompare
+    tool = vscode #bcompare
 
 [merge]
     conflictstyle = diff3
@@ -271,6 +279,7 @@
     # --------------------------------------------------------------------------
     #                                                                       diff
     # --------------------------------------------------------------------------
+    patch = !git --no-pager diff --no-color
     di = diff                         # diff unstaged changes
     dt = difftool
     d = diff                          # diff unstaged changes
