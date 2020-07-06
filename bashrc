@@ -116,8 +116,10 @@ HISTIGNORE="&:[ \t]*:exit:ls:[bf]g:history:clear:ps:cd ~:cd ..:--:pwd:clear:rese
 HISTTIMEFORMAT='%F %T '
 #HISTTIMEFORMAT="%h %d %H:%M:%S> "
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+## for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+# sets the number of commands to remember in the command history
 HISTSIZE=10000
+# sets the maximum number of lines contained on the history file
 HISTFILESIZE=20000
 
 # check the window size after each command and, if necessary,
