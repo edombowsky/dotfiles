@@ -29,6 +29,11 @@ _checkexec() {
     command -v "$1" > /dev/null
 }
 
+# delete the previous command from history
+forget() { 
+    history -d $( history | awk 'END{print $1-1}' ); 
+}
+
 ## --------------------------------------------------
 ## Path related commands
 ## --------------------------------------------------
