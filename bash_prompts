@@ -133,6 +133,8 @@ setup_magicmonty_prompt() {
         source $HOME/bin/bash-git-prompt/gitprompt.sh
     fi
 
+    # Preserve bash history across multiple sessions
+    # https://coderwall.com/p/jdvura/preserve-bash-history-across-multiple-sessions
     export PROMPT_COMMAND="history -a; history -c; history -r; tpwd; $PROMPT_COMMAND"
     # export PROMPT_COMMAND='history -a && setLastCommandState;setGitPrompt;echo -ne "\033]0;$(basename $PWD)\007"'
 
@@ -232,7 +234,7 @@ setup_git_prompt() {
     # (ESC is the escape character \033 and BEL is the bell character \007)
     #
     # Preserve bash history in multiple terminal windows
-    # http://unix.stackexchange.com/questions/1288/preserve-bash-history-in-multiple-terminal-windows
+    # https://coderwall.com/p/jdvura/preserve-bash-history-across-multiple-sessions
     export PROMPT_COMMAND="history -a; history -c; history -r; tpwd"
 
     # gitprompt.sh

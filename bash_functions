@@ -30,8 +30,8 @@ _checkexec() {
 }
 
 # delete the previous command from history
-forget() { 
-    history -d $( history | awk 'END{print $1-1}' ); 
+forget() {
+    history -d $( history | awk 'END{print $1-1}' );
 }
 
 ## --------------------------------------------------
@@ -151,8 +151,10 @@ title() {
     echo -en "${esc}]2;${txt}${bel}"
 }
 
+# Used by StarShip in the PROMPT_COMMAND to set the windows title and
+# Preserve bash history across multiple sessions (https://coderwall.com/p/jdvura/preserve-bash-history-across-multiple-sessions)
 set_win_title() {
-    echo -ne "\033]0;${PWD##*/}\007"
+    echo -ne "\033]0;${PWD##*/}\007"; history -a; history -c; history -r
 }
 
 # Sort du output in Human-readable format (http://www.bashoneliners.com/oneliners/97/)

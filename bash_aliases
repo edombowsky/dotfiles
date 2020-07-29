@@ -42,6 +42,8 @@ alias dirf='find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/
 # Calendar with today highlighted - http://www.shell-fu.org/lister.php?id=210
 alias tcal='cal | sed "s/^/ /;s/$/ /;s/ $(date +%e) / $(date +%e | sed '\''s/./#/g'\'') /"'
 
+alias hclear='cat /dev/null > ~/.bash_history && history -c && exit'
+
 # --------------------------------------------
 # Give directory listings some colour
 # --------------------------------------------
@@ -226,9 +228,9 @@ alias vc='mvn versions:display-dependency-updates -U'
 alias lu='mvn versions:update-properties -U'
 
 ## Epiphany cluster connections. Identity files are listed in ~/.ssh/config
-alias dedev10='ssh -vvv dev10'
-alias deperf10='ssh -vvv perf10'
-alias deqa10='ssh -vvv qa10'
+alias dedev10='ssh dev10'
+alias deperf10='ssh perf10'
+alias deqa10='ssh qa10'
 alias wfmint='ssh int'
 alias wfmstg='ssh stg'
 
