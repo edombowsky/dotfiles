@@ -9,7 +9,6 @@ style = "bold yellow"
 # when capacity is over 30%, the battery indicator will not be displayed
 
 [directory]
-truncation_length = 10
 truncate_to_repo = false
 
 [git_status]
