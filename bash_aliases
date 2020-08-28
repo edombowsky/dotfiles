@@ -82,8 +82,8 @@ alias la='ls -a'
 alias ll='ls -laF'
 alias lla='ls -la'
 alias lll='ls -la|less'
-alias lsa='ls -ld .??*'                  # display long listing of only dot files
-alias lsh='ls -d .??*'                   # display listing of only dot files
+alias ldotl='ls -ld'                  # display long listing of only dot files
+alias ldot='ls -d'                   # display listing of only dot files
 alias lsr='ls -R'
 alias ldl='ls -ld .??*|less'             # display log listing of only dotfiles pagenated
 alias lt='ls -lt'
@@ -234,22 +234,19 @@ alias deqa10='ssh qa10'
 alias wfmint='ssh int'
 alias wfmstg='ssh stg'
 
-# -------------------------------
-# Kubectl
-# -------------------------------
-alias k='kubectl'
-alias kgp='kubectl get pods'
-alias kgd='kubectl get deployments'
-alias kgn='kubectl get nodes'
-alias kdp='kubectl describe pod'
-alias kdd='kubectl describe deployment'
-alias kdn='kubectl describe node'
-alias kgpan='kubectl get pods --all-namespaces'
-alias kgdan='kubectl get deployments --all-namespaces'
-
-# -------------------------------
-# Docker
-# -------------------------------
+# --------------------------------------------
+#             Docker
+#
+#                    ##        .
+#              ## ## ##       ==
+#            ## ## ## ##     ===
+#       /""""""""""""""""\___/ ===
+#  ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ ~ /  ===- ~~~
+#      \_______ o            __/
+#        \     \          __/
+#         \_____\________/
+#
+# --------------------------------------------
 alias d=docker
 alias dstats='d stats -a --no-stream'
 alias dk='docker-compose'
@@ -279,15 +276,24 @@ alias dtag='docker inspect --format "{{.Name}}
 alias sa='docker run -p 8080:8080/tcp --name admin --rm -d admin/caeadom/admincontainerservice:latest'
 alias sadmin='docker run -p 8080:8080/tcp --name admin --rm -d'
 
-# Kubernetes
+# -------------------------------
+# Kubectl
+# -------------------------------
 alias k='kubectl'
 alias kn='kubectl get namespaces'
 alias kl='kubectl logs -f'
 alias kd='kubectl describe pod'
 alias kp='kubectl get pods'
 alias kpg='kubectl get pods | grep -i'
+alias kgp='kubectl get pods'
+alias kgd='kubectl get deployments'
+alias kgn='kubectl get nodes'
+alias kdp='kubectl describe pod'
+alias kdd='kubectl describe deployment'
+alias kdn='kubectl describe node'
+alias kgpan='kubectl get pods --all-namespaces'
+alias kgdan='kubectl get deployments --all-namespaces'
 
 [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
     && echo "$( date +%T%z ) End sourcing .bash_aliases..." \
     || echo "$( date +%T.%N%z ) End sourcing .bash_aliases..."
-

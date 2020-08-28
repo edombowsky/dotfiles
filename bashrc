@@ -70,6 +70,11 @@ fi
 FIGNORE=$FIGNORE:DS_Store:.o:~:.iml:.class
 
 # --------------------------------------------------------------------
+# Docker completion
+# --------------------------------------------------------------------
+[ -f ~/.docker-completion.sh ] && source ~/.docker-completion.sh
+
+# --------------------------------------------------------------------
 # Better directory navigation
 # --------------------------------------------------------------------
 # Prepend cd to directory names automatically
@@ -206,7 +211,6 @@ case "${OSTYPE//[0-9.]/}" in
         fi
         ;;
 esac
-
 
 export FZF_DEFAULT_COMMAND="rg --files --hidden --no-ignore-dot --follow"
 

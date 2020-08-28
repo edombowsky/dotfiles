@@ -35,6 +35,7 @@
     ~/.vimrc: vimrc
     ~/.fzf-functions.sh: fzf-functions.sh
     ~/.fzf-completion.bash: fzf-completion.bash
+    ~/.docker-completion.sh: docker-completion.sh
     ~/bin: bin
     ~/.vim: vim
     ~/AppData/Roaming/alacritty/alacritty.yml: 
