@@ -415,3 +415,5 @@
     minRacyThreshold = 0 nanoseconds
 [diff-so-fancy]
     stripLeadingSymbols = false
+[pull]
+	rebase = false
