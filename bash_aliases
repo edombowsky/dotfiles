@@ -254,10 +254,12 @@ alias drm="docker rm"
 alias dirm="docker image rm"
 alias dgc='docker rmi $(docker images -qf "dangling=true")'
 # alias dps="docker ps -a"
-alias dps='docker ps --format "table {{.Names}}\\t{{.Image}}\\t{{.Status}}\\t{{ .Ports }}\\t{{.RunningFor}}\\t{{.Command}}\\t{{ .ID }}" | cut -c-$(tput cols)'
-alias dls='docker ps -a --format "table {{.Names}}\\t{{.Image}}\\t{{.Status}}\\t{{ .Ports }}\\t{{.RunningFor}}\\t{{.Command}}\\t{{ .ID }}" | cut -c-$(tput cols)'
+alias dps='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}\t{{.RunningFor}}\t{{.ID}}\t{{.Command}}" | cut -c-$(tput cols)'
+alias dls='docker ps -a --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}\t{{.RunningFor}}\t{{.ID}}\t{{.Command}}" | cut -c-$(tput cols)'
+alias dlc='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.ID}}\t{{.Command}}" | cut -c-$(tput cols)' 
+alias dpsv='docker ps --no-trunc --format "NAME\t{{.Names}}\nID\t{{.ID}}\nIMAGE\t{{.Image}}\nPORTS\t{{.Ports}}\nCOMMAND\t{{.Command}}\nCREATED\t{{.CreatedAt}}\nSTATUS\t{{.Status}}\n"'
 alias di="docker image ls"
-alias dim='docker images --format "table {{.Repository}}\\t{{.Tag}}\\t{{.ID}}\\t{{.Size}}\\t{{.CreatedSince}}"'
+alias dim='docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.ID}}\t{{.Size}}\t{{.CreatedSince}}"'
 alias dv="docker volume ls"
 alias dvc='docker volume ls -qf dangling=true | xargs docker volume rm'
 alias dlog="docker logs"
