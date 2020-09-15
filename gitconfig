@@ -194,31 +194,43 @@
     # Find branches containing commit
     fb = "!f() { git branch -a --contains $1; }; f"
 
-    # ---------------------------------------------------------------------- add
+    # --------------------------------------------------------------------------
+    #                                                                        add
+    # --------------------------------------------------------------------------
     a = add .
     ai = add -i
     as = !git add . && git status
 
-    # ------------------------------------------------------------------- commit
+    # --------------------------------------------------------------------------
+    #                                                                     commit
+    # --------------------------------------------------------------------------
     cm = commit -m                    # commit with message
     ca = commit -am                   # commit all with message
     ci = commit                       # commit
 
-    # -------------------------------------------------------------------- fetch
+    # --------------------------------------------------------------------------
+    #                                                                      fetch
+    # --------------------------------------------------------------------------
     f = fetch
     fp = fetch -p
     fo = fetch origin
 
-    # --------------------------------------------------------------------- pull
+    # --------------------------------------------------------------------------
+    #                                                                       pull
+    # --------------------------------------------------------------------------
     pl = pull
     plo = pull origin
 
-    # --------------------------------------------------------------------- push
+    # --------------------------------------------------------------------------
+    #                                                                       push
+    # --------------------------------------------------------------------------
     ps = push
     pom = push origin master
     pso = push origin
 
-    # -------------------------------------------------------------------- stash
+    # --------------------------------------------------------------------------
+    #                                                                      stash
+    # --------------------------------------------------------------------------
     sa = stash apply
     sc = stash clear
     sd = stash drop
@@ -228,7 +240,9 @@
     sw = stash show
     sshow = "!f() { git stash show stash^{/$*} -p; }; f"
 
-    # -------------------------------------------------------------------- reset
+    # --------------------------------------------------------------------------
+    #                                                                      reset
+    # --------------------------------------------------------------------------
     r = reset
     r1 = reset HEAD^
     r2 = reset HEAD^^
@@ -236,17 +250,22 @@
     rh1 = reset HEAD^ --hard
     rh2 = reset HEAD^^ --hard
 
-    # ------------------------------------------------------------------- status
+    # --------------------------------------------------------------------------
+    #                                                                     status
+    # --------------------------------------------------------------------------
     s = status
     st = status
     stat = status
     sh = status -s
 
-    # Display the status and ahead/behind commits for all local branches and their remotes
+    # Display the status and ahead/behind commits for all local branches and 
+    # their remotes
     # state = !git for-each-ref --format='%(color:cyan)%(refname:short) %(color:green)%(push:track)' refs/heads && git status -s
     state = !git branch-status && git status -s
 
-    # --------------------------- verbose output about tags, branches or remotes
+    # --------------------------------------------------------------------------
+    #                             verbose output about tags, branches or remotes
+    # --------------------------------------------------------------------------
     tags = tag -l
     lasttag = describe --tags --abbrev=0
     lt = describe --tags --abbrev=0
@@ -265,10 +284,14 @@
     # https://www.atlassian.com/blog/git/advanced-git-aliases
     bclean = "!f() { git branch --merged ${1-master} | grep -v  ${1-master}$ | xargs -r git branch -d; }; f"
 
-    # ------------------------------------------ show changed files for a commit
+    # --------------------------------------------------------------------------
+    #                                            show changed files for a commit
+    # --------------------------------------------------------------------------
     cf = show --pretty=format: --name-only
 
-    # --------------------------------------------------------------------- misc
+    # --------------------------------------------------------------------------
+    #                                                                       misc
+    # --------------------------------------------------------------------------
     r = rebase
     mt = mergetool
     wc = whatchanged -n 1
@@ -293,6 +316,9 @@
     # Show a diff of last commit
     dlc = diff --cached HEAD^
 
+    # Diff uncommited changes
+    diffunc = diff --cached
+
     # Show only the files that changed between branches (short form)
     dns = "!f() { git diff --name-status $1 $2; }; f"
 
@@ -311,42 +337,48 @@
     # See: http://yantonov.com/blog/2014/10/31/git-log-aliases/
     # List of one line commits
     ls = log --pretty=custom1
+
     # List of commits with changed files
     ll = log --pretty=custom1 --decorate --numstat
     lll = log --stat --abbrev-commit
     wtf = log --pretty=custom2 --stat
     changes = log --pretty=change --name-status
+
     # Commits with dates
     ldt = log --all --pretty=custom3
-    # List oneline commits showing dates:
-    lds = !git ldt --date=short
+
     # list online commits showing relative dates
     ld = log --pretty=custom4 --decorate --date=relative
+
     # Commits with relative dates
     ldr = !git ldt --date=relative
+
     # Commits with date and times
     ldi = !git ldt --date=iso
+
     # Commit tree
     lgraph = log --all --graph --pretty=lgraph
+
     # Commit tree with relative dates and times
     lgr = log --graph --pretty=lgr --abbrev-commit --date=relative
+
     # Default look for short git log
     ldef = log --oneline --decorate
+
     # View abbreviated SHA, description, and history graph of the latest 20 commits
     l = log --pretty=oneline -n 20 --graph --abbrev-commit
-    # Commits related to a file
-    filelog = log -u
-    fl = log -u
+
     # Last commit
     lc = !git ll -1
     overview = !git log --all --oneline --no-merges
     latest = for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short)'
 
-    lh = log --graph
-    la = !git lh --date-order --all 2> /dev/null
-    lb = log --graph --simplify-by-decoration
+    lhg = log --graph
+    # la = !git lh --date-order --all 2> /dev/null
+    # lb = log --graph --simplify-by-decoration
     h = !git --no-pager log --graph -n 15
     a = !git --no-pager la -n 15
+    # log table format and no colout
     hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
 
     # show what I did today
@@ -365,8 +397,94 @@
     # Look for unpushed commits in current branch; also determine the current branch.
     unpushed = !GIT_CURRENT_BRANCH=$(git name-rev --name-only HEAD) && git log origin/$GIT_CURRENT_BRANCH..$GIT_CURRENT_BRANCH --oneline
 
+    # One liner with colours
+    l1 = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+
+    # log a list of commits with only the commit name and SHA. Useful to have a 
+    # quick overview of the branches on the repo.
+    l2 = log --graph --oneline --decorate --all
+
+    # details about the last commit
+    l3 = log -p -1
+
+    # List commits showing changed files
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Creset" --decorate --numstat
+
+    # List commits in short form, with colors and branch/tag annotations.
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Creset" --decorate
+
+    # List commits short form, tree
+    lst = log --graph --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Creset" --abbrev-commit
+
+    # List with no colors if you need to chain the out put with Unix pipes:
+    lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+
+    # oneline commits showing dates
+    lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Creset" --decorate --date=short
+
+    # default look for short git log:
+    le = log --oneline --decorate
+
+    # see all the commits related to a file, with the diff of the changes
+    filelog = log -u
+    fl = log -u
+
+    # check what was in the last commit
+	dl = "!git ll -1"
+
+    # Show content (full diff) of a commit given a revision:
+	dr  = "!f() { git diff "$1"^.."$1"; }; f"
+	lc  = "!f() { git ll "$1"^.."$1"; }; f"
+	diffr  = "!f() { git diff "$1"^.."$1"; }; f"
+
+    # show last tag
+	lasttag = describe --tags --abbrev=0
+	lt = describe --tags --abbrev=0
+
+    # show recent branches
+	short-recent = "for-each-ref --count=25 --sort=committerdate refs/heads/ --format='%(refname:short)'"
+
     # --------------------------------------------------------------------------
-    #                                                                       blame
+    # Using fzf
+    # --------------------------------------------------------------------------
+    # show recent branches
+	short-recent = "for-each-ref --count=25 --sort=committerdate refs/heads/ --format='%(refname:short)'"
+
+    # fuzzy add using fzf
+	fza = "!git ls-files -m -o --exclude-standard | fzf --print0 -m --preview 'git diff {}' --preview-window=top:10:wrap | xargs -0 -t -o git add --all"
+
+    # fuzzy restore using fzf
+	fzr = "!git ls-files -m --exclude-standard | fzf --print0 -m --preview 'git diff {}' --preview-window=top:10:wrap | xargs -0 -t -o git restore"
+
+    # fuzzy restore staged using fzf
+	fzrs = "!git diff --name-only --staged | fzf --print0 -m --preview 'git diff {}' --preview-window=top:10:wrap | xargs -0 -t -o git restore --staged"
+
+    # fuzzy switch branch...  /fish/functions/fco.fish seems better
+	fco = "!git short-recent | fzf --print0 | xargs -0 -t git checkout"
+
+    # fuzzy fix staged changes into existing commit
+	ffix = !HASH=`git log --pretty=oneline | head -n 100 | fzf` && git fixit `echo ${HASH} | awk '{ print $1 }'`
+
+    # fuzzy rebase interactive choose existing commit to start from
+	frebase = !HASH=`git log --pretty=oneline | head -n 100 | fzf` && git rebase -i `echo ${HASH} | awk '{ print $1 }'`^
+
+    # fuzzy edit untracked/modified files
+	fed = !FILES=`git status -s | awk '{ print $2 }' | fzf -x -m` && code ${FILES}
+
+    # fuzzy edit files in conflict state
+	fedconflicts = !FILES=`git status -s | grep '^[UMDA]\\{2\\} ' | awk '{ print $2 }' | fzf -x -m` && code ${FILES}
+
+    # fuzzy gitgrep working tree for pattern and choose file(s) to edit
+	fgrep = !sh -c 'FILES=`git grep -l -A 0 -B 0 $1 $2 | fzf -x -m` && code `echo ${FILES} | cut -d':' -f1 | xargs`' -
+
+    # fuzzy select past commit, and edit current state of file(s) changed in it
+	fedlog = !HASH=`git log --pretty=oneline | head -n 50 | fzf` && HASHZ=`echo ${HASH} | awk '{ print $1 }'` && FILES=`git show --pretty='format:' --name-only $HASHZ | grep -v -e '^$' | fzf -x -m` && code ${FILES}
+
+    # fuzzy reset back to prior commit
+	freset = !HASH=`git log --pretty=oneline | head -n 50 | fzf` && git reset --soft `echo ${HASH} | awk '{ print $1 }'`^
+
+    # --------------------------------------------------------------------------
+    #                                                                      blame
     # --------------------------------------------------------------------------
     # https://mislav.net/2014/02/hidden-documentation/
     who = "!f() { git show $(git blame ${1} -L ${2} | awk '{print $1}'); }; f"
@@ -389,10 +507,12 @@
 
     # http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/
     # Find file path in codebase
-    f = !git ls-files | grep -i
+    fe = "!git ls-files | grep -i"
+
     # Search/grep your entire code base for a string
     grep = grep -Ii
     gr = grep -Ii
+
     # Grep from root folder
     gra = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
 
