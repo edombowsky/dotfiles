@@ -100,6 +100,11 @@ convertcrlf () {
   \) -type f -print0 | xargs -0 dos2unix -ic | xargs -d '\n' dos2unix
 }
 
+## In cygwin, fd output displays backslash instead of forward slash
+## https://github.com/sharkdp/fd/issues/153#issuecomment-353263132
+[[ "${OSTYPE//[0-9.]/}" = 'msys' ]] && \
+    fd() { command fd "$@" | cygpath --ignore --file -; }
+
 ## Mirror stdout to stderr, useful for seeing data going through a pipe
 alias peek='tee >(cat 1>&2)'
 
