@@ -197,10 +197,7 @@ export BAT_PAGER="less -R"
 # FZF configuration
 # --------------------------------------------------------------------
 case "${OSTYPE//[0-9.]/}" in
-    "msys")         # git-bash
-        [[ -f ~/.fzf-completion.bash ]] && source ~/.fzf-completion.bash
-        ;;
-    "linux-gnu")    # wsl
+    "msys" | "linux-gnu")  # git-bash or wsl
         [[ -f ~/.fzf-completion.bash ]] && source ~/.fzf-completion.bash
         ;;
     "darwin")       # mac-os
@@ -244,6 +241,7 @@ fi
 
 
 [[ -f ~/.fzf-functions.sh ]] && source ~/.fzf-functions.sh
+[[ -f ~/.fzf-key-bindings.bash ]] && source ~/.fzf-key-bindings.bash
 
 # export FZF_DEFAULT_OPTS="
 #     --multi --cycle --keep-right -1 \
