@@ -102,7 +102,7 @@ fi
 
 # --------------------------------------------------------------------
 # Set-up the magicmonty prompt.
-# 
+#
 # See https://github.com/magicmonty/bash-git-prompt for explanation
 # of variables being set
 # --------------------------------------------------------------------
@@ -144,7 +144,7 @@ setup_magicmonty_prompt() {
 }
 
 # --------------------------------------------------------------------
-# Set-up the magicmonty prompt.
+# Set-up the liquidprompt prompt.
 # 
 # See https://github.com/nojhan/liquidprompt for further details
 # --------------------------------------------------------------------
