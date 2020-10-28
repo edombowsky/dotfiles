@@ -319,6 +319,35 @@ refresh_all() {
     cd $CURRDIR
 }
 
+# Refresh all Digital Enterprise repositories
+refresh_de() {
+    declare -a FolderArray=("_wfm _edt .idea" )
+    CURRDIR=$PWD
+    [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
+        && cd /c/Users/caeadom/Documents/projects/df \
+        || cd /home/user/Documents/wfm
+
+    for f in *; do
+        if [ -d ${f} ]; then
+            printf "Checking ${f}...\n"
+            # Will not run if no directories are available
+            if [[ ! " ${FolderArray[@]} " =~ " ${f} " ]]; then
+                printf "******** Refreshing $f ********\n"
+                cd $f
+                THE_GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
+                if [[ "$THE_GIT_BRANCH" == "master" ]]; then
+                    git refresh
+                else
+                    printf "$THE_GIT_BRANCH is NOT master, update manually...\n\n"
+                fi
+                cd ..
+            fi
+        fi
+    done
+
+    cd $CURRDIR
+}
+
 # Print the list of your Git commits this month
 # Explanation
 # --since='last month' sets the start of the period, in this case the end of the
