@@ -325,7 +325,7 @@ refresh_de() {
     CURRDIR=$PWD
     [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
         && cd /c/Users/caeadom/Documents/projects/df \
-        || cd /home/user/Documents/wfm
+        || cd /Users/caeadom/Documents/projects/de
 
     for f in *; do
         if [ -d ${f} ]; then
