@@ -257,9 +257,9 @@ rjsi() { rg --type js "$@"; }
 # ~/repos/personal/dotfiles, and repo kalis will navigate to ~/repos/personal/kalis.me.
 repo() {
     case "${OSTYPE//[0-9.]/}" in
-        "darwin") repo_base="/Users/caeadom/Documents/projects/" ;;
+        "darwin") repo_base="/Users/caeadom/Documents/projects" ;;
         "linux-gnu") repo_base="/mnt/d/repositories" ;;
-        "msys") repo_base=/c/Users/caeadom/Documents/projects/ ;;
+        "msys") repo_base=/c/Users/caeadom/Documents/projects ;;
     esac
 
     if [[ -z "${1}" ]]; then
