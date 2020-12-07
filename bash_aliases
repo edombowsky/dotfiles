@@ -99,6 +99,12 @@ alias llf="ls -l | egrep -v '^d'"        # long listing of only files
 
 alias sl=ls # often screw this up
 
+# lr:  Full Recursive Directory Listing
+alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'' | less'
+
+# To create a ZIP archive of a folder
+zipup () { zip -r "$1".zip "$1" ; }
+
 # Navigate up the directory using "..n"
 alias ..="cd .."                # go to parent directory
 alias ..2="cd ../.."            # go to grandparent directory
@@ -126,6 +132,12 @@ alias octal="stat -c '%A %a %n'"       # file permissions in octal
 alias egrep='egrep --color=auto --exclude-dir=.svn --exclude-dir=.git'       # show differences in colour
 alias fgrep='fgrep --color=auto --exclude-dir=.svn --exclude-dir=.git'       # show differences in colour
 alias grep='grep --color --exclude-dir=.svn --exclude-dir=.git'              # show differences in colour
+
+# Some networking commands
+alias lsock='sudo /usr/sbin/lsof -i -P'             # lsock:        Display open sockets
+alias lsockU='sudo /usr/sbin/lsof -nP | grep UDP'   # lsockU:       Display only open UDP sockets
+alias lsockT='sudo /usr/sbin/lsof -nP | grep TCP'   # lsockT:       Display only open TCP sockets
+alias openPorts='sudo lsof -i | grep LISTEN'        # openPorts:    All listening connections
 
 if [ -x "$(command -v fdfind)" ]; then
   echo 'Error: fdfind is not installed.' >&2
