@@ -268,8 +268,9 @@
     #                             verbose output about tags, branches or remotes
     # --------------------------------------------------------------------------
     tags = tag -l
-    lasttag = describe --tags --abbrev=0
-    lt = describe --tags --abbrev=0
+    # show last tag
+	lasttag = describe --tags --abbrev=0
+
     branches = branch -a
     remotes = remote -v
 
@@ -335,9 +336,14 @@
     # --------------------------------------------------------------------------
     #                                                                        log
     # --------------------------------------------------------------------------
+    log   = log --oneline --decorate --graph
+    lall  = log --oneline --decorate --graph --all
+    lstat = log --oneline --decorate --graph --stat
+    lt    = log --graph --decorate --pretty=format:'%C(yellow)%h%Creset%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset'
+
     # See: http://yantonov.com/blog/2014/10/31/git-log-aliases/
     # List of one line commits
-    ls = log --pretty=custom1
+    l1 = log --pretty=custom1
 
     # List of commits with changed files
     ll = log --pretty=custom1 --decorate --numstat
@@ -369,16 +375,10 @@
     # View abbreviated SHA, description, and history graph of the latest 20 commits
     l = log --pretty=oneline -n 20 --graph --abbrev-commit
 
-    # Last commit
-    lc = !git ll -1
-    overview = !git log --all --oneline --no-merges
-    latest = for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short)'
-
     lhg = log --graph
-    # la = !git lh --date-order --all 2> /dev/null
-    # lb = log --graph --simplify-by-decoration
+
+    overview = !git log --all --oneline --no-merges
     h = !git --no-pager log --graph -n 15
-    a = !git --no-pager la -n 15
     # log table format and no colout
     hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
 
@@ -399,7 +399,7 @@
     unpushed = !GIT_CURRENT_BRANCH=$(git name-rev --name-only HEAD) && git log origin/$GIT_CURRENT_BRANCH..$GIT_CURRENT_BRANCH --oneline
 
     # One liner with colours
-    l1 = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+    l1c = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
 
     # log a list of commits with only the commit name and SHA. Useful to have a 
     # quick overview of the branches on the repo.
@@ -427,8 +427,14 @@
     le = log --oneline --decorate
 
     # see all the commits related to a file, with the diff of the changes
-    filelog = log -u
     fl = log -u
+
+    # --------------------------------------------------------------------------
+    #                                                                     extras
+    # --------------------------------------------------------------------------
+    # Last commit
+    lc = !git ll -1
+    latest = for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short)'
 
     # check what was in the last commit
 	dl = "!git ll -1"
@@ -438,19 +444,12 @@
 	lc  = "!f() { git ll "$1"^.."$1"; }; f"
 	diffr  = "!f() { git diff "$1"^.."$1"; }; f"
 
-    # show last tag
-	lasttag = describe --tags --abbrev=0
-	lt = describe --tags --abbrev=0
-
     # show recent branches
 	short-recent = "for-each-ref --count=25 --sort=committerdate refs/heads/ --format='%(refname:short)'"
 
     # --------------------------------------------------------------------------
     # Using fzf
     # --------------------------------------------------------------------------
-    # show recent branches
-	short-recent = "for-each-ref --count=25 --sort=committerdate refs/heads/ --format='%(refname:short)'"
-
     # fuzzy add using fzf
 	fza = "!git ls-files -m -o --exclude-standard | fzf --print0 -m --preview 'git diff {}' --preview-window=top:10:wrap | xargs -0 -t -o git add --all"
 
