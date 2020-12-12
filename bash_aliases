@@ -112,6 +112,8 @@ alias ..3="cd ../../.."
 alias ..4="cd ../../../.."
 alias ..5="cd ../../../../.."
 
+alias cdf='cd $(ls -1 | fzf)'
+
 # alias chmod commands
 alias mx='chmod a+x'
 alias 000='chmod -R 000'
