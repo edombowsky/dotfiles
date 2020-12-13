@@ -40,13 +40,6 @@ export NNN_PLUG='o:fzopen;d:diffs;p:-_less -iR $nnn;g:_git log;e:suedit;h:hexvie
 export NNN_SHOW_HIDDEN=1
 
 # --------------------------------------------------------------------
-# Completion
-# --------------------------------------------------------------------
-fpath=(~/.zsh/completion $fpath)
-autoload -Uz compinit && compinit -i
-autoload -U +X bashcompinit && bashcompinit
-
-# --------------------------------------------------------------------
 # Smarter TAB completion
 # --------------------------------------------------------------------
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|?=** r:|?=**'
@@ -162,34 +155,17 @@ export BAT_PAGER="less -R"
 
 export FZF_DEFAULT_COMMAND="rg --files --hidden --no-ignore-dot --follow"
 
-if [[ "${OSTYPE//[0-9.]/}" = 'msys' ]]; then
-
-    export FZF_DEFAULT_OPTS="
-        --multi --cycle --keep-right -1 \
-        --height=50% --layout=reverse --info=default \
-        --preview-window=:hidden:right:70%:wrap \
-        --preview '(bat --style=numbers --color=always {} || cat {}) || echo {} 2> /dev/null | head -200' \
-        --ansi --inline-info \
-        --bind '?:toggle-preview' \
-        --bind 'ctrl-a:select-all' \
-        --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)' \
-        --bind 'ctrl-y:execute-silent(echo {+} | clip)' \
-        --bind 'ctrl-v:execute(code {+})'"
-else
-
-    export FZF_DEFAULT_OPTS="
-        --multi --cycle --keep-right -1 \
-        --height=50% --layout=reverse --info=default \
-        --preview-window=:hidden:right:70%:wrap \
-        --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200' \
-        --ansi --inline-info \
-        --bind '?:toggle-preview' \
-        --bind 'ctrl-a:select-all' \
-        --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)'
-        --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
-        --bind 'ctrl-v:execute(code {+})'"
-fi
-
+export FZF_DEFAULT_OPTS="
+    --multi --cycle --keep-right -1 \
+    --height=50% --layout=reverse --info=default \
+    --preview-window=:hidden:right:70%:wrap \
+    --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200' \
+    --ansi --inline-info \
+    --bind '?:toggle-preview' \
+    --bind 'ctrl-a:select-all' \
+    --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)'
+    --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
+    --bind 'ctrl-v:execute(code {+})'"
 
 # zsh? [[ -f ~/.fzf-functions.sh ]] && source ~/.fzf-functions.sh
 # zsh? [[ -f ~/.fzf-key-bindings.bash ]] && source ~/.fzf-key-bindings.bash
@@ -210,6 +186,14 @@ fi
 #     --preview '[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2>/dev/null | head -300' \
 #     --bind='ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | pbcopy)' \
 #     --ansi"
+
+# --------------------------------------------------------------------
+# Completion
+# --------------------------------------------------------------------
+fpath=(~/.zsh/completion $fpath)
+autoload -Uz compinit && compinit -i
+autoload -U +X bashcompinit && bashcompinit
+
 
 [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
     && [[ -f ~/.macos_zshrc ]] && source ~/.macos_zshrc

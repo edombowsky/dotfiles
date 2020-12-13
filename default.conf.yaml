@@ -27,9 +27,9 @@
     ~/.tigrc: default/tigrc
     ~/.vimrc: default/vimrc
     ~/.fzf-functions.sh: default/fzf-functions.sh
-    ~/.fzf-completion.bash: default/fzf-completion.bash
+    ~/.fzf-completion.bash: completions/bash/fzf-completion.bash
     ~/.fzf-key-bindings.bash: default/fzf-key-bindings.bash
-    ~/.docker-completion.sh: default/docker-completion.sh
+    ~/.docker-completion.bash: completions/bash/docker-completion.bash    
     ~/bin: bin
     ~/.vim: vim
     ~/.bash_prompts: default/bash_prompts
