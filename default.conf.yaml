@@ -1,0 +1,38 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- create:
+  - ~/.dotfiles_default_update
+
+- shell:
+  # - [git submodule update --init --recursive, Installing submodules]
+  - [git submodule sync, Syncing submodule remotes]
+  - [git submodule foreach git pull origin master, Updating submodule contents]
+  - [date > ~/.dotfiles_default_update, Logging last update]
+
+- clean: ['~', '~/.config', '~/.vim']
+
+- link:
+    ~/.config: config
+    ~/.dircolors: default/dircolors
+    ~/.curlrc: default/curlrc
+    ~/.gitconfig: default/gitconfig
+    ~/.gitignore_global: default/gitignore_global
+    ~/.multitail.conf: default/multitail.conf
+    #~/.markdownlintrc: markdownlintrc
+    ~/.ripgreprc: default/ripgreprc
+    ~/.psqlc: default/psqlc
+    ~/.tigrc: default/tigrc
+    ~/.vimrc: default/vimrc
+    ~/.fzf-functions.sh: default/fzf-functions.sh
+    ~/.fzf-completion.bash: default/fzf-completion.bash
+    ~/.fzf-key-bindings.bash: default/fzf-key-bindings.bash
+    ~/.docker-completion.sh: default/docker-completion.sh
+    ~/bin: bin
+    ~/.vim: vim
+    ~/.bash_prompts: default/bash_prompts
+    ~/.aliases: default/aliases
+    ~/.functions: default/functions
+

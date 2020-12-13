@@ -1,0 +1,57 @@
+echo "$( date +%T.%N%z ) Begin sourcing .win_profile..."
+
+# -------------------------------
+# Docker settings
+# -------------------------------
+export DOCKER_HOST=tcp://localhost:2375
+
+# #######################################
+# DEVELOPMENT SETTINGS
+# #######################################
+
+# -------------------------------
+# JAVA settings
+#---------------------------------
+if [[ "${OSTYPE//[0-9.]/}" = 'msys' ]]; then
+    # I am going to rely on Windows environment to set up the path I want, which 
+    # for the time being is jdk-14. The following is for reference.
+    :
+    
+    #--------------------------------------
+    # JAVA 11
+    #--------------------------------------
+    #export JAVA_HOME=/c/jdk-11
+    #pathmunge ${JAVA_HOME}/bin before; export PATH
+
+    #--------------------------------------
+    # JAVA 14
+    #--------------------------------------
+    #export JAVA_HOME="/c/Program Files/Java/jdk-14.0.1"
+    #echo ${JAVA_HOME}/bin
+    #pathmunge ${JAVA_HOME}/bin before; export PATH
+else
+    #--------------------------------------
+    # JAVA 11
+    #--------------------------------------
+    export JAVA_HOME=/usr/lib/jvm/jdk-11.0.4
+    pathmunge ${JAVA_HOME}/bin before; export PATH
+    export J2SDKDIR=${JAVA_HOME}
+
+    #--------------------------------------
+    # JAVA 8
+    #--------------------------------------
+    #export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_221/
+    #pathmunge ${JAVA_HOME}/bin before; export PATH
+    #export JRE_HOME=${JAVA_HOME}/jre/
+    #export J2SDKDIR=${JAVA_HOME}
+    #export J2REDIR=${JAVA_HOME}/jre/
+fi
+
+case "${OSTYPE//[0-9.]/}" in
+    "linux-gnu") export REPO_BASE_DIR="/mnt/d/repositories" ;;
+    "msys") export REPO_BASE_DIR="/c/Users/caeadom/Documents/projects" ;;
+
+export DE_BASE_DIR="$REPO_BASE_DIR/df"
+export WFM_BASE_DIR="$REPO_BASE_DIR/wfm"
+
+echo "$( date +%T.%N%z ) End sourcing .win_profile..."

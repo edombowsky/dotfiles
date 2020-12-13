@@ -1,0 +1,99 @@
+# If not running interactively, don't do anything
+[[ $- == *i* ]] || return
+# case $- in
+#     *i*) ;;
+#       *) return;;
+# esac
+
+echo "$( date +%T%z ) Begin sourcing .macos_zshrc..."
+
+# --------------------------------------------------------------------
+# General options
+# --------------------------------------------------------------------
+# Automatically trim long paths in the prompt (requires Bash 4.x)
+# zsh? PROMPT_DIRTRIM=0
+
+# Enable history expansion with space
+# E.g. typing !!<space> will replace the !! with your last command
+bindkey ' ' magic-space
+
+# Immediately add a trailing slash when auto-completing symlinks to directories
+# zsh? g46bind "set mark-symlinked-directories on"
+
+# --------------------------------------------------------------------
+# Completion
+# --------------------------------------------------------------------
+fpath=(~/.zsh/completion $fpath)
+autoload -Uz compinit && compinit -i
+autoload -U +X bashcompinit && bashcompinit
+
+# --------------------------------------------------------------------
+# Smarter TAB completion
+# --------------------------------------------------------------------
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|?=** r:|?=**'
+
+# --------------------------------------------------------------------
+# Better directory navigation
+# --------------------------------------------------------------------
+# This defines where cd looks for targets
+# Add the directories you want to have fast access to, separated by colon
+# Ex: CDPATH=".:~:~/projects" will look for targets in the current working directory, in home and in the ~/projects folder
+CDPATH=".:~:/Users/caeadom/Documents/projects/"
+
+# --------------------------------------------------------------------
+# Sane history defaults
+# --------------------------------------------------------------------
+setopt EXTENDED_HISTORY          # add timestamp in unix epoch time and elapsed time of the command
+setopt HIST_EXPIRE_DUPS_FIRST    # expire duplicates first
+setopt HIST_FIND_NO_DUPS         # ignore duplicates when searching
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE         # do not store duplications
+setopt HIST_REDUCE_BLANKS        # removes blank lines from history
+setopt HIST_NO_FUNCTIONS         # remove function definitions from the history list.
+setopt HIST_NO_STORE             # remove the history (fc -l) command
+setopt HIST_SAVE_NO_DUPS         # when writing history file, older commands that duplicate newer ones are omitted
+setopt HIST_VERIFY               # perform history expansion and reload the line into the editing buffer rather direct execution
+setopt SHARE_HISTORY             # share history across multiple zsh sessions
+
+HISTORY_IGNORE='([ \t]*|[bf]g *}exit|[alsh]#( *)#|history *|clear|ps|cd ~|cd ..|--|pwd|clear|reset|h|vi[m,] *)'
+
+# sets the number of commands to remember in the command history
+HISTSIZE=10000
+# sets the maximum number of lines contained on the history file
+HISTFILESIZE=20000
+
+setopt NO_CASE_GLOB
+setopt MAGIC_EQUAL_SUBST
+
+# --------------------------------------------------------------------
+# Customise the prompt
+# --------------------------------------------------------------------
+[[ -f ~/.bash_prompts ]] && source ~/.bash_prompts
+
+# if [[ -f "$HOME/liquidprompt/liquidprompt1" ]]; then    # liquidprompt seemed too slow so for now don't use it
+#     setup_liquidprompt
+# elif [[ "${OSTYPE//[0-9.]/}" = 'darwin' && -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]]; then
+#     setup_magicmonty_prompt
+# elif [[ -f "$HOME/bin/bash-git-prompt/gitprompt.sh" ]]; then
+#     setup_magicmonty_prompt
+# elif [[ -f "~/.git-prompt.sh" ]]; then
+#     setup_git-prompt
+# fi
+
+# Use the cross shell prompt "starship" ==> https://starship.rs/
+starship_precmd_user_func="set_win_title"
+eval "$(starship init zsh)"
+
+export FZF_DEFAULT_OPTS="
+    --multi --cycle --keep-right -1 \
+    --height=50% --layout=reverse --info=default \
+    --preview-window=:hidden:right:70%:wrap \
+    --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200' \
+    --ansi --inline-info \
+    --bind '?:toggle-preview' \
+    --bind 'ctrl-a:select-all' \
+    --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)'
+    --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
+    --bind 'ctrl-v:execute(code {+})'"
+
+echo "$( date +%T%z ) End sourcing .macos_zshrc..."

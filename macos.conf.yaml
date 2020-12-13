@@ -1,0 +1,21 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- create:
+  - ~/.dotfiles_macos_update
+
+- shell:
+  - [date > ~/.dotfiles_macos_update, Logging last update]
+
+- clean: ['~', '~/.config', '~/.vim']
+
+- link:
+    ~/.zshrc: default/zshrc
+    ~/.zshenv: default/zshenv
+    ~/.macos_zshrc: macos/zshrc
+    ~/.macos_zshenv: macos/zshenv
+    ~/.macos_aliases: macos/aliases
+    ~/.macos_functions: macos/functions
+    ~/.zlogout: default/bash_logout

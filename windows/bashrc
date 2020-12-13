@@ -1,0 +1,96 @@
+# If not running interactively, don't do anything
+[[ $- == *i* ]] || return
+# case $- in
+#     *i*) ;;
+#       *) return;;
+# esac
+
+echo "$( date +%T.%N%z ) Begin sourcing .win_bashrc..."
+
+# -------------------------------------------
+# bash command line completion
+# -------------------------------------------
+# Enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+    fi
+fi
+
+# This defines where cd looks for targets
+# Add the directories you want to have fast access to, separated by colon
+# Ex: CDPATH=".:~:~/projects" will look for targets in the current working directory, in home and in the ~/projects folder
+case "${OSTYPE//[0-9.]/}" in
+    "msys") CDPATH=".:~:/c/Users/caeadom/Documents/projects" ;;      # git-bash
+    "linux-gnu") CDPATH=".:~:/mnt/d/repositories" ;;       # wsl
+esac
+
+# Use the cross shell prompt "starship" ==> https://starship.rs/
+starship_precmd_user_func="set_win_title"
+eval "$(starship init bash)"
+
+# --------------------------------------------------------------------
+# FZF configuration
+# --------------------------------------------------------------------
+[[ -f ~/.fzf-completion.bash ]] && source ~/.fzf-completion.bash
+
+if [[ "${OSTYPE//[0-9.]/}" = 'msys' ]]; then
+
+    export FZF_DEFAULT_OPTS="
+        --multi --cycle --keep-right -1 \
+        --height=50% --layout=reverse --info=default \
+        --preview-window=:hidden:right:70%:wrap \
+        --preview '(bat --style=numbers --color=always {} || cat {}) || echo {} 2> /dev/null | head -200' \
+        --ansi --inline-info \
+        --bind '?:toggle-preview' \
+        --bind 'ctrl-a:select-all' \
+        --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)' \
+        --bind 'ctrl-y:execute-silent(echo {+} | clip)' \
+        --bind 'ctrl-v:execute(code {+})'"
+else
+
+    export FZF_DEFAULT_OPTS="
+        --multi --cycle --keep-right -1 \
+        --height=50% --layout=reverse --info=default \
+        --preview-window=:hidden:right:70%:wrap \
+        --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200' \
+        --ansi --inline-info \
+        --bind '?:toggle-preview' \
+        --bind 'ctrl-a:select-all' \
+        --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)'
+        --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
+        --bind 'ctrl-v:execute(code {+})'"
+fi
+
+
+[[ -f ~/.fzf-functions.sh ]] && source ~/.fzf-functions.sh
+[[ -f ~/.fzf-key-bindings.bash ]] && source ~/.fzf-key-bindings.bash
+
+# export FZF_DEFAULT_OPTS="
+#     --multi --cycle --keep-right -1 \
+#     --height=50% --layout=reverse --info=default \
+#     --preview-window right:70%:wrap \
+#     --preview '[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2>/dev/null | head -300' \
+#     --bind='ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | clip)' \
+#     --ansi"
+
+# OSX
+# export FZF_DEFAULT_OPTS="
+#     --multi --cycle --keep-right -1 \
+#     --height=80% --layout=reverse --info=default \
+#     --preview-window right:70%:wrap \
+#     --preview '[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2>/dev/null | head -300' \
+#     --bind='ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | pbcopy)' \
+#     --ansi"
+
+# --------------------------------------------------------------------
+# Azure CLI 2.0 settings
+# --------------------------------------------------------------------
+pathmunge $HOME/bin before; export PATH
+[ -s "/home/user/lib/azure-cli/az.completion" ] && source "/home/user/lib/azure-cli/az.completion"
+
+echo "$( date +%T.%N%z ) End sourcing .bashrc..."

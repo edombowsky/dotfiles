@@ -1,0 +1,62 @@
+#*****************************************************
+#*           ▄▄▄▄         ██                         *
+#*           ▀▀██         ▀▀                         *
+#*  ▄█████▄    ██       ████      ▄█████▄  ▄▄█████▄  *
+#*  ▀ ▄▄▄██    ██         ██      ▀ ▄▄▄██  ██▄▄▄▄ ▀  *
+#* ▄██▀▀▀██    ██         ██     ▄██▀▀▀██   ▀▀▀▀██▄  *
+#* ██▄▄▄███    ██▄▄▄   ▄▄▄██▄▄▄  ██▄▄▄███  █▄▄▄▄▄██  *
+#*  ▀▀▀▀ ▀▀     ▀▀▀▀   ▀▀▀▀▀▀▀▀   ▀▀▀▀ ▀▀   ▀▀▀▀▀▀   *
+#*****************************************************
+echo "$( date +%T%z ) Begin sourcing .macos_aliases..."
+    
+alias ps="ps auxww"
+
+# --------------------------------------------
+# Give directory listings some colour
+# --------------------------------------------
+colourflag="-G"
+# export LS_OPTIONS='--color=auto'
+export CLICOLOR=1
+export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
+# export LSCOLORS=ExFxBxDxCxegedabagacad
+
+alias lrt="ls -lrt ${colourflag}"
+alias lart="ls -lart ${colourflag}"
+alias ls="/bin/ls -CF ${colourflag}"
+
+# Tree
+if [[ ! -x "$(which tree 2>/dev/null)" ]]; then
+    alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+fi
+
+# Default to human readable figures
+alias df='df -h'
+alias du='du -h'
+
+# Make process table searchable. For example:
+# psg bash
+#
+# USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+# 1001      5227  0.0  0.0  26320  3376 pts/0    Ss   16:29   0:00 bash
+alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
+
+alias off='pmset displaysleepnow'
+alias f='open -a Finder '
+alias fh='open -a Finder .'
+# Pin to the tail of long commands for an audible alert after long processes
+## curl http://downloads.com/hugefile.zip; lmk
+alias lmk="say 'Process complete.'"
+
+alias g="cd ~/Documents/Google\ Drive"
+alias dl="cd ~/Downloads"
+alias dt="cd ~/Desktop"
+alias p="cd ~/Documents/projects"
+alias vi=/usr/local/bin/vim
+
+# --------------------------------------------------------------------
+# Setup GCC (must be changes when updating to new major version)
+# --------------------------------------------------------------------
+alias g++='/usr/local/opt/gcc/bin/g++-7'
+alias gcc='/usr/local/opt/gcc/bin/gcc-7'
+
+echo "$( date +%T%z ) End sourcing .macos_aliases..."
