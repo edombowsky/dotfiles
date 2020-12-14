@@ -9,6 +9,8 @@
     && echo "$( date +%T%z ) Begin sourcing .bashrc..." \
     || echo "$( date +%T.%N%z ) Begin sourcing .bashrc..."
 
+[[ -f ~/.win_bashrc ]] && source ~/.win_bashrc
+
 # --------------------------------------------------------------------
 # General options
 # --------------------------------------------------------------------

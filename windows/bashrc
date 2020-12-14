@@ -36,36 +36,19 @@ eval "$(starship init bash)"
 # --------------------------------------------------------------------
 # FZF configuration
 # --------------------------------------------------------------------
-[[ -f ~/.fzf-completion.bash ]] && source ~/.fzf-completion.bash
+# [[ -f ~/.fzf-completion.bash ]] && source ~/.fzf-completion.bash
 
-if [[ "${OSTYPE//[0-9.]/}" = 'msys' ]]; then
-
-    export FZF_DEFAULT_OPTS="
-        --multi --cycle --keep-right -1 \
-        --height=50% --layout=reverse --info=default \
-        --preview-window=:hidden:right:70%:wrap \
-        --preview '(bat --style=numbers --color=always {} || cat {}) || echo {} 2> /dev/null | head -200' \
-        --ansi --inline-info \
-        --bind '?:toggle-preview' \
-        --bind 'ctrl-a:select-all' \
-        --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)' \
-        --bind 'ctrl-y:execute-silent(echo {+} | clip)' \
-        --bind 'ctrl-v:execute(code {+})'"
-else
-
-    export FZF_DEFAULT_OPTS="
-        --multi --cycle --keep-right -1 \
-        --height=50% --layout=reverse --info=default \
-        --preview-window=:hidden:right:70%:wrap \
-        --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200' \
-        --ansi --inline-info \
-        --bind '?:toggle-preview' \
-        --bind 'ctrl-a:select-all' \
-        --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)'
-        --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
-        --bind 'ctrl-v:execute(code {+})'"
-fi
-
+export FZF_DEFAULT_OPTS="
+    --multi --cycle --keep-right -1 \
+    --height=50% --layout=reverse --info=default \
+    --preview-window=:hidden:right:70%:wrap \
+    --preview '(bat --style=numbers --color=always {} || cat {}) || echo {} 2> /dev/null | head -200' \
+    --ansi --inline-info \
+    --bind '?:toggle-preview' \
+    --bind 'ctrl-a:select-all' \
+    --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)' \
+    --bind 'ctrl-y:execute-silent(echo {+} | clip)' \
+    --bind 'ctrl-v:execute(code {+})'"
 
 [[ -f ~/.fzf-functions.sh ]] && source ~/.fzf-functions.sh
 [[ -f ~/.fzf-key-bindings.bash ]] && source ~/.fzf-key-bindings.bash
@@ -93,4 +76,4 @@ fi
 pathmunge $HOME/bin before; export PATH
 [ -s "/home/user/lib/azure-cli/az.completion" ] && source "/home/user/lib/azure-cli/az.completion"
 
-echo "$( date +%T.%N%z ) End sourcing .bashrc..."
+echo "$( date +%T.%N%z ) End sourcing .win_bashrc..."
