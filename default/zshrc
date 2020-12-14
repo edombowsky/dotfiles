@@ -90,7 +90,7 @@ export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 # --------------------------------------------------------------------
 # Customise the prompt
 # --------------------------------------------------------------------
-[[ -f ~/.bash_prompts ]] && source ~/.bash_prompts
+# [[ -f ~/.bash_prompts ]] && source ~/.bash_prompts
 
 # if [[ -f "$HOME/liquidprompt/liquidprompt1" ]]; then    # liquidprompt seemed too slow so for now don't use it
 #     setup_liquidprompt
@@ -101,6 +101,8 @@ export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 # elif [[ -f "~/.git-prompt.sh" ]]; then
 #     setup_git-prompt
 # fi
+
+precmd_functions+=(set_win_title)
 
 # Use the cross shell prompt "starship" ==> https://starship.rs/
 starship_precmd_user_func="set_win_title"

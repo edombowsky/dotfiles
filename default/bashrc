@@ -169,6 +169,12 @@ export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 #     setup_git-prompt
 # fi
 
+# Used by StarShip in the PROMPT_COMMAND to set the windows title and
+# Preserve bash history across multiple sessions (https://coderwall.com/p/jdvura/preserve-bash-history-across-multiple-sessions)
+set_win_title() {
+    echo -ne "\033]0;${PWD##*/}\007"; history -a; history -c; history -r
+}
+
 # Use the cross shell prompt "starship" ==> https://starship.rs/
 starship_precmd_user_func="set_win_title"
 eval "$(starship init bash)"
