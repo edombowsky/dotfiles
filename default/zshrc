@@ -39,22 +39,6 @@ shopt -s globstar 2> /dev/null
 export NNN_PLUG='o:fzopen;d:diffs;p:-_less -iR $nnn;g:_git log;e:suedit;h:hexview'
 export NNN_SHOW_HIDDEN=1
 
-# --------------------------------------------------------------------
-# Smarter TAB completion
-# --------------------------------------------------------------------
-zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|?=** r:|?=**'
-
-# --------------------------------------------------------------------
-# Better directory navigation
-# --------------------------------------------------------------------
-# This defines where cd looks for targets
-# Add the directories you want to have fast access to, separated by colon
-# Ex: CDPATH=".:~:~/projects" will look for targets in the current working directory, in home and in the ~/projects folder
-case "${OSTYPE//[0-9.]/}" in
-    "msys") CDPATH=".:~:/c/Users/caeadom/Documents/projects" ;;      # git-bash
-    "linux-gnu") CDPATH=".:~:/mnt/d/repositories" ;;       # wsl
-    "darwin") CDPATH=".:~:/Users/caeadom/Documents/projects/" ;;          # mac-os
-esac
 
 # --------------------------------------------------------------------
 # Sane history defaults
@@ -194,6 +178,10 @@ fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
 autoload -U +X bashcompinit && bashcompinit
 
+# --------------------------------------------------------------------
+# Smarter TAB completion
+# --------------------------------------------------------------------
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|?=** r:|?=**'
 
 [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
     && [[ -f ~/.macos_zshrc ]] && source ~/.macos_zshrc
