@@ -4,20 +4,20 @@
       relink: true
 
 - create:
-  - ~/.dotfiles_macos_update
+  - ~/.dotfiles_mac_update
 
 - shell:
-  - [date > ~/.dotfiles_macos_update, Logging last update]
+  - [date > ~/.dotfiles_mac_update, Logging last update]
 
 - clean: ['~', '~/.config', '~/.vim']
 
 - link:
     ~/.zshrc: default/zshrc
     ~/.zshenv: default/zshenv
-    ~/.macos_zshrc: macos/zshrc
-    ~/.macos_zshenv: macos/zshenv
-    ~/.macos_aliases: macos/aliases
-    ~/.macos_functions: macos/functions
+    ~/.mac_zshrc: mac/zshrc
+    ~/.mac_zshenv: mac/zshenv
+    ~/.mac_aliases: mac/aliases
+    ~/.mac_functions: mac/functions
     ~/.zlogout: default/bash_logout
     ~/.zsh/completion/_fd: completions/zsh/fd-completion.zsh
     ~/.zsh/completion/_git: completions/zsh/git-completion.zsh

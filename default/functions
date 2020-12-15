@@ -342,7 +342,7 @@ repo() {
 }
 
 if [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]]; then
-    [[ -f ~/.macos_functions ]] && source ~/.macos_functions
+    [[ -f ~/.mac_functions ]] && source ~/.mac_functions
 else
     [[ -f ~/.win_functions ]] && source ~/.win_functions
 fi

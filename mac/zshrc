@@ -5,7 +5,7 @@
 #       *) return;;
 # esac
 
-echo "$( date +%T%z ) Begin sourcing .macos_zshrc..."
+echo "$( date +%T%z ) Begin sourcing .mac_zshrc..."
 
 # --------------------------------------------------------------------
 # Better directory navigation
@@ -16,4 +16,4 @@ echo "$( date +%T%z ) Begin sourcing .macos_zshrc..."
 # directory, in home and in the ~/projects folder
 CDPATH=".:~:/Users/caeadom/Documents/projects/"
 
-echo "$( date +%T%z ) End sourcing .macos_zshrc..."
+echo "$( date +%T%z ) End sourcing .mac_zshrc..."

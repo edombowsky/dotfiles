@@ -102,6 +102,9 @@ export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 #     setup_git-prompt
 # fi
 
+function set_win_title() {
+    echo -ne "\033]0; YOUR_WINDOW_TITLE_HERE \007"
+}
 precmd_functions+=(set_win_title)
 
 # Use the cross shell prompt "starship" ==> https://starship.rs/
@@ -188,7 +191,7 @@ autoload -U +X bashcompinit && bashcompinit
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|?=** r:|?=**'
 
 [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
-    && [[ -f ~/.macos_zshrc ]] && source ~/.macos_zshrc
+    && [[ -f ~/.mac_zshrc ]] && source ~/.mac_zshrc
 
 [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
     && echo "$( date +%T%z ) End sourcing .zshrc..." \

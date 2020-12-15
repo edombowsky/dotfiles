@@ -233,7 +233,7 @@ alias kgpan='kubectl get pods --all-namespaces'
 alias kgdan='kubectl get deployments --all-namespaces'
 
 if [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]]; then
-    [[ -f ~/.macos_aliases ]] && source ~/.macos_aliases
+    [[ -f ~/.mac_aliases ]] && source ~/.mac_aliases
 else
     [[ -f ~/.win_aliases ]] && source ~/.win_aliases
 fi

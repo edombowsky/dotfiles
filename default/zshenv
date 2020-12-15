@@ -196,7 +196,7 @@ noproxy
 export SBT_OPTS="-Xmx2G -Xss4M -XX:+CMSClassUnloadingEnabled"
 
 [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
-    && [[ -f ~/.macos_zshenv ]] && source ~/.macos_zshenv
+    && [[ -f ~/.mac_zshenv ]] && source ~/.mac_zshenv
 
 [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
     && echo "$( date +%T%z ) End sourcing .zshenv..." \
