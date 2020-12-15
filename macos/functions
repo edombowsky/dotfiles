@@ -1,0 +1,128 @@
+echo "$( date +%T%z ) Begin sourcing .macos_functions..."
+
+# display useful host related information
+ii() {
+    echo -e "\nYou are logged on ${RED}$HOST"
+    echo -e "\nAdditionnal information:$NC " ; uname -a
+    echo -e "\n${RED}Users logged on:$NC " ; w -h
+    echo -e "\n${RED}Current date :$NC " ; date
+    echo -e "\n${RED}Machine stats :$NC " ; uptime
+    echo -e "\n${RED}Current network location :$NC " ; scselect
+    echo
+}
+
+## --------------------------------------------------
+## Path related commands
+## --------------------------------------------------
+
+# Beyond Comapre
+bcompare() { /usr/local/bin/bcomp $* &> /dev/null & }
+alias extend_bcomp='rm /Users/caeadom/Library/Application\ Support/Beyond\ Compare/registry.dat'
+
+listening() {
+    if [ $# -eq 0 ]; then
+        sudo lsof -iTCP -sTCP:LISTEN -n -P
+    elif [ $# -eq 1 ]; then
+        sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
+    else
+        echo "Usage: listening [pattern]"
+    fi
+}
+
+alias listen-portd='lsof -nP -iTCP -sTCP:LISTEN'
+
+#######################################
+# Developer stuff
+#######################################
+export REPO_BASE="/Users/caeadom/Documents/projects"
+
+#       -Dnoauth \
+#       -DMemoryLock=false \
+#       -DDebugging \
+
+# Used to create AdminContainerService docker container (It's WFM so needs Java 1.8)
+install_wfm() {
+    JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_221.jdk/Contents/Home
+    PATH=$JAVA_HOME/bin:$PATH
+    mvn install \
+        -Dmaven.test.skip=true \
+        -DAzureContainerFolder=admin/caeadom \
+        -Dnoauth | tee install.log
+}
+
+refresh_all() {
+    CURRDIR=$PWD
+    cd $WFM_HOME_DIR
+
+    for f in *; do
+        if [ -d ${f} ]; then
+            # Will not run if no directories are available
+            if [[ "${f}" != "_wfm" ]]; then
+                printf "\n******** Refreshing $f ********\n"
+                cd $f
+                THE_GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
+                if [[ "$THE_GIT_BRANCH" == "master" ]]; then
+                    git refresh
+                else
+                    printf "$THE_GIT_BRANCH is not master, update manually...\n\n"
+                fi
+                cd ..
+            fi
+        fi
+    done
+
+    cd $CURRDIR
+}
+
+# Refresh all Digital Enterprise repositories
+refresh_de() {
+    declare -a FolderArray=("_wfm _edt .idea" )
+    CURRDIR=$PWD
+    cd $DE_BASE_DIR
+
+    for f in *; do
+        if [ -d ${f} ]; then
+            printf "Checking ${f}...\n"
+            # Will not run if no directories are available
+            if [[ ! " ${FolderArray[@]} " =~ " ${f} " ]]; then
+                printf "******** Refreshing $f ********\n"
+                cd $f
+                THE_GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
+                if [[ "$THE_GIT_BRANCH" == "master" ]]; then
+                    git refresh
+                else
+                    printf "$THE_GIT_BRANCH is NOT master, update manually...\n\n"
+                fi
+                cd ..
+            fi
+        fi
+    done
+
+    cd $CURRDIR
+}
+
+jdk8() {
+    export JAVA_HOME=/Library/Java/JavaVirtualMchines/jdk1.8.0_221.jdk/Contents/Home
+    pathmunge $JAVA_HOME/bin before; export PATH
+}
+
+# --------------------------------------------------------------------
+# iboss rubbish
+# --------------------------------------------------------------------
+iboss() {
+    if [[ -z "${1}" ]]; then
+        echo "must supply an action: [start, stop or reload]"
+    else
+        base_command="/Applications/Utilities/iboss.app/gen4agent/reconfigure.sh"
+        case "${1}" in
+            "start") $("base_command" load) ;;
+            "stop") $("$base_command" unload) ;;
+            "reload") $("$base_command" reload) ;;
+            *)
+                echo "must supply an appropriate action: [start, stop or reload]"
+                return
+        esac
+    fi
+}
+
+echo "$( date +%T%z ) End sourcing .macos_functions..."

@@ -145,7 +145,7 @@ setup_magicmonty_prompt() {
 
 # --------------------------------------------------------------------
 # Set-up the liquidprompt prompt.
-# 
+#
 # See https://github.com/nojhan/liquidprompt for further details
 # --------------------------------------------------------------------
 setup_liquidprompt() {

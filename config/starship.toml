@@ -1,22 +1,10 @@
-[[battery.display]]  # "bold red" style when capacity is between 0% and 10%
-threshold = 10
-style = "bold red"
-
-[[battery.display]]  # "bold yellow" style when capacity is between 10% and 30%
-threshold = 30
-style = "bold yellow"
-
-# when capacity is over 30%, the battery indicator will not be displayed
-
-[directory]
 truncate_to_repo = false
 use_logical_path = true
 fish_style_pwd_dir_length = 1
 truncation_length = 10
+truncation_symbol = "…/"
 
 [git_status]
 modified_count.enabled = true
 untracked_count.enabled = true
 
-[java]
-disabled = true

@@ -51,6 +51,10 @@ git submodule update --remote --merge
 - Homebrew: `brew install starship`
 - Scoop: `scoop install starship`
 
+### Multiple targets
+
+I have utilised the method outlined in the following [pull request](https://github.com/anishathalye/dotbot/pull/11) discussion to support multiple targets.
+
 ### Dependencies
 
 - [dotbot](https://github.com/anishathalye/dotbot): A tool that bootstraps your dotfiles
@@ -60,7 +64,7 @@ git submodule update --remote --merge
 ##### Current
 
 - [starship](https://starship.rs/): The minimal, blazing-fast, and infinitely customizable prompt for any shell!
-    + [Github](https://github.com/starship/starship)
+  + [Github](https://github.com/starship/starship)
 
 ##### Obsolete
 

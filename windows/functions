@@ -1,0 +1,89 @@
+echo "$( date +%T.%N%z ) Begin sourcing .win_functons..."
+
+## --------------------------------------------------
+## Path related commands
+## --------------------------------------------------
+
+## In cygwin, fd output displays backslash instead of forward slash
+## https://github.com/sharkdp/fd/issues/153#issuecomment-353263132
+[[ "${OSTYPE//[0-9.]/}" = 'msys' ]] && \
+    fd() { command fd "$@" | cygpath --ignore --file -; }
+
+#######################################
+# Developer stuff
+#######################################
+
+# The function takes one argument, for which it searches for directories inside
+# all subfolders of the root repo folder (~/repos), and returns the first result,
+# if there is one. So repo dotfiles or even repo dot will result in navigating to
+# ~/repos/personal/dotfiles, and repo kalis will navigate to ~/repos/personal/kalis.me.
+repo() {
+    case "${OSTYPE//[0-9.]/}" in
+        "linux-gnu") repo_base="/mnt/d/repositories" ;;
+        "msys") repo_base=/c/Users/caeadom/Documents/projects ;;
+    esac
+
+    if [[ -z "${1}" ]]; then
+        echo "repo not found so go to $repo_base"
+        cd "$repo_base"
+    else
+        repo_path=$(find "$repo_base" -maxdepth 4 -type d -name "*$1*" | head -n 1)
+        if [[ -z "${repo_path}" ]]; then
+            echo "repo not found so go to $repo_base"
+            cd "$repo_base"
+        else
+            echo "found $repo_path"
+            cd "$repo_path"
+        fi
+    fi
+}
+
+#       -Dnoauth \
+#       -DMemoryLock=false \
+#       -DDebugging \
+
+# Used to create AdminContainerService docker container (It's WFM so needs Java 1.8)
+install_wfm() {
+    JAVA_HOME=/usr/lib/jvm/jdk1.8.0_221
+    PATH=$JAVA_HOME/bin:$PATH
+    mvn install \
+        -Dmaven.test.skip=true \
+        -DAzureContainerFolder=admin/caeadom \
+        -Dnoauth | tee install.log
+}
+
+# Refresh all WFM repositories
+export WFM_HOME="/home/user/Documents/wfm"
+
+# Refresh all Digital Enterprise repositories
+export DE_HOME="/c/Users/caeadom/Documents/projects/df"
+
+# translate to linux path from windows path
+windir() {
+    echo "$1" | sed -e 's|^\([a-z]\):\(.*\)|/mnt/\L\1\E\2|' -e 's|\\|/|g'
+}
+
+# translate the path back to windows path
+wsldir() {
+    echo "$1" | sed -e 's|^/mnt/\([a-z]\)/\(.*\)|\U\1\:\\\E\2|' -e 's|/|\\|g'
+}
+
+# --------------------------------------------------------------------
+# iboss rubbish
+# --------------------------------------------------------------------
+iboss() {
+    if [[ -z "${1}" ]]; then
+        echo "must supply an action: [start, stop or disable]"
+    else
+        case "${1}" in
+            "start") $("net start IBSA") ;;
+            "stop") $("net stop IBSA") ;;
+            "disable") $("sc config IBSA start= disabled") ;;
+            *)
+                echo "must supply an appropriate action: [start, stop or disable]"
+                return
+        esac
+    fi
+}
+
+echo "$( date +%T.%N%z ) End sourcing .win_functions..."

@@ -1,0 +1,82 @@
+echo "$( date +%T%z ) Begin sourcing .macos_zshenv..."
+
+# #######################################
+# DEVELOPMENT SETTINGS
+# #######################################
+
+# -------------------------------
+# JAVA settings
+#---------------------------------
+## [How to Set $JAVA_HOME environment variable on Mac OS X](https://www.mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/)
+# Mac: http://www.mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/
+# http://stackoverflow.com/questions/15826202/where-is-java-installed-on-mac-os-x
+# Either set JAVA_HOME as shown below when changing java versions or update
+# the symbolic link in /Library/Java to point to the new directory. For example.
+# sudo /Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home Home
+# and use the second JAVA_HOME export
+#export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home
+export JAVA_HOME=$(/usr/libexec/java_home)
+
+## After updating to IDEA 2017.1 EAP I started to receiver the following message:
+## objc[4193]: Class JavaLaunchHelper is implemented in both /Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/bin/java and /Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre/lib/libinstrument.dylib. One of the two will be used. Which one is undefined.
+##
+## A fix was discovered here: http://stackoverflow.com/a/37896401
+# export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home
+pathmunge $JAVA_HOME/bin before; export PATH
+
+# =========================================
+# Settings due to keg installs
+# =========================================
+export LDFLAGS="-L/usr/local/opt/readline/lib"
+export CPPFLAGS="-I/usr/local/opt/readline/include"
+export PKG_CONFIG_PATH="/usr/local/opt/readline/lib/pkgconfig"
+
+pathmunge /usr/local/opt/sqlite/bin before; export PATH
+export LDFLAGS="-L/usr/local/opt/sqlite/lib"
+export CPPFLAGS="-I/usr/local/opt/sqlite/include"
+export PKG_CONFIG_PATH="/usr/local/opt/sqlite/lib/pkgconfig"
+
+pathmunge /usr/local/opt/ruby/bin before; export PATH
+export LDFLAGS="-L/usr/local/opt/ruby/lib"
+export CPPFLAGS="-I/usr/local/opt/ruby/include"
+export PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"
+
+pathmunge /usr/local/opt/icu4c/bin before; export PATH
+export LDFLAGS="-L/usr/local/opt/icu4c/lib"
+export CPPFLAGS="-I/usr/local/opt/icu4c/include"
+export PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig"
+
+pathmunge /usr/local/opt/gettext/bin before; export PATH
+export LDFLAGS="-L/usr/local/opt/gettext/lib"
+export CPPFLAGS="-I/usr/local/opt/gettext/include"
+
+pathmunge /usr/local/sbin before; export PATH
+pathmunge /Users/caeadom/.npm-packages/bin before; export PATH
+
+# Oracle additions
+export ORACLE_HOME=/Users/caeadom/Documents/oracle/instantclient_11_2
+export TNS_ADMIN=$ORACLE_HOME/network/admin
+#export DYLD_LIBRARY_PATH=$ORACLE_HOME
+pathmunge $ORACLE_HOME after; export PATH
+
+# Python and SciPy stack
+pathmunge /Users/caeadom/Library/Python/3.6/bin after; export PATH
+
+# The path_helper utility reads the contents of the files in the directories
+# /etc/paths.d and /etc/manpaths.d and appends their contents to the PATH and
+# MANPATH environment variables respectively. The MANPATH environment variable
+#  will not be modified unless it is already set in the environment.
+eval $(/usr/libexec/path_helper -s)
+
+export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
+# #######################################
+# DEVELOPMENT SETTINGS
+# #######################################
+export REPO_BASE_DIR="/Users/caeadom/Documents/projects"
+export DE_BASE_DIR="$REPO_BASE_DIR/de"
+export WFM_BASE_DIR="$REPO_BASE_DIR/wfm"
+
+echo "$( date +%T%z ) End sourcing .macos_zshenv..."

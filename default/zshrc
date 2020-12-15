@@ -1,0 +1,195 @@
+# If not running interactively, don't do anything
+[[ $- == *i* ]] || return
+# case $- in
+#     *i*) ;;
+#       *) return;;
+# esac
+
+[[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
+    && echo "$( date +%T%z ) Begin sourcing .zshrc..." \
+    || echo "$( date +%T.%N%z ) Begin sourcing .zshrc..."
+
+# --------------------------------------------------------------------
+# Aliases and functions
+# --------------------------------------------------------------------
+[[ -f ~/.aliases ]] && source ~/.aliases
+[[ -f ~/.functions ]] && source ~/.functions
+
+# --------------------------------------------------------------------
+# General options
+# --------------------------------------------------------------------
+set bell-style none
+
+# Automatically trim long paths in the prompt (requires Bash 4.x)
+# zsh? PROMPT_DIRTRIM=0
+
+# Enable history expansion with space
+# E.g. typing !!<space> will replace the !! with your last command
+bindkey ' ' magic-space
+
+# Immediately add a trailing slash when auto-completing symlinks to directories
+# zsh? g46bind "set mark-symlinked-directories on"
+
+# Turn on recursive globbing (enables ** to recurse all directories and subdirectories)
+shopt -s globstar 2> /dev/null
+
+# --------------------------------------------------------------------
+# nnn configuration
+# --------------------------------------------------------------------
+export NNN_PLUG='o:fzopen;d:diffs;p:-_less -iR $nnn;g:_git log;e:suedit;h:hexview'
+export NNN_SHOW_HIDDEN=1
+
+
+# --------------------------------------------------------------------
+# Sane history defaults
+# --------------------------------------------------------------------
+setopt EXTENDED_HISTORY          # add timestamp in unix epoch time and elapsed time of the command
+setopt HIST_EXPIRE_DUPS_FIRST    # expire duplicates first
+setopt HIST_FIND_NO_DUPS         # ignore duplicates when searching
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE         # do not store duplications
+setopt HIST_REDUCE_BLANKS        # removes blank lines from history
+setopt HIST_NO_FUNCTIONS         # remove function definitions from the history list.
+setopt HIST_NO_STORE             # remove the history (fc -l) command
+setopt HIST_SAVE_NO_DUPS         # when writing history file, older commands that duplicate newer ones are omitted
+setopt HIST_VERIFY               # perform history expansion and reload the line into the editing buffer rather direct execution
+setopt SHARE_HISTORY             # share history across multiple zsh sessions
+
+HISTORY_IGNORE='([ \t]*|[bf]g *}exit|[alsh]#( *)#|history *|clear|ps|cd ~|cd ..|--|pwd|clear|reset|h|vi[m,] *)'
+
+# sets the number of commands to remember in the command history
+HISTSIZE=10000
+# sets the maximum number of lines contained on the history file
+HISTFILESIZE=20000
+
+setopt NO_CASE_GLOB
+setopt MAGIC_EQUAL_SUBST
+
+# --------------------------------------------------------------------
+# Customise less
+# --------------------------------------------------------------------
+# export LESS="-cisQMgRwPmFX -Pm<--Less--> -PM?f%f:<stdin>. ?n?m(file %i of %m) ..?ltlines %lt-%lb?L/%L. : byte %bB?s/%s. .?e(END) ?x- Next\: %x.:?pB%pB\%..%t\$"
+# export LESS="-cisQMgFRw -Pm<--Less--> -PM?f%f:<stdin>. ?n?m(file %i of %m) ..?ltlines %lt-%lb?L/%L. : byte %bB?s/%s. .?e(END) ?x- Next\: %x.:?pB%pB\%..%t\$"
+export LESS="-cisQMgRw -PM?n?f%f .?m(file %i of %m) ..?e(End) ?x- Next\: %x.: ?pB%pB\%:byte %bB?s/%s...%t ?f%f .?n?m(file %i of %m) ..?ltlines %lt-%lb?L/%L. : byte %bB?s/%s. .?e(End) ?x- Next\: %x.:?pB%pB\%..%t\$"
+export LESSKEY=${HOME}/.less_${OS}
+export LESSBINFMT='*u[%X]'  # Underline non-printable characters and print them in hex inside square brackets
+export LESSEDIT="%E --no-wait ?lm+%lm. %f"
+export LESSSECURE=1
+# export PAGER="less -cisQMgRw  -PM'<man page> ?ltlines %lt-%lb?L/%L. : byte %bB?s/%s. .?e(END):?pB%pB\%..%t'"
+# export PAGER="less -s  -PM'<man page> ?ltlines %lt-%lb?L/%L. : byte %bB?s/%s. .?e(END):?pB%pB\%..%t'"
+export PAGER=less
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# --------------------------------------------------------------------
+# Customise ripgrep
+# --------------------------------------------------------------------
+export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+
+# --------------------------------------------------------------------
+# Customise the prompt
+# --------------------------------------------------------------------
+# [[ -f ~/.bash_prompts ]] && source ~/.bash_prompts
+
+# if [[ -f "$HOME/liquidprompt/liquidprompt1" ]]; then    # liquidprompt seemed too slow so for now don't use it
+#     setup_liquidprompt
+# elif [[ "${OSTYPE//[0-9.]/}" = 'darwin' && -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]]; then
+#     setup_magicmonty_prompt
+# elif [[ -f "$HOME/bin/bash-git-prompt/gitprompt.sh" ]]; then
+#     setup_magicmonty_prompt
+# elif [[ -f "~/.git-prompt.sh" ]]; then
+#     setup_git-prompt
+# fi
+
+precmd_functions+=(set_win_title)
+
+# Use the cross shell prompt "starship" ==> https://starship.rs/
+starship_precmd_user_func="set_win_title"
+eval "$(starship init zsh)"
+
+# --------------------------------------------------------------------
+# Neovim configuration
+# --------------------------------------------------------------------
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# zsh? [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export EDITOR=nvim
+export VISUAL=nvim
+
+# --------------------------------------------------------------------
+# BAT configuration
+# --------------------------------------------------------------------
+export BAT_PAGER="less -R"
+
+# --------------------------------------------------------------------
+# FZF configuration zsh?
+# --------------------------------------------------------------------
+# case "${OSTYPE//[0-9.]/}" in
+#     "msys" | "linux-gnu")  # git-bash or wsl
+#         [[ -f ~/.fzf-completion.bash ]] && source ~/.fzf-completion.bash
+#         ;;
+#     "darwin")       # mac-os
+#         if [[ -f /usr/local/Cellar/fzf/0.21.1/shell/completion.bash ]]; then
+#             source /usr/local/Cellar/fzf/0.21.1/shell/completion.bash
+#         elif [[ -f ~/.fzf-completion.bash ]]; then
+#             source ~/.fzf-completion.bash
+#         fi
+#         ;;
+# esac
+
+export FZF_DEFAULT_COMMAND="rg --files --hidden --no-ignore-dot --follow"
+
+export FZF_DEFAULT_OPTS="
+    --multi --cycle --keep-right -1 \
+    --height=50% --layout=reverse --info=default \
+    --preview-window=:hidden:right:70%:wrap \
+    --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200' \
+    --ansi --inline-info \
+    --bind '?:toggle-preview' \
+    --bind 'ctrl-a:select-all' \
+    --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)'
+    --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
+    --bind 'ctrl-v:execute(code {+})'"
+
+# zsh? [[ -f ~/.fzf-functions.sh ]] && source ~/.fzf-functions.sh
+# zsh? [[ -f ~/.fzf-key-bindings.bash ]] && source ~/.fzf-key-bindings.bash
+
+# export FZF_DEFAULT_OPTS="
+#     --multi --cycle --keep-right -1 \
+#     --height=50% --layout=reverse --info=default \
+#     --preview-window right:70%:wrap \
+#     --preview '[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2>/dev/null | head -300' \
+#     --bind='ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | clip)' \
+#     --ansi"
+
+# OSX
+# export FZF_DEFAULT_OPTS="
+#     --multi --cycle --keep-right -1 \
+#     --height=80% --layout=reverse --info=default \
+#     --preview-window right:70%:wrap \
+#     --preview '[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2>/dev/null | head -300' \
+#     --bind='ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | pbcopy)' \
+#     --ansi"
+
+# --------------------------------------------------------------------
+# Completion
+# --------------------------------------------------------------------
+fpath=(~/.zsh/completion $fpath)
+## Enable the completion system and initialise all completions on $fpath and 
+## ignore (-i) all insecure files and directories
+autoload -Uz compinit && compinit -i
+autoload -U +X bashcompinit && bashcompinit
+
+# --------------------------------------------------------------------
+# Smarter TAB completion
+# --------------------------------------------------------------------
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|?=** r:|?=**'
+
+[[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
+    && [[ -f ~/.macos_zshrc ]] && source ~/.macos_zshrc
+
+[[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
+    && echo "$( date +%T%z ) End sourcing .zshrc..." \
+    || echo "$( date +%T.%N%z ) End sourcing .zshrc..."

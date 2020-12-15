@@ -1,0 +1,32 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- create:
+  - ~/.dotfiles_windows_update
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
+  - [git submodule sync, Syncing submodule remotes]
+  - [git submodule foreach git pull origin master, Updating submodule contents]
+  - [date > ~/.dotfiles_windows_update, Logging last update]
+
+- clean: ['~', '~/.config', '~/.vim']
+
+- link:
+    ~/.bashrc: default/bashrc
+    ~/.bash_profile: default/bash_profile
+    ~/.aliases: default/aliases
+    ~/.functions: default/functions
+    ~/.bash_logout: default/bash_logout
+    ~/.bash_prompts: default/bash_prompts
+    ~/.win_aliases: default/win_aliases
+    ~/.win_functions: default/win_functions
+    ~/.win_bash_profile: default/win_bash_profile
+    ~/AppData/Roaming/alacritty/alacritty.yml: 
+      if: '[ $(uname -o) = Msys ]'
+      path: windows/alacritty.yml
+    ~/AppData/Local/nvim/init.vim:
+      if: '[ $(uname -o) = Msys ]'
+      path: config/nvim/init.vim

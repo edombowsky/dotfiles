@@ -9,6 +9,8 @@
     && echo "$( date +%T%z ) Begin sourcing .bashrc..." \
     || echo "$( date +%T.%N%z ) Begin sourcing .bashrc..."
 
+[[ -f ~/.win_bashrc ]] && source ~/.win_bashrc
+
 # --------------------------------------------------------------------
 # General options
 # --------------------------------------------------------------------
@@ -70,9 +72,10 @@ fi
 FIGNORE=$FIGNORE:DS_Store:.o:~:.iml:.class
 
 # --------------------------------------------------------------------
-# Docker completion
+# Completion
 # --------------------------------------------------------------------
-[ -f ~/.docker-completion.sh ] && source ~/.docker-completion.sh
+[ -f ~/.docker-completion.bash ] && source ~/.docker-completion.bash
+[ -f ~/.git-completion.bash ] && source ~/.git-completion.bash
 
 # --------------------------------------------------------------------
 # Better directory navigation
@@ -168,6 +171,12 @@ export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 #     setup_git-prompt
 # fi
 
+# Used by StarShip in the PROMPT_COMMAND to set the windows title and
+# Preserve bash history across multiple sessions (https://coderwall.com/p/jdvura/preserve-bash-history-across-multiple-sessions)
+set_win_title() {
+    echo -ne "\033]0;${PWD##*/}\007"; history -a; history -c; history -r
+}
+
 # Use the cross shell prompt "starship" ==> https://starship.rs/
 starship_precmd_user_func="set_win_title"
 eval "$(starship init bash)"
@@ -196,52 +205,23 @@ export BAT_PAGER="less -R"
 # --------------------------------------------------------------------
 # FZF configuration
 # --------------------------------------------------------------------
-case "${OSTYPE//[0-9.]/}" in
-    "msys" | "linux-gnu")  # git-bash or wsl
-        [[ -f ~/.fzf-completion.bash ]] && source ~/.fzf-completion.bash
-        ;;
-    "darwin")       # mac-os
-        if [[ -f /usr/local/Cellar/fzf/0.21.1/shell/completion.bash ]]; then
-            source /usr/local/Cellar/fzf/0.21.1/shell/completion.bash
-        elif [[ -f ~/.fzf-completion.bash ]]; then
-            source ~/.fzf-completion.bash
-        fi
-        ;;
-esac
+[[ -f ~/.fzf-completion.bash ]] && source ~/.fzf-completion.bash
+[[ -f ~/.fzf-functions.sh ]] && source ~/.fzf-functions.sh
+[[ -f ~/.fzf-key-bindings.bash ]] && source ~/.fzf-key-bindings.bash
 
 export FZF_DEFAULT_COMMAND="rg --files --hidden --no-ignore-dot --follow"
 
-if [[ "${OSTYPE//[0-9.]/}" = 'msys' ]]; then
-
-    export FZF_DEFAULT_OPTS="
-        --multi --cycle --keep-right -1 \
-        --height=50% --layout=reverse --info=default \
-        --preview-window=:hidden:right:70%:wrap \
-        --preview '(bat --style=numbers --color=always {} || cat {}) || echo {} 2> /dev/null | head -200' \
-        --ansi --inline-info \
-        --bind '?:toggle-preview' \
-        --bind 'ctrl-a:select-all' \
-        --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)' \
-        --bind 'ctrl-y:execute-silent(echo {+} | clip)' \
-        --bind 'ctrl-v:execute(code {+})'"
-else
-
-    export FZF_DEFAULT_OPTS="
-        --multi --cycle --keep-right -1 \
-        --height=50% --layout=reverse --info=default \
-        --preview-window=:hidden:right:70%:wrap \
-        --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200' \
-        --ansi --inline-info \
-        --bind '?:toggle-preview' \
-        --bind 'ctrl-a:select-all' \
-        --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)'
-        --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
-        --bind 'ctrl-v:execute(code {+})'"
-fi
-
-
-[[ -f ~/.fzf-functions.sh ]] && source ~/.fzf-functions.sh
-[[ -f ~/.fzf-key-bindings.bash ]] && source ~/.fzf-key-bindings.bash
+export FZF_DEFAULT_OPTS="
+    --multi --cycle --keep-right -1 \
+    --height=50% --layout=reverse --info=default \
+    --preview-window=:hidden:right:70%:wrap \
+    --preview '(bat --style=numbers --color=always {} || cat {}) || echo {} 2> /dev/null | head -200' \
+    --ansi --inline-info \
+    --bind '?:toggle-preview' \
+    --bind 'ctrl-a:select-all' \
+    --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)' \
+    --bind 'ctrl-y:execute-silent(echo {+} | clip)' \
+    --bind 'ctrl-v:execute(code {+})'"
 
 # export FZF_DEFAULT_OPTS="
 #     --multi --cycle --keep-right -1 \
@@ -251,20 +231,11 @@ fi
 #     --bind='ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | clip)' \
 #     --ansi"
 
-# OSX
-# export FZF_DEFAULT_OPTS="
-#     --multi --cycle --keep-right -1 \
-#     --height=80% --layout=reverse --info=default \
-#     --preview-window right:70%:wrap \
-#     --preview '[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2>/dev/null | head -300' \
-#     --bind='ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | pbcopy)' \
-#     --ansi"
-
 # --------------------------------------------------------------------
 # Aliases and functions
 # --------------------------------------------------------------------
-[[ -f ~/.bash_aliases ]] && source ~/.bash_aliases
-[[ -f ~/.bash_functions ]] && source ~/.bash_functions
+[[ -f ~/.aliases ]] && source ~/.aliases
+[[ -f ~/.functions ]] && source ~/.functions
 
 [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
     && echo "$( date +%T%z ) End sourcing .bashrc..." \
