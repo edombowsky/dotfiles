@@ -26,7 +26,7 @@
     ~/.win_bash_profile: default/win_bash_profile
     ~/AppData/Roaming/alacritty/alacritty.yml: 
       if: '[ $(uname -o) = Msys ]'
-      path: alacritty.yml
+      path: windows/alacritty.yml
     ~/AppData/Local/nvim/init.vim:
       if: '[ $(uname -o) = Msys ]'
       path: config/nvim/init.vim

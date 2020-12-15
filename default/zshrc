@@ -177,6 +177,8 @@ export FZF_DEFAULT_OPTS="
 # Completion
 # --------------------------------------------------------------------
 fpath=(~/.zsh/completion $fpath)
+## Enable the completion system and initialise all completions on $fpath and 
+## ignore (-i) all insecure files and directories
 autoload -Uz compinit && compinit -i
 autoload -U +X bashcompinit && bashcompinit
 
