@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-set -e
+# commented out as it was causing issues on windows
+# set -e
 
 DEFAULT_CONFIG_PREFIX="default"
 CONFIG_SUFFIX=".conf.yaml"
