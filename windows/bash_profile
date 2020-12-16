@@ -50,6 +50,7 @@ fi
 case "${OSTYPE//[0-9.]/}" in
     "linux-gnu") export REPO_BASE_DIR="/mnt/d/repositories" ;;
     "msys") export REPO_BASE_DIR="/c/Users/caeadom/Documents/projects" ;;
+esac
 
 export DE_BASE_DIR="$REPO_BASE_DIR/df"
 export WFM_BASE_DIR="$REPO_BASE_DIR/wfm"
