@@ -102,8 +102,8 @@ export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 #     setup_git-prompt
 # fi
 
-function set_win_title() {
-    echo -ne "\033]0; YOUR_WINDOW_TITLE_HERE \007"
+set_win_title() {
+    echo -ne "\033]0;${PWD##*/}\007"
 }
 precmd_functions+=(set_win_title)
 
