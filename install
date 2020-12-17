@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-set -e
+# commented out as it was causing issues on windows
+# set -e
 
 DEFAULT_CONFIG_PREFIX="default"
 CONFIG_SUFFIX=".conf.yaml"
@@ -12,6 +13,7 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "${BASEDIR}"
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
-for conf in ${DEFAULT_CONFIG_PREFIX} ${@}; do
-    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${conf}${CONFIG_SUFFIX}"
+for config in ${DEFAULT_CONFIG_PREFIX} ${@}; do
+    echo "Installing ${config}${CONFIG_SUFFIX}..."
+    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${config}${CONFIG_SUFFIX}"
 done

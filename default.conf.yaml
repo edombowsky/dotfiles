@@ -4,13 +4,13 @@
       relink: true
 
 - create:
-  - ~/.dotfiles_default_update
+  - ~/.dotfiles_update
 
 - shell:
   # - [git submodule update --init --recursive, Installing submodules]
   - [git submodule sync, Syncing submodule remotes]
   - [git submodule foreach git pull origin master, Updating submodule contents]
-  - [date > ~/.dotfiles_default_update, Logging last update]
+  - [date > ~/.dotfiles_update/default_update, Logging last update]
 
 - clean: ['~', '~/.config', '~/.vim']
 

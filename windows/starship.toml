@@ -1,0 +1,32 @@
+truncate_to_repo = false
+use_logical_path = true
+fish_style_pwd_dir_length = 1
+truncation_length = 10
+truncation_symbol = "…/"
+
+[git_status]
+modified_count.enabled = true
+untracked_count.enabled = true
+
+[character]
+success_symbol = "[>](bold green) "
+error_symbol = "[X](bold red) "
+
+[golang]
+symbol = "g "
+format = "via [g $version](bold cyan) "
+
+[java]
+symbol = "j "
+
+[nodejs]
+symbol = "n "
+format = "via [n $version](bold green) "
+
+[package]
+symbol = "p "
+format = "via [p $version](208 bold) "
+
+[rust]
+symbol = "r "
+format = "via [r $version](red bold)"
