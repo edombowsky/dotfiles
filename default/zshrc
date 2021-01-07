@@ -105,7 +105,7 @@ export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 set_win_title() {
     echo -ne "\033]0;${PWD##*/}\007"
 }
-precmd_functions+=(set_win_titlAe)
+precmd_functions+=(set_win_title)
 
 # Use the cross shell prompt "starship" ==> https://starship.rs/
 starship_precmd_user_func="set_win_title"
