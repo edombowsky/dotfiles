@@ -5,9 +5,9 @@
 #       *) return;;
 # esac
 
-[[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
-    && echo "$( date +%T%z ) Begin sourcing .zshrc..." \
-    || echo "$( date +%T.%N%z ) Begin sourcing .zshrc..."
+# [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
+#     && echo "$( date +%T%z ) Begin sourcing .zshrc..." \
+#     || echo "$( date +%T.%N%z ) Begin sourcing .zshrc..."
 
 # --------------------------------------------------------------------
 # Aliases and functions
@@ -176,6 +176,8 @@ export FZF_DEFAULT_OPTS="
 #     --bind='ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | pbcopy)' \
 #     --ansi"
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # --------------------------------------------------------------------
 # Completion
 # --------------------------------------------------------------------
@@ -198,6 +200,7 @@ zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower
 [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
     && [[ -f ~/.mac_zshrc ]] && source ~/.mac_zshrc
 
-[[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
-    && echo "$( date +%T%z ) End sourcing .zshrc..." \
-    || echo "$( date +%T.%N%z ) End sourcing .zshrc..."
+
+# [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
+#     && echo "$( date +%T%z ) End sourcing .zshrc..." \
+#     || echo "$( date +%T.%N%z ) End sourcing .zshrc..."

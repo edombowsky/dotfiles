@@ -7,7 +7,7 @@
 #* ██▄▄▄███    ██▄▄▄   ▄▄▄██▄▄▄  ██▄▄▄███  █▄▄▄▄▄██  *
 #*  ▀▀▀▀ ▀▀     ▀▀▀▀   ▀▀▀▀▀▀▀▀   ▀▀▀▀ ▀▀   ▀▀▀▀▀▀   *
 #*****************************************************
-echo "$( date +%T%z ) Begin sourcing .mac_aliases..."
+# echo "$( date +%T%z ) Begin sourcing .mac_aliases..."
     
 alias ps="ps auxww"
 
@@ -59,4 +59,4 @@ alias vi=/usr/local/bin/vim
 alias g++='/usr/local/opt/gcc/bin/g++-7'
 alias gcc='/usr/local/opt/gcc/bin/gcc-7'
 
-echo "$( date +%T%z ) End sourcing .mac_aliases..."
+# echo "$( date +%T%z ) End sourcing .mac_aliases..."

@@ -1,4 +1,4 @@
-echo "$( date +%T%z ) Begin sourcing .mac_zshenv..."
+# echo "$( date +%T%z ) Begin sourcing .mac_zshenv..."
 
 # #######################################
 # DEVELOPMENT SETTINGS
@@ -79,4 +79,4 @@ export REPO_BASE_DIR="/Users/caeadom/Documents/projects"
 export DE_BASE_DIR="$REPO_BASE_DIR/de"
 export WFM_BASE_DIR="$REPO_BASE_DIR/wfm"
 
-echo "$( date +%T%z ) End sourcing .mac_zshenv..."
+# echo "$( date +%T%z ) End sourcing .mac_zshenv..."

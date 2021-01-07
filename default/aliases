@@ -7,9 +7,9 @@
 #* ██▄▄▄███    ██▄▄▄   ▄▄▄██▄▄▄  ██▄▄▄███  █▄▄▄▄▄██  *
 #*  ▀▀▀▀ ▀▀     ▀▀▀▀   ▀▀▀▀▀▀▀▀   ▀▀▀▀ ▀▀   ▀▀▀▀▀▀   *
 #*****************************************************
-[[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
-    && echo "$( date +%T%z ) Begin sourcing .aliases..." \
-    || echo "$( date +%T.%N%z ) Begin sourcing .aliases..."
+# [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
+#     && echo "$( date +%T%z ) Begin sourcing .aliases..." \
+#     || echo "$( date +%T.%N%z ) Begin sourcing .aliases..."
 
 alias jdate='date +%j'
 
@@ -238,6 +238,6 @@ else
     [[ -f ~/.win_aliases ]] && source ~/.win_aliases
 fi
 
-[[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
-    && echo "$( date +%T%z ) End sourcing .aliases..." \
-    || echo "$( date +%T.%N%z ) End sourcing .aliases..."
+# [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
+#     && echo "$( date +%T%z ) End sourcing .aliases..." \
+#     || echo "$( date +%T.%N%z ) End sourcing .aliases..."

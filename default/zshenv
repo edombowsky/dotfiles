@@ -1,6 +1,6 @@
-[[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
-    && echo "$( date +%T%z ) Begin sourcing .zshenv..." \
-    || echo "$( date +%T.%N%z ) Begin sourcing .zshenv..."
+# [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
+#     && echo "$( date +%T%z ) Begin sourcing .zshenv..." \
+#     || echo "$( date +%T.%N%z ) Begin sourcing .zshenv..."
 
 # In case this is not set which is likely in git-bash
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=$HOME/.config}
@@ -35,20 +35,20 @@ pathmunge() {
         *:"$1":*)
             # case is equivalent to
             # if ! echo $PATH | /bin/egrep -q "(^|:)$1($|:)" ; then
-            printf "Suppressed adding a duplicate to PATH [$1]\n"
+            # printf "Suppressed adding a duplicate to PATH [$1]\n"
             ;;
 
         *)
             if [ -d "$1" ]; then
                 if [ "$2" = "after" ] ; then
-                    printf "Adding [$1] after PATH\n"
+                    # printf "Adding [$1] after PATH\n"
                     PATH=$PATH:$1
                 else
-                    printf "Adding [$1] before PATH\n"
+                    # printf "Adding [$1] before PATH\n"
                     PATH=$1:$PATH
                 fi
             else
-                printf "Skipped adding [$1] to PATH as it does not exist\n"
+                # printf "Skipped adding [$1] to PATH as it does not exist\n"
             fi
             ;;
     esac
@@ -58,7 +58,7 @@ pathmunge() {
 ldpathmunge() {
     case ":${LD_LIBRARY_PATH}:" in
         *:"$1":*)
-            printf "Suppressed adding a duplicate to LD_LIBRARY_PATH [$1]"
+            # printf "Suppressed adding a duplicate to LD_LIBRARY_PATH [$1]"
             ;;
         *)
             if [ "$2" = "after" ] ; then
@@ -74,7 +74,7 @@ ldpathmunge() {
 manpathmunge() {
     case ":${MANPATH}:" in
         *:"$1":*)
-            printf "Suppressed adding a duplicate to MANPATH [$1]"
+            # printf "Suppressed adding a duplicate to MANPATH [$1]"
             ;;
         *)
             if [ "$2" = "after" ] ; then
@@ -198,6 +198,6 @@ export SBT_OPTS="-Xmx2G -Xss4M -XX:+CMSClassUnloadingEnabled"
 [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
     && [[ -f ~/.mac_zshenv ]] && source ~/.mac_zshenv
 
-[[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
-    && echo "$( date +%T%z ) End sourcing .zshenv..." \
-    || echo "$( date +%T.%N%z ) End sourcing .zshenv..."
+# [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
+#     && echo "$( date +%T%z ) End sourcing .zshenv..." \
+#     || echo "$( date +%T.%N%z ) End sourcing .zshenv..."

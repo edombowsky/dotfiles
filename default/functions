@@ -1,6 +1,6 @@
-[[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
-    && echo "$( date +%T%z ) Begin sourcing .functions..." \
-    || echo "$( date +%T.%N%z ) Begin sourcing .functons..."
+# [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
+#     && echo "$( date +%T%z ) Begin sourcing .functions..." \
+#     || echo "$( date +%T.%N%z ) Begin sourcing .functons..."
 
 # taken from https://github.com/matthewmccullough/dotfiles/blob/master/shellaliases
 matrix() {
@@ -347,6 +347,6 @@ else
     [[ -f ~/.win_functions ]] && source ~/.win_functions
 fi
 
-[[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
-    && echo "$( date +%T%z ) End sourcing .functions..." \
-    || echo "$( date +%T.%N%z ) End sourcing .functions..."
+# [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
+#     && echo "$( date +%T%z ) End sourcing .functions..." \
+#     || echo "$( date +%T.%N%z ) End sourcing .functions..."

@@ -1,4 +1,4 @@
-echo "$( date +%T%z ) Begin sourcing .mac_functions..."
+# echo "$( date +%T%z ) Begin sourcing .mac_functions..."
 
 # display useful host related information
 ii() {
@@ -125,4 +125,4 @@ iboss() {
     fi
 }
 
-echo "$( date +%T%z ) End sourcing .mac_functions..."
+# echo "$( date +%T%z ) End sourcing .mac_functions..."
