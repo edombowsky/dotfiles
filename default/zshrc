@@ -129,23 +129,6 @@ export BAT_PAGER="less -R"
 # --------------------------------------------------------------------
 # FZF configuration zsh
 # --------------------------------------------------------------------
-# export FZF_DEFAULT_OPTS="
-#     --multi --cycle --keep-right -1 \
-#     --height=50% --layout=reverse --info=default \
-#     --preview-window right:70%:wrap \
-#     --preview '[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2>/dev/null | head -300' \
-#     --bind='ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | clip)' \
-#     --ansi"
-
-# OSX
-# export FZF_DEFAULT_OPTS="
-#     --multi --cycle --keep-right -1 \
-#     --height=80% --layout=reverse --info=default \
-#     --preview-window right:70%:wrap \
-#     --preview '[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2>/dev/null | head -300' \
-#     --bind='ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | pbcopy)' \
-#     --ansi"
-
 # original export FZF_DEFAULT_COMMAND="rg --files --hidden --no-ignore-dot --follow"
 export FZF_DEFAULT_COMMAND='fd --type f --color=never --hidden'
 export FZF_DEFAULT_OPTS=" \
@@ -160,22 +143,9 @@ export FZF_DEFAULT_OPTS=" \
     --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
     --bind 'ctrl-v:execute(code {+})'"
 
-# export FZF_DEFAULT_OPTS="
-#     --multi --cycle --keep-right -1 \
-#     --height=50% --layout=reverse --info=default \
-#     --preview-window=:hidden:right:70%:wrap \
-#     --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200' \
-#     --ansi --inline-info \
-#     --bind '?:toggle-preview' \
-#     --bind 'ctrl-a:select-all' \
-#     --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)'
-#     --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
-#     --bind 'ctrl-v:execute(code {+})'"
-
-
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_CTRL_T_OPTS="--preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'"
-# export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :50 {}'"
+export FZF_CTRL_T_OPTS="--preview '[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2>/dev/null | head -300'"
+# export FZF_CTRL_T_OPTS="--preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'"
 
 export FZF_ALT_C_COMMAND='fd --type d . --color=never --hidden'
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"

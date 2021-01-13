@@ -325,6 +325,8 @@ refresh_de() {
 # all subfolders of the root repo folder (~/repos), and returns the first result,
 # if there is one. So repo dotfiles or even repo dot will result in navigating to
 # ~/repos/personal/dotfiles, and repo kalis will navigate to ~/repos/personal/kalis.me.
+#
+# Make sure to define REPO_BASE_DIR someplace before calling this function
 repo() {
     if [[ -z "${1}" ]]; then
         echo "repo not found so go to $REPO_BASE_DIR"

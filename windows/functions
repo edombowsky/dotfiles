@@ -12,36 +12,6 @@ echo "$( date +%T.%N%z ) Begin sourcing .win_functons..."
 #######################################
 # Developer stuff
 #######################################
-
-# The function takes one argument, for which it searches for directories inside
-# all subfolders of the root repo folder (~/repos), and returns the first result,
-# if there is one. So repo dotfiles or even repo dot will result in navigating to
-# ~/repos/personal/dotfiles, and repo kalis will navigate to ~/repos/personal/kalis.me.
-repo() {
-    case "${OSTYPE//[0-9.]/}" in
-        "linux-gnu") repo_base="/mnt/d/repositories" ;;
-        "msys") repo_base=/c/Users/caeadom/Documents/projects ;;
-    esac
-
-    if [[ -z "${1}" ]]; then
-        echo "repo not found so go to $repo_base"
-        cd "$repo_base"
-    else
-        repo_path=$(find "$repo_base" -maxdepth 4 -type d -name "*$1*" | head -n 1)
-        if [[ -z "${repo_path}" ]]; then
-            echo "repo not found so go to $repo_base"
-            cd "$repo_base"
-        else
-            echo "found $repo_path"
-            cd "$repo_path"
-        fi
-    fi
-}
-
-#       -Dnoauth \
-#       -DMemoryLock=false \
-#       -DDebugging \
-
 # Used to create AdminContainerService docker container (It's WFM so needs Java 1.8)
 install_wfm() {
     JAVA_HOME=/usr/lib/jvm/jdk1.8.0_221

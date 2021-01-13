@@ -36,19 +36,56 @@ eval "$(starship init bash)"
 # --------------------------------------------------------------------
 # FZF configuration
 # --------------------------------------------------------------------
-# [[ -f ~/.fzf-completion.bash ]] && source ~/.fzf-completion.bash
-
-export FZF_DEFAULT_OPTS="
-    --multi --cycle --keep-right -1 \
-    --height=50% --layout=reverse --info=default \
-    --preview-window=:hidden:right:70%:wrap \
-    --preview '(bat --style=numbers --color=always {} || cat {}) || echo {} 2> /dev/null | head -200' \
-    --ansi --inline-info \
+# original export FZF_DEFAULT_COMMAND="rg --files --hidden --no-ignore-dot --follow"
+export FZF_DEFAULT_COMMAND='fd --type f --color=never --hidden'
+export FZF_DEFAULT_OPTS=" \
+    --no-height \
+    --multi \
+    --cycle \
+    --color=bg+:#343d46,gutter:-1,pointer:#ff3c3c,info:#0dbc79,hl:#0dbc79,hl+:#23d18b \
+    --ansi \
     --bind '?:toggle-preview' \
     --bind 'ctrl-a:select-all' \
-    --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)' \
-    --bind 'ctrl-y:execute-silent(echo {+} | clip)' \
+    --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)'
+    --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
     --bind 'ctrl-v:execute(code {+})'"
+
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS="--preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'"
+# export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :50 {}'"
+
+export FZF_ALT_C_COMMAND='fd --type d . --color=never --hidden'
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
+
+# [[ -f ~/.fzf-completion.bash ]] && source ~/.fzf-completion.bash
+
+# Old version
+# export FZF_DEFAULT_OPTS="
+#     --multi --cycle --keep-right -1 \
+#     --height=50% --layout=reverse --info=default \
+#     --preview-window=:hidden:right:70%:wrap \
+#     --preview '(bat --style=numbers --color=always {} || cat {}) || echo {} 2> /dev/null | head -200' \
+#     --ansi --inline-info \
+#     --bind '?:toggle-preview' \
+#     --bind 'ctrl-a:select-all' \
+#     --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)' \
+#     --bind 'ctrl-y:execute-silent(echo {+} | clip)' \
+#     --bind 'ctrl-v:execute(code {+})'"
+
+# export FZF_DEFAULT_OPTS="
+#     --multi --cycle --keep-right -1 \
+#     --no-height --info=default \
+#     --color=bg+:#343d46,gutter:-1,pointer:#ff3c3c,info:#0dbc79,hl:#0dbc79,hl+:#23d18b \
+#     --ansi --inline-info \
+#     --bind '?:toggle-preview' \
+#     --bind 'ctrl-a:select-all' \
+#     --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)' \
+#     --bind 'ctrl-y:execute-silent(echo {+} | clip)' \
+#     --bind 'ctrl-v:execute(code {+})'"
+# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :50 {}'"
+
+# FZF_DEFAULT_OPTS=--no-height --color=bg+:#343d46,gutter:-1,pointer:#ff3c3c,info:#0dbc79,hl:#0dbc79,hl+:#23d18b
 
 [[ -f ~/.fzf-functions.sh ]] && source ~/.fzf-functions.sh
 [[ -f ~/.fzf-key-bindings.bash ]] && source ~/.fzf-key-bindings.bash
