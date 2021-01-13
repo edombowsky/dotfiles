@@ -4,7 +4,8 @@
 
 ### Eclipse ###
 .metadata
-bin/
+# I actually have files in this directory I need for this repository
+# bin/
 tmp/
 *.tmp
 *.bak
