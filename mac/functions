@@ -34,12 +34,6 @@ alias listen-portd='lsof -nP -iTCP -sTCP:LISTEN'
 #######################################
 # Developer stuff
 #######################################
-export REPO_BASE="/Users/caeadom/Documents/projects"
-
-#       -Dnoauth \
-#       -DMemoryLock=false \
-#       -DDebugging \
-
 # Used to create AdminContainerService docker container (It's WFM so needs Java 1.8)
 install_wfm() {
     JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_221.jdk/Contents/Home
