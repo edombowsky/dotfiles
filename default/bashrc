@@ -204,9 +204,12 @@ export BAT_PAGER="less -R"
 # FZF configuration
 # --------------------------------------------------------------------
 # original export FZF_DEFAULT_COMMAND="rg --files --hidden --no-ignore-dot --follow"
-export FZF_DEFAULT_COMMAND='fd --type f --color=never --hidden'
+export FZF_DEFAULT_COMMAND="fd --type f --color=never --hidden --exclude '.git' --exclude '.cache'"
 export FZF_DEFAULT_OPTS=" \
     --no-height \
+    --info=inline \
+    --layout=reverse \
+    --preview-window=:hidden \
     --multi \
     --cycle \
     --color=bg+:#343d46,gutter:-1,pointer:#ff3c3c,info:#0dbc79,hl:#0dbc79,hl+:#23d18b \
