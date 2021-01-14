@@ -9,7 +9,8 @@
 #*****************************************************
 # echo "$( date +%T%z ) Begin sourcing .mac_aliases..."
     
-alias ps="ps auxww"
+alias ps="/bin/ps aww"
+alias psall="/bin/ps auxww"
 
 # --------------------------------------------
 # Give directory listings some colour
