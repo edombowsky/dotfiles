@@ -241,6 +241,10 @@ jarpkgs() {
     jar tf $1 | grep class$ | perl -pe "s|/[^/]*class$||;s|/|.|g" | sort | uniq
 }
 
+# ---------------------------------
+# Docker Functions
+# ---------------------------------
+
 dsh() {
     docker exec -it $1 bash
 }
@@ -264,10 +268,38 @@ delstop() {
     fi
 }
 
+# Select a docker container to start and attach to
+function da() {
+  local cid
+  cid=$(docker ps -a | sed 1d | fzf -1 -q "$1" | awk '{print $1}')
+
+  [ -n "$cid" ] && docker start "$cid" && docker attach "$cid"
+}
+
+# Select a running docker container to stop
+function ds() {
+  local cid
+  cid=$(docker ps | sed 1d | fzf -q "$1" | awk '{print $1}')
+
+  [ -n "$cid" ] && docker stop "$cid"
+}
+
+# Select a docker container to remove
+function drm() {
+  local cid
+  cid=$(docker ps -a | sed 1d | fzf -q "$1" | awk '{print $1}')
+
+  [ -n "$cid" ] && docker rm "$cid"
+}
+
 # print the corresponding error message
 strerror() {
     python -c "import os,locale as l; l.setlocale(l.LC_ALL, ''); print os.strerror($1)";
 }
+
+# --------------------------------
+# Git Functions
+# --------------------------------
 
 refresh_all() {
     CURRDIR=$PWD
@@ -341,6 +373,20 @@ repo() {
             cd "$repo_path"
         fi
     fi
+}
+
+# ---------------------
+# Fzf functions
+# ---------------------
+
+# Uses rg to search files that match the pattern, then fzf to present the
+# results, with the preview window showing the exact line.
+fif() {
+    if [ ! "$#" -gt 0 ]; then
+        echo "Need a string to search for!";
+        return 1;
+    fi
+    rg --files-with-matches --no-messages "$1" | fzf $FZF_PREVIEW_WINDOW --preview "rg --ignore-case --pretty --context 10 '$1' {}"
 }
 
 if [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]]; then
