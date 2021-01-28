@@ -25,9 +25,5 @@
     ~/.win_functions: windows/functions
     ~/.win_bash_profile: windows/bash_profile
     ~/.starship: windows/starship.toml
-    ~/AppData/Roaming/alacritty/alacritty.yml: 
-      if: '[ $(uname -o) = Msys ]'
-      path: windows/alacritty.yml
-    ~/AppData/Local/nvim/init.vim:
-      if: '[ $(uname -o) = Msys ]'
-      path: config/nvim/init.vim
+    ~/AppData/Roaming/alacritty/alacritty.yml: windows/alacritty.yml
+    ~/AppData/Local/nvim/init.vim: config/nvim/init.vim
