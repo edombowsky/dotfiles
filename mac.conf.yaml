@@ -23,6 +23,6 @@
     ~/.zsh/completion/_git: completions/zsh/git-completion.zsh
     ~/.zsh/completion/_rg: completions/zsh/rg-completion.zsh
     ~/.zsh/completion/_docker: completions/zsh/docker-completion.zsh
+    ~/.zsh/completion/_exa: completions/zsh/exa-completion.zsh
     ~/.zsh/completion/_fzf: completions/zsh/fzf-completion.zsh
     ~/.zsh/completion/git-completion.bash: completions/bash/git-completion.bash
-
