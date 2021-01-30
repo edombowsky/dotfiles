@@ -12,18 +12,38 @@
 alias ps="/bin/ps aww"
 alias psall="/bin/ps auxww"
 
-# --------------------------------------------
-# Give directory listings some colour
-# --------------------------------------------
-colourflag="-G"
-# export LS_OPTIONS='--color=auto'
-export CLICOLOR=1
-export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
-# export LSCOLORS=ExFxBxDxCxegedabagacad
+if [[ "command -v exa &> /dev/null" ]]; then
+    alias ls='exa -F'
+    alias l='exa -lg --group-directories-first'
+    alias la='exa -aa --group-directories-first'
+    alias ll='exa -laagF --group-directories-first'
+    alias lla='exa -laag --group-directories-first'
+    alias lll='exa -laag --group-directories-first | less'
+    alias ldotl='exa -ldg --group-directories-first .*'
+    alias ldot='exa -d --group-directories-first .*'
+    alias lsr='exa -R'
+    alias lt='exa -lgs oldest'
+    alias lrt='exa -lgs newest'
+    alias lart='exa -aalgs newest'
+    alias ldir='exa -D'
+    alias lldir='exa -lgD'
+    alias lgit='exa -lg --git --group-directories-first'
 
-alias lrt="ls -lrt ${colourflag}"
-alias lart="ls -lart ${colourflag}"
-alias ls="/bin/ls -CF ${colourflag}"
+    alias sl='exa -F' # often screw this up
+else
+    # --------------------------------------------
+    # Give directory listings some colour
+    # --------------------------------------------
+    colourflag="-G"
+    # export LS_OPTIONS='--color=auto'
+    export CLICOLOR=1
+    export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
+    # export LSCOLORS=ExFxBxDxCxegedabagacad
+
+    alias lrt="ls -lrt ${colourflag}"
+    alias lart="ls -lart ${colourflag}"
+    alias ls="/bin/ls -CF ${colourflag}"
+fi
 
 # Tree
 if [[ ! -x "$(which tree 2>/dev/null)" ]]; then
