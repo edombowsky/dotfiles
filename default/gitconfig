@@ -125,7 +125,7 @@
     # Tell git diff to use mnemonic prefixes (index, work tree, commit, object)
     # instead of the standard a and b notation:
     mnemonicprefix = true
-    tool = vscode
+    tool = bcompare
 
 [merge]
     conflictstyle = diff3
