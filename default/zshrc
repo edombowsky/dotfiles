@@ -160,7 +160,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 #
 #     ([[ -d {} ]] && (tree -C {} | less))
 #
-# If it’s not a file or directory, our last resource is to echo it:
+# If it's not a file or directory, our last resource is to echo it:
 #
 #     echo {}
 #

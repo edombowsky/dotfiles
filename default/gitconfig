@@ -531,3 +531,5 @@
     stripLeadingSymbols = false
 [pull]
 	rebase = false
+[credential]
+	helper = manager-core
