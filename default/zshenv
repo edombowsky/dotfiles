@@ -193,7 +193,15 @@ noproxy
 # #######################################
 # DEVELOPMENT SETTINGS
 # #######################################
+# -------------------------------
+# Scala and SBT settings
+#---------------------------------
 export SBT_OPTS="-Xmx2G -Xss4M -XX:+CMSClassUnloadingEnabled"
+
+# -------------------------------
+# GO settings
+#---------------------------------
+export GOPRIVATE=abb-es.visualstudio.com
 
 [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
     && [[ -f ~/.mac_zshenv ]] && source ~/.mac_zshenv

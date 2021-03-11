@@ -263,9 +263,14 @@ else
 fi
 
 #--------------------------------------
-# SBT options
+# Scala and SBT options
 #--------------------------------------
 export SBT_OPTS="-Xmx2G -Xss4M -XX:+CMSClassUnloadingEnabled"
+
+# -------------------------------
+# GO settings
+#---------------------------------
+export GOPRIVATE=abb-es.visualstudio.com
 
 # http://apple.stackexchange.com/questions/12993/why-doesnt-bashrc-run-automatically#comment13715_13019
 #
@@ -280,4 +285,3 @@ if [[ -f ~/.bashrc ]]; then source ~/.bashrc; fi
 [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
     && echo "$( date +%T%z ) End sourcing .bash_profile..." \
     || echo "$( date +%T.%N%z ) End sourcing .bash_profile..."
-

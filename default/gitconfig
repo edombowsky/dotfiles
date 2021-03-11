@@ -533,3 +533,5 @@
 	rebase = false
 [credential]
 	helper = manager-core
+[url "https://abb-es:voh7am53z7dlbv6hk47zxca5harkcadokdmlimnbu562skluspba@abb-es.visualstudio.com"]
+	insteadOf = https://abb-es.visualstudio.com
