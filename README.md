@@ -10,7 +10,7 @@ This repository contains files created by me to keep the following systems worki
 
 You should probably make your own repository, and put your dragons there.
 
-Try bootstraping your dotfiles with [Dotbot](https://github.com/anishathalye/dotbot). If you want a template to get started, you can fork the [dotbot template][https://github.com/anishathalye/dotfiles_template] repo.
+Try bootstrapping your dotfiles with [Dotbot](https://github.com/anishathalye/dotbot). If you want a template to get started, you can fork the [dotbot template][https://github.com/anishathalye/dotfiles_template] repo.
 
 ## Installing
 
@@ -88,4 +88,3 @@ I have utilised the method outlined in the following [pull request](https://gith
 This software is hereby released into the public domain. That means you can do whatever you want with it without restriction. See `LICENSE.md` for details.
 
 That being said, I would appreciate it if you could maintain a link back to Dotbot (or this repository) to help other people discover Dotbot.
-
