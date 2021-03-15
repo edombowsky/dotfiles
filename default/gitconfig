@@ -531,5 +531,4 @@
     stripLeadingSymbols = false
 [pull]
 	rebase = false
-[url "https://abb-es:to4ncwou4cqsvc6ml23kgcf5fv4tzy4fz24kmi22bu7obsczzadq@abb-es.visualstudio.com"]
-	insteadOf = https://abb-es.visualstudio.com
+
