@@ -8,7 +8,7 @@
 #*  ▀▀▀▀ ▀▀     ▀▀▀▀   ▀▀▀▀▀▀▀▀   ▀▀▀▀ ▀▀   ▀▀▀▀▀▀   *
 #*****************************************************
 # echo "$( date +%T%z ) Begin sourcing .mac_aliases..."
-    
+
 alias ps="/bin/ps aww"
 alias psall="/bin/ps auxww"
 
@@ -72,7 +72,7 @@ alias g="cd ~/Documents/Google\ Drive"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias p="cd ~/Documents/projects"
-alias vi=/usr/local/bin/vim
+alias vi=nvim
 
 # --------------------------------------------------------------------
 # Setup GCC (must be changes when updating to new major version)
