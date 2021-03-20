@@ -531,5 +531,8 @@
     stripLeadingSymbols = false
 [pull]
 	rebase = false
+[include]
+    path = ~/.gitconfig-pat
+
 [credential]
-   helper = manager-core
+	helper = manager-core
