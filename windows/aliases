@@ -47,14 +47,14 @@ alias du='du -h'
 ## System information
 alias sysinfo='landscape-sysinfo --exclude-sysinfo-plugins=LandscapeLink'
 
+alias vi=nvim
+
 if [[ "${OSTYPE//[0-9.]/}" = "linux-gnu" ]]; then
     alias c='cd /mnt/c'
     alias r='cd /mnt/d/repositories'
-    alias vi=nvim
 elif [[ "${OSTYPE//[0-9.]/}" = "msys" ]]; then
     alias c='cd /c'
     alias r='cd /c/Users/caeadom/Documents/projects'
-    alias vi=nvim
 fi
 
 echo "$( date +%T.%N%z ) End sourcing .win_aliases..."
