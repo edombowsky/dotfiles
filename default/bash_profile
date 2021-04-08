@@ -138,8 +138,6 @@ removeFromPath() {
 # -------------------------------------
 # Proxy settings
 # -------------------------------------
-#export PROXY_SERVER=access618.cws.sco.cisco.com
-#export PROXY_SERVER_PORT=8080
 export PROXY_SERVER=geo-cluster125184-swg.ibosscloud.com
 export PROXY_SERVER_PORT=8082
 
@@ -197,6 +195,18 @@ noproxy() {
 #proxyon
 noproxy
 
+# -----------------------------------------------
+# Replacement for `which $1 > /dev/null 2>&1`.
+# -----------------------------------------------
+can() {
+    if [ "$#" = 0 ]; then
+        return 1
+    fi
+
+    command -v "$1" > /dev/null
+    return "$?"
+}
+
 # -------------------------------
 # Docker settings
 # -------------------------------
@@ -231,7 +241,7 @@ elif [[ "${OSTYPE//[0-9.]/}" = 'msys' ]]; then
     # I am going to rely on Windows environment to set up the path I want, which 
     # for the time being is jdk-14. The following is for reference.
     :
-    
+
     #--------------------------------------
     # JAVA 11
     #--------------------------------------

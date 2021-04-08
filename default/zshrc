@@ -39,7 +39,6 @@ shopt -s globstar 2> /dev/null
 export NNN_PLUG='o:fzopen;d:diffs;p:-_less -iR $nnn;g:_git log;e:suedit;h:hexview'
 export NNN_SHOW_HIDDEN=1
 
-
 # --------------------------------------------------------------------
 # Sane history defaults
 # --------------------------------------------------------------------
@@ -64,6 +63,16 @@ HISTFILESIZE=20000
 
 setopt NO_CASE_GLOB
 setopt MAGIC_EQUAL_SUBST
+
+# Replacement for `which $1 > /dev/null 2>&1`.
+can() {
+    if [ "$#" = 0 ]; then
+        return 1
+    fi
+
+    command -v "$1" > /dev/null
+    return "$?"
+}
 
 # --------------------------------------------------------------------
 # Customise less

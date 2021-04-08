@@ -132,6 +132,15 @@ HISTFILESIZE=20000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+# ---------------
+# Replacements
+# ---------------
+# `cat`.
+if can bat; then
+    # Replace `cat` with `bat`.
+    alias cat='bat'
+fi
+
 # --------------------------------------------------------------------
 # Customise less
 # --------------------------------------------------------------------
@@ -242,4 +251,3 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
 [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
     && echo "$( date +%T%z ) End sourcing .bashrc..." \
     || echo "$( date +%T.%N%z ) End sourcing .bashrc..."
-

@@ -188,7 +188,9 @@
 
     branches = branch -vv
     remotes = remote -v
-
+    contributors = shortlog --summary --numbered --email
+    current-branch = rev-parse --abbrev-ref HEAD
+    
     # Switch to a branch, creating it if necessary
     go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 
@@ -259,7 +261,7 @@
     stat = status
     sh = status -s
 
-    # Display the status and ahead/behind commits for all local branches and 
+    # Display the status and ahead/behind commits for all local branches and
     # their remotes
     # state = !git for-each-ref --format='%(color:cyan)%(refname:short) %(color:green)%(push:track)' refs/heads && git status -s
     state = !git branch-status && git status -s
@@ -305,7 +307,7 @@
     #                                                                       diff
     # --------------------------------------------------------------------------
     patch = !git --no-pager diff --no-color
-    di = diff                         # diff unstaged changes
+    di = diff --color-words           # diff unstaged changes
     dt = difftool
     d = diff                          # diff unstaged changes
     dc = diff --cached                # diff staged changes
