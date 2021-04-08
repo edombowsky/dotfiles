@@ -1,0 +1,73 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = false
+max_line_length = 240
+insert_final_newline = true
+
+# CSS
+# https://google.github.io/styleguide/htmlcssguide.xml#General_Formatting_Rules
+# http://cssguidelin.es/#syntax-and-formatting
+[*.css]
+indent_size = 2
+trim_trailing_whitespace = true
+
+# HTML
+# https://google.github.io/styleguide/htmlcssguide.xml#General_Formatting_Rules
+[*.{htm,html}]
+indent_size = 2
+trim_trailing_whitespace = true
+
+# DOS batch files
+[*.{[Bb][Aa][Tt],[Cc][Mm][Dd]}]
+# DOS/Win *requires* BAT/CMD files to have CRLF newlines
+end_of_line = crlf
+
+# Makefile
+[[Mm]akefile{,.*}]
+# TAB-style indentation
+indent_style = tab
+
+# Java, Groovy, Gradle
+[*.{gradle,groovy,java}]
+indent_size = 4
+
+# JavaScript, React, TypeScript
+# Tab indentation (no size specified)
+[[*.{.cjs,js,jsx,ts,tsx,re,mjs}]
+indent_size = 2
+
+# JSON Files
+[*.json]
+indent_size = 3
+
+# YAML Files
+[*.{yml,yaml}]
+indent_size = 2
+
+# Markdown Files
+[*.md]
+trim_trailing_whitespace = false
+
+# Shell Files
+[*.{sh,bash,zsh}]
+end_of_line = lf
+
+# SQL files
+[*.sql]
+indent_size = 3
+
+# Scala files
+[*.{scala, sbt]
+indent_size = 3
+
+# Go
+[{go.mod,*.go}]
+indent_style = tab
