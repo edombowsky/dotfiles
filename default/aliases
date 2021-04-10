@@ -42,10 +42,10 @@ alias tcal='cal | sed "s/^/ /;s/$/ /;s/ $(date +%e) / $(date +%e | sed '\''s/./#
 alias hclear='cat /dev/null > ~/.bash_history && history -c && exit'
 
 # jeez I'm lazy ...
-alias l='ls -l'
-alias la='ls -a'
-alias ll='ls -laF'
-alias lla='ls -la'
+alias l='ls -l --group-directories-first'
+alias la='ls -a --group-directories-first'
+alias ll='ls -laF --group-directories-first'
+alias lla='ls -la --group-directories-first'
 alias lll='ls -la|less'
 alias ldotl='ls -ld .*'              # display long listing of only dot files
 alias ldot='ls -d'                   # display listing of only dot files
@@ -96,9 +96,10 @@ fi
 alias tf='tail -f '                    # continuous tail
 alias whence='type -a'                 # where, of a sort
 alias octal="stat -c '%A %a %n'"       # file permissions in octal
-alias egrep='egrep --color=auto --exclude-dir=.svn --exclude-dir=.git'       # show differences in colour
-alias fgrep='fgrep --color=auto --exclude-dir=.svn --exclude-dir=.git'       # show differences in colour
-alias grep='grep --color --exclude-dir=.svn --exclude-dir=.git'              # show differences in colour
+alias egrep='egrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn'       # show differences in colour
+alias fgrep='fgrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'       # show differences in colour
+alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'              # show differences in colour
+
 
 # Some networking commands
 alias lsock='sudo /usr/sbin/lsof -i -P'             # lsock:        Display open sockets
