@@ -532,7 +532,7 @@
 [diff-so-fancy]
     stripLeadingSymbols = false
 [pull]
-	rebase = false
+	rebase = true
 [include]
     path = ~/.gitconfig-pat
 

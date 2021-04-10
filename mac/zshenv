@@ -4,6 +4,10 @@
 # DEVELOPMENT SETTINGS
 # #######################################
 
+export REPO_BASE_DIR="/Users/caeadom/Documents/projects"
+export DE_BASE_DIR="$REPO_BASE_DIR/de"
+export WFM_BASE_DIR="$REPO_BASE_DIR/wfm"
+
 # -------------------------------
 # JAVA settings
 #---------------------------------
@@ -71,12 +75,5 @@ eval $(/usr/libexec/path_helper -s)
 
 export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
-
-# #######################################
-# DEVELOPMENT SETTINGS
-# #######################################
-export REPO_BASE_DIR="/Users/caeadom/Documents/projects"
-export DE_BASE_DIR="$REPO_BASE_DIR/de"
-export WFM_BASE_DIR="$REPO_BASE_DIR/wfm"
 
 # echo "$( date +%T%z ) End sourcing .mac_zshenv..."

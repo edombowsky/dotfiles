@@ -406,10 +406,10 @@ fif() {
     rg --files-with-matches --no-messages "$1" | fzf $FZF_PREVIEW_WINDOW --preview "rg --ignore-case --pretty --context 10 '$1' {}"
 }
 
-if [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]]; then
-    [[ -f ~/.mac_functions ]] && source ~/.mac_functions
-else
-    [[ -f ~/.win_functions ]] && source ~/.win_functions
+[[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
+    && [[ -f ~/.mac_functions ]] && source ~/.mac_functions
+[[ "${OSTYPE//[0-9.]/}" = 'msys' ]] \
+    && [[ -f ~/.win_functions ]] && source ~/.win_functions
 fi
 
 # [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \

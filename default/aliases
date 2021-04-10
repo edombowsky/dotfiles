@@ -233,11 +233,10 @@ alias kdn='kubectl describe node'
 alias kgpan='kubectl get pods --all-namespaces'
 alias kgdan='kubectl get deployments --all-namespaces'
 
-if [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]]; then
-    [[ -f ~/.mac_aliases ]] && source ~/.mac_aliases
-else
-    [[ -f ~/.win_aliases ]] && source ~/.win_aliases
-fi
+[[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
+    && [[ -f ~/.mac_aliases ]] && source ~/.mac_aliases
+[[ "${OSTYPE//[0-9.]/}" = 'msys' ]] \
+    && [[ -f ~/.win_aliases ]] && source ~/.win_aliases
 
 # [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
 #     && echo "$( date +%T%z ) End sourcing .aliases..." \
