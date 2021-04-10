@@ -12,7 +12,7 @@
 alias ps="/bin/ps aww"
 alias psall="/bin/ps auxww"
 
-if [[ "command -v exa &> /dev/null" ]]; then
+if can exa; then
     alias ls='exa -F'
     alias l='exa -lg --group-directories-first'
     alias la='exa -aa --group-directories-first'
