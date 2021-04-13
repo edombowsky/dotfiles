@@ -21,9 +21,10 @@ export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=$HOME/.config}
 #|+++++++++++++++++++++++++++++++++++++
 umask 022
 
-# -----------------------------------------------
+# --------------------------------------------------------------------
+# Funcrions that will be needed later on
+# --------------------------------------------------------------------
 # Replacement for `which $1 > /dev/null 2>&1`.
-# -----------------------------------------------
 can() {
     if [ "$#" = 0 ]; then
         return 1
@@ -219,6 +220,8 @@ pathmunge $GOPATH/bin after; export PATH
 
 [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
     && [[ -f ~/.mac_zshenv ]] && source ~/.mac_zshenv
+[[ "${OSTYPE//[0-9.]/}" = 'linux-gnu' ]] \
+    && [[ -f ~/.wsl_zshenv ]] && source ~/.wsl_zshenv
 
 # [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
 #     && echo "$( date +%T%z ) End sourcing .zshenv..." \

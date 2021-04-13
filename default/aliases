@@ -245,10 +245,15 @@ alias kdn='kubectl describe node'
 alias kgpan='kubectl get pods --all-namespaces'
 alias kgdan='kubectl get deployments --all-namespaces'
 
+# mac-os
 [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
     && [[ -f ~/.mac_aliases ]] && source ~/.mac_aliases
+# git-bash
 [[ "${OSTYPE//[0-9.]/}" = 'msys' ]] \
     && [[ -f ~/.win_aliases ]] && source ~/.win_aliases
+# wsl
+[[ "${OSTYPE//[0-9.]/}" = 'linux-gnu' ]] \
+    && [[ -f ~/.wsl_aliases ]] && source ~/.wsl_aliases
 
 # [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
 #     && echo "$( date +%T%z ) End sourcing .aliases..." \

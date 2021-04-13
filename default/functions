@@ -410,6 +410,8 @@ fif() {
     && [[ -f ~/.mac_functions ]] && source ~/.mac_functions
 [[ "${OSTYPE//[0-9.]/}" = 'msys' ]] \
     && [[ -f ~/.win_functions ]] && source ~/.win_functions
+[[ "${OSTYPE//[0-9.]/}" = 'linux-gnu' ]] \
+    && [[ -f ~/.wsl_functions ]] && source ~/.wsl_functions
 
 # [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
 #     && echo "$( date +%T%z ) End sourcing .functions..." \
