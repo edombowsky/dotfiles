@@ -44,28 +44,6 @@ alias hclear='cat /dev/null > ~/.bash_history && history -c && exit'
 # An alias to rerun the previous command with sudo
 alias ffs='sudo !!'
 
-# -------------------------------
-# Some global aliases
-# -------------------------------
-# Pipe a command's output to less, useful for paging
-alias -g L='| less'
-# Writes stderr to stdout and passes it to less
-alias -g LL='2>&1 | less'
-# Pipe a command's output to grep:
-alias -g G='| grep'
-# Pipe a command's output to ripgrep:
-alias -g R='| rg'
-# Silences stderr
-alias -g NE='2 > /dev/null'
-# Silences both stdout and stderr
-alias -g NUL='> /dev/null 2>&1'
-# Writes stderr to stdout and passes it to cat
-alias -g CA='2>&1 | cat -A'
-# Pipes output to tail which outputs the last part of a file
-alias -g T='| tail'
-# Pipes output to head which outputs the first part of a file
-alias -g H='| head'
-
 # ---------------
 # Replacements
 # ---------------
