@@ -40,8 +40,8 @@ else
     export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
     # export LSCOLORS=ExFxBxDxCxegedabagacad
 
-    alias lrt="ls -lrt ${colourflag}"
-    alias lart="ls -lart ${colourflag}"
+    alias lrt="ls -lrtFh ${colourflag}"
+    alias lart="ls -lartFh ${colourflag}"
     alias ls="/bin/ls -CF ${colourflag}"
 fi
 

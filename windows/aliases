@@ -35,8 +35,8 @@ else                                     # OS X `ls`
 fi
 
 # $colourflag must be defined in a system specific manner
-alias lrt="ls -lrt ${colourflag}"
-alias lart="ls -lart ${colourflag}"
+alias lrt="ls -lrtFh ${colourflag}"
+alias lart="ls -lartFh ${colourflag}"
 alias ls="BLOCK_SIZE=\'1 /bin/ls -CFG ${colourflag}" #enable thousands grouping
 
 # List our disk usage in human-readable units including filesystem type, and

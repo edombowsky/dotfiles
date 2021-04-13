@@ -41,6 +41,31 @@ alias tcal='cal | sed "s/^/ /;s/$/ /;s/ $(date +%e) / $(date +%e | sed '\''s/./#
 
 alias hclear='cat /dev/null > ~/.bash_history && history -c && exit'
 
+# An alias to rerun the previous command with sudo
+alias ffs='sudo !!'
+
+# -------------------------------
+# Some global aliases
+# -------------------------------
+# Pipe a command's output to less, useful for paging
+alias -g L='| less'
+# Writes stderr to stdout and passes it to less
+alias -g LL='2>&1 | less'
+# Pipe a command's output to grep:
+alias -g G='| grep'
+# Pipe a command's output to ripgrep:
+alias -g R='| rg'
+# Silences stderr
+alias -g NE='2 > /dev/null'
+# Silences both stdout and stderr
+alias -g NUL='> /dev/null 2>&1'
+# Writes stderr to stdout and passes it to cat
+alias -g CA='2>&1 | cat -A'
+# Pipes output to tail which outputs the last part of a file
+alias -g T='| tail'
+# Pipes output to head which outputs the first part of a file
+alias -g H='| head'
+
 # ---------------
 # Replacements
 # ---------------
@@ -51,18 +76,18 @@ if can bat; then
 fi
 
 # jeez I'm lazy ...
-alias l='ls -l --group-directories-first'
+alias l='ls -lFh --group-directories-first'
 alias la='ls -a --group-directories-first'
-alias ll='ls -laF --group-directories-first'
-alias lla='ls -la --group-directories-first'
-alias lll='ls -la|less'
+alias ll='ls -laFh --group-directories-first'
+alias lla='ls -lFha --group-directories-first'
+alias lll='ls -lFha|less'
 alias ldotl='ls -ld .*'              # display long listing of only dot files
 alias ldot='ls -d'                   # display listing of only dot files
 alias lsr='ls -R'
 alias ldl='ls -ld .??*|less'         # display log listing of only dotfiles pagenated
-alias lt='ls -lt'
-alias ltl='ls -lt|less'
-alias lr='ls -lR'
+alias lt='ls -ltFh'
+alias ltl='ls -ltFh|less'
+alias lr='ls -lRFh'
 alias l.='ls -d .*'                      # list hidden files
 alias ldot='ls -a | egrep "^\."'         # list hidden files in a directory
 alias lz='ls -l | sort -bn +4'           # sort by files size in ascending order
