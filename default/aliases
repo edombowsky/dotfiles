@@ -41,6 +41,15 @@ alias tcal='cal | sed "s/^/ /;s/$/ /;s/ $(date +%e) / $(date +%e | sed '\''s/./#
 
 alias hclear='cat /dev/null > ~/.bash_history && history -c && exit'
 
+# ---------------
+# Replacements
+# ---------------
+# `cat`.
+if can bat; then
+    # Replace `cat` with `bat`.
+    alias cat='bat'
+fi
+
 # jeez I'm lazy ...
 alias l='ls -l --group-directories-first'
 alias la='ls -a --group-directories-first'

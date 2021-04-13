@@ -21,6 +21,18 @@ export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=$HOME/.config}
 #|+++++++++++++++++++++++++++++++++++++
 umask 022
 
+# -----------------------------------------------
+# Replacement for `which $1 > /dev/null 2>&1`.
+# -----------------------------------------------
+can() {
+    if [ "$#" = 0 ]; then
+        return 1
+    fi
+
+    command -v "$1" > /dev/null
+    return "$?"
+}
+
 # Comment out for now
 # export BASE_MAVEN_OPTS="-Xmx1G -DargLine=-Djdk.attach.allowAttachSelf=true"
 # export BASE_JDK_JAVA_OPTIONS="-Djdk.attach.allowAttachSelf=true"
