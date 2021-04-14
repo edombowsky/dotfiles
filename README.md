@@ -4,7 +4,7 @@ Here be Dragons!
 
 This repository contains files created by me to keep the following systems working the way I like them:
 
-- Debian WSL
+- Ubuntu WSL
 - Git Bash Windows 10
 - MacOS
 
@@ -64,12 +64,17 @@ I have utilised the method outlined in the following [pull request](https://gith
 ##### Current
 
 - [starship](https://starship.rs/): The minimal, blazing-fast, and infinitely customizable prompt for any shell!
-  + [Github](https://github.com/starship/starship)
+  + [starship source](https://github.com/starship/starship)
 
 ##### Obsolete
 
 - [liquidprompt](https://github.com/nojhan/liquidprompt): A full-featured & carefully designed adaptive prompt for Bash & Zsh
 - [bash-git-prompt](https://github.com/magicmonty/bash-git-prompt): An informative and fancy bash prompt for Git users
+
+#### Zsh prompts
+
+- [oh-my-zsh](https://ohmyz.sh/)
+  + [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
 
 #### Vim/Nvim plugins
 
