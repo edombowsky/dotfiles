@@ -72,6 +72,7 @@ alias rg='rg.exe'
 alias tig='tig.exe'
 alias unix2dos='unix2dos.exe'
 alias zip='zip.exe'
+alias bcompare='BCompare.exe'
 
 # ---------------
 # Replacements
