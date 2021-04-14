@@ -47,18 +47,31 @@ alias ffs='sudo !!'
 # ---------------
 # Replacements
 # ---------------
-# `cat`.
 if can bat; then
     # Replace `cat` with `bat`.
     alias cat='bat'
 fi
 
+if can nvim; then
+    # Replace `vi` and 'vim' with `nvim`.
+    alias vi='nvim'
+    alias vim='nvim'
+fi
+
+# --------------------------------------------
+# Give directory listings some colour
+# --------------------------------------------
+colourflag='--color=auto'
+
 # jeez I'm lazy ...
-alias l='ls -lFh --group-directories-first'
-alias la='ls -a --group-directories-first'
-alias ll='ls -laFh --group-directories-first'
-alias lla='ls -lFha --group-directories-first'
-alias lll='ls -lFha --group-directories-first|less'
+alias ls='/bin/ls -CF --group-directories-first ${colourflag}'
+alias l='ls -lFh --group-directories-first ${colourflag}'
+alias la='ls -a --group-directories-first ${colourflag}'
+alias ll='ls -laFh --group-directories-first ${colourflag}'
+alias lla='ls -lFha --group-directories-first ${colourflag}'
+alias lll='ls -lFha --group-directories-first ${colourflag}|less'
+alias lrt='ls -lrtFh --group-directories-first ${colourflag}'
+alias lart='ls -lartFh --group-directories-first ${colourflag}'
 alias ldotl='ls -ld .*'              # display long listing of only dot files
 alias ldot='ls -d'                   # display listing of only dot files
 alias lsr='ls -R'
@@ -109,8 +122,8 @@ alias tf='tail -f '                    # continuous tail
 alias whence='type -a'                 # where, of a sort
 alias octal="stat -c '%A %a %n'"       # file permissions in octal
 alias egrep='egrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn'       # show differences in colour
-alias fgrep='fgrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'       # show differences in colour
-alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'              # show differences in colour
+alias fgrep='fgrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'      # show differences in colour
+alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'        # show differences in colour
 
 
 # Some networking commands

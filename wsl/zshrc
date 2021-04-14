@@ -1,0 +1,19 @@
+# If not running interactively, don't do anything
+[[ $- == *i* ]] || return
+# case $- in
+#     *i*) ;;
+#       *) return;;
+# esac
+
+# echo "$( date +%T%z ) Begin sourcing .wsl_zshrc..."
+
+# --------------------------------------------------------------------
+# Better directory navigation
+# --------------------------------------------------------------------
+# This defines where cd looks for targets
+# Add the directories you want to have fast access to, separated by colon
+# Ex: CDPATH=".:~:~/projects" will look for targets in the current working 
+# directory, in home and in the ~/projects folder
+CDPATH=".:~:/mnt/c/Users/caeadom/Documents/projects/"
+
+# echo "$( date +%T%z ) End sourcing .wsl_zshrc..."

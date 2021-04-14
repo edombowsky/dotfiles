@@ -239,6 +239,9 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
 [[ -f ~/.aliases ]] && source ~/.aliases
 [[ -f ~/.functions ]] && source ~/.functions
 
+[[ "${OSTYPE//[0-9.]/}" = 'msys' ]] \
+    && [[ -f ~/.win_bashrc ]] && source ~/.win_bashrc
+
 [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
     && echo "$( date +%T%z ) End sourcing .bashrc..." \
     || echo "$( date +%T.%N%z ) End sourcing .bashrc..."

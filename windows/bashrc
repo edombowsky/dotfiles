@@ -110,7 +110,13 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
 # --------------------------------------------------------------------
 # Azure CLI 2.0 settings
 # --------------------------------------------------------------------
-pathmunge $HOME/bin before; export PATH
 [ -s "/home/user/lib/azure-cli/az.completion" ] && source "/home/user/lib/azure-cli/az.completion"
+
+# --------------------------------------------------------------------
+# Local bin directory
+# --------------------------------------------------------------------
+pathmunge $HOME/bin before; export PATH
+echo "999999999999"
+pathmunge $HOME/bin/windows before; export PATH
 
 echo "$( date +%T.%N%z ) End sourcing .win_bashrc..."

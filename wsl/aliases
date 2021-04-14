@@ -1,0 +1,90 @@
+#*****************************************************
+#*           ▄▄▄▄         ██                         *
+#*           ▀▀██         ▀▀                         *
+#*  ▄█████▄    ██       ████      ▄█████▄  ▄▄█████▄  *
+#*  ▀ ▄▄▄██    ██         ██      ▀ ▄▄▄██  ██▄▄▄▄ ▀  *
+#* ▄██▀▀▀██    ██         ██     ▄██▀▀▀██   ▀▀▀▀██▄  *
+#* ██▄▄▄███    ██▄▄▄   ▄▄▄██▄▄▄  ██▄▄▄███  █▄▄▄▄▄██  *
+#*  ▀▀▀▀ ▀▀     ▀▀▀▀   ▀▀▀▀▀▀▀▀   ▀▀▀▀ ▀▀   ▀▀▀▀▀▀   *
+#*****************************************************
+# echo "$( date +%T.%N%z ) Begin sourcing .wsl_aliases..."
+
+# -------------------------------
+# Some global aliases
+# -------------------------------
+# Pipe a command's output to less, useful for paging
+alias -g L='| less'
+# Writes stderr to stdout and passes it to less
+alias -g LL='2>&1 | less'
+# Pipe a command's output to grep:
+alias -g G='| grep'
+# Pipe a command's output to ripgrep:
+alias -g R='| rg'
+# Silences stderr
+alias -g NE='2 > /dev/null'
+# Silences both stdout and stderr
+alias -g NUL='> /dev/null 2>&1'
+# Writes stderr to stdout and passes it to cat
+alias -g CA='2>&1 | cat -A'
+# Pipes output to tail which outputs the last part of a file
+alias -g T='| tail'
+# Pipes output to head which outputs the first part of a file
+alias -g H='| head'
+
+# --------------------------------------------
+# Give directory listings some colour
+# --------------------------------------------
+# LS_COLORS+=':ow=01;33'
+LS_COLORS="ow=01;90:di=01;90"
+
+# List our disk usage in human-readable units including filesystem type, and
+# print a total at the bottom:
+alias df='df -Tha --total'
+alias du='du -h'
+
+## System information
+alias sysinfo='landscape-sysinfo --exclude-sysinfo-plugins=LandscapeLink'
+
+# Make process table searchable. For example:
+# psg bash
+#
+# USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+# 1001      5227  0.0  0.0  26320  3376 pts/0    Ss   16:29   0:00 bash
+alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
+
+alias c='cd /mnt/c'
+alias r='cd /mnt/c/Users/caeadom/Documents/projects'
+
+# Aliases for executables installed via Scoop
+alias bat='bat.exe'
+alias dk='docker-compose.exe'
+alias docker-compose='docker-compose.exe'
+alias dos2unix='dos2unix.exe'
+alias far='far.exe'
+alias fd='fd.exe --path-separator /'
+alias fzf='fzf.exe'
+alias lazygit='lazygit.exe'
+alias mc='mc.exe'
+alias nvim='nvim.exe'
+alias python='python3.exe'
+alias py='python3.exe'
+alias rg='rg.exe'
+alias tig='tig.exe'
+alias unix2dos='unix2dos.exe'
+alias zip='zip.exe'
+
+# ---------------
+# Replacements
+# ---------------
+if can bat; then
+    # Replace `cat` with `bat`.
+    alias cat='bat'
+fi
+
+if can nvim; then
+    # Replace `vi` and 'vim' with `nvim`.
+    alias vi='nvim'
+    alias vim='nvim'
+fi
+
+# echo "$( date +%T.%N%z ) End sourcing .wsl_aliases..."

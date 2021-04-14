@@ -29,10 +29,9 @@
     ~/.fzf-functions.sh: default/fzf-functions.sh
     ~/.fzf-completion.bash: completions/bash/fzf-completion.bash
     ~/.fzf-key-bindings.bash: default/fzf-key-bindings.bash
-    ~/.docker-completion.bash: completions/bash/docker-completion.bash    
-    ~/bin: bin
+    ~/.docker-completion.bash: completions/bash/docker-completion.bash
+    ~/bin: bin/*
     ~/.vim: vim
     ~/.bash_prompts: default/bash_prompts
     ~/.aliases: default/aliases
     ~/.functions: default/functions
-

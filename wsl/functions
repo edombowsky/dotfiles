@@ -1,0 +1,84 @@
+# echo "$( date +%T%z ) Begin sourcing .wsl_functions..."
+
+# display useful host related information
+ii() {
+    echo -e "\nYou are logged on ${RED}$HOST"
+    echo -e "\nAdditional information:$NC " ; uname -a
+    echo -e "\n${RED}Users logged on:$NC " ; w -h
+    echo -e "\n${RED}Current date :$NC " ; date
+    echo -e "\n${RED}Machine stats :$NC " ; uptime
+    echo -e "\n${RED}Current network location :$NC " ; scselect
+    echo
+}
+
+## --------------------------------------------------
+## Path related commands
+## --------------------------------------------------
+
+listening() {
+    if [ $# -eq 0 ]; then
+        sudo lsof -iTCP -sTCP:LISTEN -n -P
+    elif [ $# -eq 1 ]; then
+        sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
+    else
+        echo "Usage: listening [pattern]"
+    fi
+}
+
+alias listen-portd='lsof -nP -iTCP -sTCP:LISTEN'
+
+#######################################
+# Developer stuff
+#######################################
+refresh_all() {
+    CURRDIR=$PWD
+    cd $WFM_HOME_DIR
+
+    for f in *; do
+        if [ -d ${f} ]; then
+            # Will not run if no directories are available
+            if [[ "${f}" != "_wfm" ]]; then
+                printf "\n******** Refreshing $f ********\n"
+                cd $f
+                THE_GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
+                if [[ "$THE_GIT_BRANCH" == "master" ]]; then
+                    git refresh
+                else
+                    printf "$THE_GIT_BRANCH is not master, update manually...\n\n"
+                fi
+                cd ..
+            fi
+        fi
+    done
+
+    cd $CURRDIR
+}
+
+# Refresh all Digital Enterprise repositories
+refresh_de() {
+    declare -a FolderArray=("_wfm _edt .idea" )
+    CURRDIR=$PWD
+    cd $DE_BASE_DIR
+
+    for f in *; do
+        if [ -d ${f} ]; then
+            printf "Checking ${f}...\n"
+            # Will not run if no directories are available
+            if [[ ! " ${FolderArray[@]} " =~ " ${f} " ]]; then
+                printf "******** Refreshing $f ********\n"
+                cd $f
+                THE_GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
+                if [[ "$THE_GIT_BRANCH" == "master" ]]; then
+                    git refresh
+                else
+                    printf "$THE_GIT_BRANCH is NOT master, update manually...\n\n"
+                fi
+                cd ..
+            fi
+        fi
+    done
+
+    cd $CURRDIR
+}
+
+# echo "$( date +%T%z ) End sourcing .wsl_functions..."

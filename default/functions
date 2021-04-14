@@ -138,17 +138,17 @@ function bu { cp "$1" "$1".backup-`date +%Y%m%d.%H%M%S`; }
 ord() { printf "0x%x\n" "'$1"; }
 chr() { printf $(printf '\\%03o\\n' "$1"); }
 
-title() {
-    # sends xterm escape sequence to change window title to first command line
-    # argument if present, otherwise, use $PWD
+# title() {
+#     # sends xterm escape sequence to change window title to first command line
+#     # argument if present, otherwise, use $PWD
 
-    esc="\e" # \033
-    bel="\a" # \007
+#     esc="\e" # \033
+#     bel="\a" # \007
 
-    txt=${1:$PWD}
+#     txt=${1:$PWD}
 
-    echo -en "${esc}]2;${txt}${bel}"
-}
+#     echo -en "${esc}]2;${txt}${bel}"
+# }
 
 # Sort du output in Human-readable format (http://www.bashoneliners.com/oneliners/97/)
 #
@@ -158,10 +158,10 @@ title() {
 #
 # grep "[0-9]$i\b" matches lines containing a digit followed by G or M or K
 # followed by a "word boundary"
-duh() {
-    for i in G M K; do du -hsx * | grep "[0-9]$i\b" | sort -nr; done 2>/dev/null
-    # du -hsx * | sort -rh
-}
+# duh() {
+#     for i in G M K; do du -hsx * | grep "[0-9]$i\b" | sort -nr; done 2>/dev/null
+#     # du -hsx * | sort -rh
+# }
 
 #
 # Print the complete command line history.  If you type
