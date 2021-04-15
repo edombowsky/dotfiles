@@ -316,6 +316,9 @@ ZSH_DISABLE_COMPFIX=true
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# I also liked this for oh-my-posh (https://ohmyposh.dev/)
+#eval "$(oh-my-posh-wsl --init --shell zsh --config ~/.poshthemes/bubbles.omp.json)"
+
 # --------------------------------------------------------------------
 # Aliases and functions
 # --------------------------------------------------------------------
