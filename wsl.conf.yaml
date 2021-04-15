@@ -26,3 +26,4 @@
     ~/.zsh/completion/_exa: completions/zsh/exa-completion.zsh
     ~/.zsh/completion/_fzf: completions/zsh/fzf-completion.zsh
     ~/.zsh/completion/git-completion.bash: completions/bash/git-completion.bash
+    ~/.gitconfig-wsl: wsl/gitconfig

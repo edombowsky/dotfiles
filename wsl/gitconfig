@@ -1,0 +1,7 @@
+[credential]
+    # helper = manager-core
+    helper = "/mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe"
+[credential "https://dev.azure.com"]
+    useHttpPath = true
+[diff]
+    tool = bcompare_wsl

@@ -535,8 +535,7 @@
 	rebase = true
 [include]
     path = ~/.gitconfig-pat
-
-[credential]
-	helper = manager-core
-[credential "https://dev.azure.com"]
-	useHttpPath = true
+[include]
+    path = ~/.gitconfig-wsl
+[include]
+    path = ~/.gitconfig-win

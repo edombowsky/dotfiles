@@ -213,7 +213,7 @@ alias wfmstg='ssh stg'
 alias d=docker
 alias dstats='d stats -a --no-stream'
 alias dk='docker-compose'
-alias drm="docker rm"
+alias drm='docker rm'
 alias dirm="docker image rm"
 alias dgc='docker rmi $(docker images -qf "dangling=true")'
 # alias dps="docker ps -a"
