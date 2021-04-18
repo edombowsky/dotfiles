@@ -169,7 +169,8 @@ alias psa='ps -xedaf'
 # changes the default head/tail behaviour to output x lines,
 # where x is the number of lines currently displayed on your terminal
 alias head='head -n $((${LINES:-12}-2))' # as many as possible without scrolling
-alias tail='tail -n $((${LINES:-12}-2))'
+# causes me grief in mac-os for some reason
+[[ "${OSTYPE//[0-9.]/}" != 'darwin' ]] && alias tail='tail -n $((${LINES:-12}-2))'
 # This sounds great but cauases issues and is not supported everywhere
 # alias tail='tail -n $((${LINES:-12}-2)) -s.1' # Likewise, also more responsive -f
 
