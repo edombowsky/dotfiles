@@ -35,3 +35,4 @@
     ~/.bash_prompts: default/bash_prompts
     ~/.aliases: default/aliases
     ~/.functions: default/functions
+    ~/.oh-my-zsh-theme.sh: default/oh-my-zsh-theme.sh
