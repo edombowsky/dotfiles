@@ -1,15 +1,6 @@
 [submodule "dotbot"]
     path = dotbot
     url = https://github.com/anishathalye/dotbot
-[submodule "bin/liquidprompt"]
-    path = bin/liquidprompt
-    url = https://github.com/nojhan/liquidprompt.git
-[submodule "bin/bash-git-prompt"]
-    path = bin/bash-git-prompt
-    url = https://github.com/magicmonty/bash-git-prompt.git
-# [submodule "private"]
-#      path = private
-#      url = git@gitlab.com:4U6U57/dotfiles.private    
 [submodule "vim/bundle/Vundle.vim"]
 	path = vim/bundle/Vundle.vim
 	url = git@github.com:VundleVim/Vundle.vim.git

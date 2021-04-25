@@ -22,7 +22,6 @@
     ~/.win_functions: windows/functions
     ~/.win_bash_profile: windows/bash_profile
     ~/.win_bashrc: windows/bashrc
-    ~/.starship: windows/starship.toml
     ~/AppData/Roaming/alacritty/alacritty.yml: windows/alacritty.yml
     ~/AppData/Local/nvim/init.vim: config/nvim/init.vim
     ~/bin/windows: windows/bin

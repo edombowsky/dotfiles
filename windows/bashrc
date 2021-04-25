@@ -29,10 +29,6 @@ case "${OSTYPE//[0-9.]/}" in
     "linux-gnu") CDPATH=".:~:/mnt/d/repositories" ;;       # wsl
 esac
 
-# Use the cross shell prompt "starship" ==> https://starship.rs/
-starship_precmd_user_func="set_win_title"
-eval "$(starship init bash)"
-
 # --------------------------------------------------------------------
 # FZF configuration
 # --------------------------------------------------------------------
