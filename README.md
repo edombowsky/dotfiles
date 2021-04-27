@@ -4,9 +4,9 @@ Here be Dragons!
 
 This repository contains files created by me to keep the following systems working the way I like them:
 
-- Ubuntu WSL
-- Git Bash Windows 10
-- MacOS
+- Ubuntu WSL = zsh
+- Git Bash Windows 10 - bash`
+- MacOS - zsh
 
 You should probably make your own repository, and put your dragons there.
 
@@ -61,20 +61,11 @@ I have utilised the method outlined in the following [pull request](https://gith
 
 #### Bash prompts
 
-##### Current
-
-- [starship](https://starship.rs/): The minimal, blazing-fast, and infinitely customizable prompt for any shell!
-  + [starship source](https://github.com/starship/starship)
-
-##### Obsolete
-
-- [liquidprompt](https://github.com/nojhan/liquidprompt): A full-featured & carefully designed adaptive prompt for Bash & Zsh
-- [bash-git-prompt](https://github.com/magicmonty/bash-git-prompt): An informative and fancy bash prompt for Git users
+- [oh-my-posh](https://ohmyposh.dev)
 
 #### Zsh prompts
 
-- [oh-my-zsh](https://ohmyz.sh/)
-  + [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
+- [oh-my-posh](https://ohmyposh.dev)
 
 #### Vim/Nvim plugins
 
@@ -87,6 +78,7 @@ I have utilised the method outlined in the following [pull request](https://gith
 #### Extras
 
 - [git-extras](https://github.com/tj/git-extras): Little git extras
+- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions): Fish-like autosuggestions for zsh
 
 ## License
 

@@ -212,7 +212,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # [[ "${OSTYPE//[0-9.]/}" = 'linux-gnu' ]] \
 #     && ZSH_THEME="powerlevel10k/powerlevel10k"
 
-[[ -f $HOME/.oh-my-zsh-theme.sh ]] && source $HOME/.oh-my-zsh-theme.sh
+# ZSH_THEME="agnosterzak"
+# [[ -f $HOME/.oh-my-zsh-theme.sh ]] && source $HOME/.oh-my-zsh-theme.sh
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -274,9 +275,9 @@ export ZSH="$HOME/.oh-my-zsh"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+# plugins=(git)
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -305,8 +306,11 @@ ZSH_DISABLE_COMPFIX=true
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# alias zshconfig="code ~/.zshrc"
+# alias ohmyzsh="code ~/.oh-my-zsh"
+
+eval "$(oh-my-posh --init --shell zsh --config ~/.powerlevel10k_modern.omp.json)"
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # --------------------------------------------------------------------
 # Aliases and functions
