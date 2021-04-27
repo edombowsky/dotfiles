@@ -201,7 +201,6 @@ colors:
     cyan:    '#78DCE8'
     white:   '#FCFCFA'
 
-
 # # Colors (Cobalt 2)
 # colors:
 #   cursor:
@@ -257,6 +256,48 @@ colors:
 #   #
 #   indexed_colors: []
 
+# Colors (Solarized dark)
+# colors:
+#   # Default colors
+#   primary:
+#     background: "0x073642"
+#     foreground: "0x93a1a1"
+
+#   # Colors the cursor will use if `custom_cursor_colors` is true
+#   cursor:
+#     text: "0x002b36"
+#     cursor: "0x93a1a1"
+
+#   # Normal colors
+#   normal:
+#     black: "0x002b36"
+#     red: "0xdc322f"
+#     green: "0x859900"
+#     yellow: "0xb58900"
+#     blue: "0x268bd2"
+#     magenta: "0x6c71c4"
+#     cyan: "0x2aa198"
+#     white: "0x93a1a1"
+
+#   # Bright colors
+#   bright:
+#     black: "0x657b83"
+#     red: "0xdc322f"
+#     green: "0x859900"
+#     yellow: "0xb58900"
+#     blue: "0x268bd2"
+#     magenta: "0x6c71c4"
+#     cyan: "0x2aa198"
+#     white: "0xfdf6e3"
+
+#   indexed_colors:
+#     - { index: 16, color: "0xcb4b16" }
+#     - { index: 17, color: "0xd33682" }
+#     - { index: 18, color: "0x073642" }
+#     - { index: 19, color: "0x586e75" }
+#     - { index: 20, color: "0x839496" }
+#     - { index: 21, color: "0xeee8d5" }
+  
 # Visual Bell
 #
 # Any time the BEL code is received, Alacritty "rings" the visual bell. Once
@@ -513,7 +554,7 @@ mouse_bindings:
 
 #   (Linux/BSD only):
 #   - CopySelection: Copies into selection buffer
-#   
+#
 # - `command`: Fork and execute a specified command plus arguments
 #
 #    The `command` field must be a map containing a `program` string and an
@@ -554,7 +595,11 @@ mouse_bindings:
 #
 # If the same trigger is assigned to multiple actions, all of them are executed
 # at once.
-# key_bindings:
+key_bindings:
+  - { key: V,    mods: Control, action: Paste            }
+  - { key: C,    mods: Control, action: Copy             }
+  - { key: N,    mods: Control, action: SpawnNewInstance }
+
   #- { key: Paste,                                action: Paste          }
   #- { key: Copy,                                 action: Copy           }
   #- { key: L,         mods: Control,             action: ClearLogNotice }
