@@ -1,6 +1,6 @@
-[[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
-    && echo "$( date +%T%z ) Begin sourcing .bash_profile..." \
-    || echo "$( date +%T.%N%z ) Begin sourcing .bash_profile..."
+# [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
+#     && echo "$( date +%T%z ) Begin sourcing .bash_profile..." \
+#     || echo "$( date +%T.%N%z ) Begin sourcing .bash_profile..."
 
 # Settings in this file are only for interactive shells.
 # I don't know why bash loads this file for scp etc.,
@@ -118,9 +118,6 @@ manpathmunge() {
 #     esac
 # }
 
-pathmunge $HOME/.local/bin after; export PATH
-pathmunge $HOME/bin before; export PATH
-
 realpath() {
     if ! pushd $1 &> /dev/null; then
         pushd ${1##*/} &> /dev/null
@@ -212,6 +209,11 @@ can() {
 # -------------------------------
 [[ "${OSTYPE//[0-9.]/}" != 'darwin' ]] && export DOCKER_HOST=tcp://localhost:2375
 
+# -------------------------------
+# Path additions
+# -------------------------------
+pathmunge $HOME/bin before; export PATH
+
 # #######################################
 ## DEVELOPMENT SETTINGS
 # #######################################
@@ -294,6 +296,6 @@ pathmunge $GOPATH/bin after; export PATH
 # -- Chris Johnsen
 if [[ -f ~/.bashrc ]]; then source ~/.bashrc; fi
 
-[[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
-    && echo "$( date +%T%z ) End sourcing .bash_profile..." \
-    || echo "$( date +%T.%N%z ) End sourcing .bash_profile..."
+# [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
+#     && echo "$( date +%T%z ) End sourcing .bash_profile..." \
+#     || echo "$( date +%T.%N%z ) End sourcing .bash_profile..."

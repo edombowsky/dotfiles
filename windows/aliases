@@ -7,7 +7,7 @@
 #* ██▄▄▄███    ██▄▄▄   ▄▄▄██▄▄▄  ██▄▄▄███  █▄▄▄▄▄██  *
 #*  ▀▀▀▀ ▀▀     ▀▀▀▀   ▀▀▀▀▀▀▀▀   ▀▀▀▀ ▀▀   ▀▀▀▀▀▀   *
 #*****************************************************
-echo "$( date +%T.%N%z ) Begin sourcing .win_aliases..."
+# echo "$( date +%T.%N%z ) Begin sourcing .win_aliases..."
 
 # --------------------------------------------
 # Give directory listings some colour
@@ -57,4 +57,4 @@ elif [[ "${OSTYPE//[0-9.]/}" = "msys" ]]; then
     alias r='cd /c/Users/caeadom/Documents/projects'
 fi
 
-echo "$( date +%T.%N%z ) End sourcing .win_aliases..."
+# echo "$( date +%T.%N%z ) End sourcing .win_aliases..."

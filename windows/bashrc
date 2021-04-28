@@ -5,7 +5,7 @@
 #       *) return;;
 # esac
 
-echo "$( date +%T.%N%z ) Begin sourcing .win_bashrc..."
+# echo "$( date +%T.%N%z ) Begin sourcing .win_bashrc..."
 
 # -------------------------------------------
 # bash command line completion
@@ -106,9 +106,8 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
 [ -s "/home/user/lib/azure-cli/az.completion" ] && source "/home/user/lib/azure-cli/az.completion"
 
 # --------------------------------------------------------------------
-# Local bin directory
+# Local windows specifig bin directory
 # --------------------------------------------------------------------
-pathmunge $HOME/bin before; export PATH
 pathmunge $HOME/bin/windows before; export PATH
 
-echo "$( date +%T.%N%z ) End sourcing .win_bashrc..."
+# echo "$( date +%T.%N%z ) End sourcing .win_bashrc..."

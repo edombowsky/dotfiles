@@ -1,4 +1,4 @@
-echo "$( date +%T.%N%z ) Begin sourcing .win_functons..."
+# echo "$( date +%T.%N%z ) Begin sourcing .win_functons..."
 
 ## --------------------------------------------------
 ## Path related commands
@@ -56,4 +56,4 @@ iboss() {
     fi
 }
 
-echo "$( date +%T.%N%z ) End sourcing .win_functions..."
+# echo "$( date +%T.%N%z ) End sourcing .win_functions..."

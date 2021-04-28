@@ -5,9 +5,9 @@
 #       *) return;;
 # esac
 
-[[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
-    && echo "$( date +%T%z ) Begin sourcing .bashrc..." \
-    || echo "$( date +%T.%N%z ) Begin sourcing .bashrc..."
+# [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
+#     && echo "$( date +%T%z ) Begin sourcing .bashrc..." \
+#     || echo "$( date +%T.%N%z ) Begin sourcing .bashrc..."
 
 # --------------------------------------------------------------------
 # General options
@@ -155,7 +155,7 @@ export PAGER=less
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 # --------------------------------------------------------------------
-# Customise the prompt (use oh-my-posh https://ohmyposh.dev/)
+# Customise the prompt (use oh-my-posh https://ohmyposh.dev/ls)
 # --------------------------------------------------------------------
 eval "$(oh-my-posh --init --shell bash --config ~/.poshthemes/powerlevel10k_modern.omp.json)"
 
@@ -178,7 +178,6 @@ export VISUAL=nvim
 # --------------------------------------------------------------------
 # Azure CLI 2.0 settings
 # --------------------------------------------------------------------
-pathmunge $HOME/bin before; export PATH
 [ -s "/home/user/lib/azure-cli/az.completion" ] && source "/home/user/lib/azure-cli/az.completion"
 
 # --------------------------------------------------------------------
@@ -228,6 +227,6 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
 [[ "${OSTYPE//[0-9.]/}" = 'msys' ]] \
     && [[ -f ~/.win_bashrc ]] && source ~/.win_bashrc
 
-[[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
-    && echo "$( date +%T%z ) End sourcing .bashrc..." \
-    || echo "$( date +%T.%N%z ) End sourcing .bashrc..."
+# [[ "${OSTYPE//[0-9.]/}" = 'darwin' ]] \
+#     && echo "$( date +%T%z ) End sourcing .bashrc..." \
+#     || echo "$( date +%T.%N%z ) End sourcing .bashrc..."
