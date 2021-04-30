@@ -78,10 +78,16 @@ I have utilised the method outlined in the following [pull request](https://gith
 #### Extras
 
 - [git-extras](https://github.com/tj/git-extras): Little git extras
-  + Install on mac with 
+  + Install on mac with
 
     ```zsh
     brew install git-extras
+    ```
+
+  + Install on wsl with
+
+    ```zsh
+    sudo apt-get install git-extras
     ```
 
   + Install on windows without
@@ -91,14 +97,21 @@ I have utilised the method outlined in the following [pull request](https://gith
     # checkout the latest tag (optional)
     git checkout $(git describe --tags $(git rev-list --tags --max-count=1))
 
-    install.cmd "C:\git"
+    # Run as administrator
+    install.cmd
     ```
 
 - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions): Fish-like autosuggestions for zsh
   + Install on mac with
 
     ```bash
-    brew install zsh-autosuggestions`
+    brew install zsh-autosuggestions
+    ```
+
+  + Install on wsl without
+
+    ```bash
+    sudo apt-get install zsh-autosuggestions
     ```
 
 ## License
