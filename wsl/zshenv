@@ -7,4 +7,10 @@ export REPO_BASE_DIR="/mnt/c/Users/caeadom/Documents/projects"
 export DE_BASE_DIR="$REPO_BASE_DIR/de"
 export WFM_BASE_DIR="$REPO_BASE_DIR/wfm"
 
+# GO
+export GOROOT=/usr/lib/go-1.16
+export GOPATH=/home/wsl/go
+export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:$GOPATH/bin
+
 # echo "$( date +%T%z ) End sourcing .wsl_zshenv..."
