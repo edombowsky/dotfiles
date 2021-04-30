@@ -27,3 +27,4 @@
     ~/.zsh/completion/_fzf: completions/zsh/fzf-completion.zsh
     ~/.zsh/completion/git-completion.bash: completions/bash/git-completion.bash
     ~/.gitconfig-wsl: wsl/gitconfig
+    ~/.powerlevel10k_modern.omp.json: wsl/powerlevel10k_modern.omp.json

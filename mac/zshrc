@@ -16,4 +16,7 @@
 # directory, in home and in the ~/projects folder
 CDPATH=".:~:/Users/caeadom/Documents/projects/"
 
+[[ -f /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] \
+    && source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 # echo "$( date +%T%z ) End sourcing .mac_zshrc..."

@@ -310,7 +310,6 @@ ZSH_DISABLE_COMPFIX=true
 # alias ohmyzsh="code ~/.oh-my-zsh"
 
 eval "$(oh-my-posh --init --shell zsh --config ~/.powerlevel10k_modern.omp.json)"
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # --------------------------------------------------------------------
 # Aliases and functions
