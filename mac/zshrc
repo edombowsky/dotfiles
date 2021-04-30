@@ -16,7 +16,16 @@
 # directory, in home and in the ~/projects folder
 CDPATH=".:~:/Users/caeadom/Documents/projects/"
 
+# --------------------------------------------------------------------
+# Zsh plugins
+# --------------------------------------------------------------------
 [[ -f /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] \
     && source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# --------------------------------------------------------------------
+# Completions
+# --------------------------------------------------------------------
+[[ -f /usr/local/opt/git-extras/share/git-extras/git-extras-completion.zsh ]] \
+    && source /usr/local/opt/git-extras/share/git-extras/git-extras-completion.zsh
 
 # echo "$( date +%T%z ) End sourcing .mac_zshrc..."
