@@ -2,6 +2,47 @@
 #     && echo "$( date +%T%z ) Begin sourcing .functions..." \
 #     || echo "$( date +%T.%N%z ) Begin sourcing .functons..."
 
+# Checks if running on macOS Darwin.
+function is-darwin {
+  [[ "$OSTYPE" == darwin* ]]
+}
+
+# Checks if running on Linux.
+function is-linux {
+  [[ "$OSTYPE" == linux* ]]
+}
+
+# Checks if running on BSD.
+function is-bsd {
+  [[ "$OSTYPE" == *bsd* ]]
+}
+
+# Checks if running on Cygwin (Windows).
+function is-cygwin {
+  [[ "$OSTYPE" == cygwin* ]]
+}
+
+# Checks if running on Cygwin (Windows).
+function is-git-bash {
+  [[ "$OSTYPE" == msys ]]
+}
+
+# Checks if running on termux (Android).
+function is-termux {
+  [[ "$OSTYPE" == linux-android ]]
+}
+
+# Checks if running on termux (Android).
+function is-wsl{
+  [[ "$OSTYPE" == linux-gnu ]]
+}
+
+# Checks a boolean variable for "true".
+# Case insensitive: "1", "y", "yes", "t", "true", "o", and "on".
+function is-true {
+  [[ -n "$1" && "$1" == (1|[Yy]([Ee][Ss]|)|[Tt]([Rr][Uu][Ee]|)|[Oo]([Nn]|)) ]]
+}
+
 # taken from https://github.com/matthewmccullough/dotfiles/blob/master/shellaliases
 matrix() {
     echo -e "\e[1;40m" ; clear ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $(( $RANDOM % 72 )) ;sleep 0.05; done|awk '{ letters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()"; c=$4; letter=substr(letters,c,1);a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}'
