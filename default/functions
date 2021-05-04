@@ -3,44 +3,33 @@
 #     || echo "$( date +%T.%N%z ) Begin sourcing .functons..."
 
 # Checks if running on macOS Darwin.
-function is-darwin {
+is-darwin() {
   [[ "$OSTYPE" == darwin* ]]
 }
 
 # Checks if running on Linux.
-function is-linux {
+is-linux() {
   [[ "$OSTYPE" == linux* ]]
 }
 
 # Checks if running on BSD.
-function is-bsd {
+is-bsd() {
   [[ "$OSTYPE" == *bsd* ]]
 }
 
 # Checks if running on Cygwin (Windows).
-function is-cygwin {
+is-cygwin() {
   [[ "$OSTYPE" == cygwin* ]]
 }
 
 # Checks if running on Cygwin (Windows).
-function is-git-bash {
+is-git-bash() {
   [[ "$OSTYPE" == msys ]]
 }
 
 # Checks if running on termux (Android).
-function is-termux {
-  [[ "$OSTYPE" == linux-android ]]
-}
-
-# Checks if running on termux (Android).
-function is-wsl{
+is-wsl() {
   [[ "$OSTYPE" == linux-gnu ]]
-}
-
-# Checks a boolean variable for "true".
-# Case insensitive: "1", "y", "yes", "t", "true", "o", and "on".
-function is-true {
-  [[ -n "$1" && "$1" == (1|[Yy]([Ee][Ss]|)|[Tt]([Rr][Uu][Ee]|)|[Oo]([Nn]|)) ]]
 }
 
 # taken from https://github.com/matthewmccullough/dotfiles/blob/master/shellaliases
@@ -114,7 +103,7 @@ path_prepend() {
 }
 
 # Search for a running process
-task () { ps axuf | grep -v grep | grep "$@" -i --color=auto; }
+task() { ps axuf | grep -v grep | grep "$@" -i --color=auto; }
 
 # Creates an archive (*.tar.gz) from given directory
 maketar() { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
@@ -173,7 +162,7 @@ bu() { cp "$1" "$1".backup-`date +%Y%m%d.%H%M%S`; }
 gzipsize() { echo $((`gzip -c $1 | wc -c`/1024))"KB"; }
 
 # Copy a file to the current directory with todays date automatically appended to the end
-function bu { cp "$1" "$1".backup-`date +%Y%m%d.%H%M%S`; }
+bu() { cp "$1" "$1".backup-`date +%Y%m%d.%H%M%S`; }
 
 # Make these functions, common in other languages, available in the shell
 ord() { printf "0x%x\n" "'$1"; }
@@ -327,7 +316,7 @@ delstop() {
 }
 
 # Select a docker container to start and attach to
-function da() {
+dattach() {
   local cid
   cid=$(docker ps -a | sed 1d | fzf -1 -q "$1" | awk '{print $1}')
 
@@ -335,7 +324,7 @@ function da() {
 }
 
 # Select a running docker container to stop
-function ds() {
+dstp() {
   local cid
   cid=$(docker ps | sed 1d | fzf -q "$1" | awk '{print $1}')
 
@@ -343,7 +332,7 @@ function ds() {
 }
 
 # Select a docker container to remove
-function drm() {
+dremove() {
   local cid
   cid=$(docker ps -a | sed 1d | fzf -q "$1" | awk '{print $1}')
 
