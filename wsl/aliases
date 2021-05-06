@@ -31,11 +31,46 @@ alias -g T='| tail'
 # Pipes output to head which outputs the first part of a file
 alias -g H='| head'
 
-# --------------------------------------------
-# Give directory listings some colour
-# --------------------------------------------
-# LS_COLORS+=':ow=01;33'
-LS_COLORS="ow=01;90:di=01;90"
+if can exa; then
+    alias ls='exa -F'
+    alias l='exa -lg --group-directories-first'
+    alias la='exa -aa --group-directories-first'
+    alias ll='exa -laagF --group-directories-first'
+    alias lla='exa -laag --group-directories-first'
+    alias lll='exa -laag --group-directories-first | less'
+    alias ldotl='exa -ldg --group-directories-first .*'
+    alias ldot='exa -d --group-directories-first .*'
+    alias lsr='exa -R'
+    alias lt='exa -lgs oldest'
+    alias lrt='exa -lgs newest'
+    alias lart='exa -aalgs newest'
+    alias ldir='exa -D'
+    alias lldir='exa -lgD'
+    alias lgit='exa -lg --git --group-directories-first'
+
+    alias llm='exa -lbGF --git --sort=modified'
+    alias ltr='exa --tree --level=2'
+    alias llt='exa -l --git --tree'
+    alias lx='exa -lbhHigmuSa@ --time-style=long-iso --git --color-scale'
+    alias lat='exa -lbhHigmuSa --time-style=long-iso --git --color-scale'
+
+    alias sl='exa -F' # often screw this up
+else
+    # --------------------------------------------
+    # Give directory listings some colour
+    # --------------------------------------------
+    colourflag="-G"
+    # export LS_OPTIONS='--color=auto'
+    export CLICOLOR=1
+    export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
+    # export LSCOLORS=ExFxBxDxCxegedabagacad
+    # LS_COLORS+=':ow=01;33'
+    # LS_COLORS="ow=01;90:di=01;90"
+
+    alias lrt="ls -lrtFh ${colourflag}"
+    alias lart="ls -lartFh ${colourflag}"
+    alias ls="/bin/ls -CF ${colourflag}"
+fi
 
 # List our disk usage in human-readable units including filesystem type, and
 # print a total at the bottom:

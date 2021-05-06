@@ -51,6 +51,12 @@ if can exa; then
     alias lldir='exa -lgD'
     alias lgit='exa -lg --git --group-directories-first'
 
+    alias llm='exa -lbGF --git --sort=modified'
+    alias ltr='exa --tree --level=2'
+    alias llt='exa -l --git --tree'
+    alias lx='exa -lbhHigmuSa@ --time-style=long-iso --git --color-scale'
+    alias lat='exa -lbhHigmuSa --time-style=long-iso --git --color-scale'
+
     alias sl='exa -F' # often screw this up
 else
     # --------------------------------------------
