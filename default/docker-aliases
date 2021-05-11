@@ -1,0 +1,188 @@
+# --------------------------------------------
+#             Docker
+#
+#                    ##        .
+#              ## ## ##       ==
+#            ## ## ## ##     ===
+#       /""""""""""""""""\___/ ===
+#  ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ ~ /  ===- ~~~
+#      \_______ o            __/
+#        \     \          __/
+#         \_____\________/
+#
+# --------------------------------------------
+alias d=docker
+alias dstats='d stats -a --no-stream'
+alias dk='docker-compose'
+alias drm='docker rm'
+alias dirm="docker image rm"
+alias dgc='docker rmi $(docker images -qf "dangling=true")'
+# alias dps="docker ps -a"
+alias dps='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}\t{{.RunningFor}}\t{{.ID}}\t{{.Command}}" | cut -c-$(tput cols)'
+alias dls='docker ps -a --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}\t{{.RunningFor}}\t{{.ID}}\t{{.Command}}" | cut -c-$(tput cols)'
+alias dlc='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.ID}}\t{{.Command}}" | cut -c-$(tput cols)' 
+alias dpsv='docker ps --no-trunc --format "NAME\t{{.Names}}\nID\t{{.ID}}\nIMAGE\t{{.Image}}\nPORTS\t{{.Ports}}\nCOMMAND\t{{.Command}}\nCREATED\t{{.CreatedAt}}\nSTATUS\t{{.Status}}\n"'
+alias di="docker image ls"
+alias dim='docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.ID}}\t{{.Size}}\t{{.CreatedSince}}"'
+alias dv="docker volume ls"
+alias dvc='docker volume ls -qf dangling=true | xargs docker volume rm'
+alias dlog="docker logs"
+alias dtail="docker logs --follow"
+alias dstop="docker stop"
+alias dexec="docker exec"
+alias drmac='docker rm $(docker ps -a -q)'  # Delete all Docker containers
+alias dtop='docker stats $(docker ps --format="{{.Names}}")'
+alias dnet='docker network ls && echo && docker inspect --format "{{\$e := . }}{{with .NetworkSettings}} {{\$e.Name}}
+{{range \$index, \$net := .Networks}}  - {{\$index}}    {{.IPAddress}}
+{{end}}{{end}}" $(docker ps -q)'
+alias dtag='docker inspect --format "{{.Name}}
+{{range \$index, \$label := .Config.Labels}}  - {{\$index}}={{\$label}}
+{{end}}" $(docker ps -q)'
+
+alias sa='docker run -p 8080:8080/tcp --name admin --rm -d admin/caeadom/admincontainerservice:latest'
+alias sadmin='docker run -p 8080:8080/tcp --name admin --rm -d'
+
+# Docker
+alias dk='docker'                   # is short for docker
+alias dka='docker attach'           # attach to a running container
+alias dkb='docker build'            # build an image from a Dockerfile
+alias dkd='docker diff'             # inspect changes on a container's filesystem
+alias dkdf='docker system df'       # show docker filesystem usage
+alias dke='docker exec'             # run a command in a running container
+alias dkE='docker exec -it'         # run an interactive command in a running container
+alias dkh='docker history'          # show the history of an image
+alias dki='docker images'           # list images
+alias dkin='docker inspect'         # return low-level information on a container, image or task
+alias dkim='docker import'
+alias dkk='docker kill'             # kill a running container
+alias dkl='docker logs'             # fetch the logs of a container
+alias dkli='docker login'           # log in to a Docker registry
+alias dklo='docker logout'          # log out from a Docker registry
+alias dkls='docker ps'              # is alias for dkps
+alias dkp='docker pause'            # pause all processes within one or more containers
+alias dkP='docker unpause'          # unpause all processes within one or more containers
+alias dkpl='docker pull'            # pull an image or a repository from a registry
+alias dkph='docker push'            # push an image or a repository to a registry
+alias dkps='docker ps'              # list containers
+alias dkpsa='docker ps -a'          # list all containers (default lists just running)
+alias dkr='docker run'              # run a command in a new container
+alias dkR='docker run -it --rm'     # run an interactive command in a new container and automatically remove the container when it exits
+alias dkRe='docker run -it --rm --entrypoint /bin/bash'  # like dkR and set entry point to /bin/bash
+alias dkRM='docker system prune'
+alias dkrm='docker rm'              # remove one or more containers
+alias dkrmi='docker rmi'            # remove one or more images
+alias dkrn='docker rename'          # rename a container
+alias dks='docker start'            # start one or more stopped containers
+alias dkS='docker restart'          # restart a container
+alias dkss='docker stats'           # display a live stream of container(s) resource usage statistics
+alias dksv='docker save'            # save one or more images to a tar archive (streamed to STDOUT by default)
+alias dkt='docker tag'              # tag an image into a repository
+alias dktop='docker top'            # display the running processes of a container
+alias dkup='docker update'          # update configuration of one or more containers
+alias dkV='docker volume'           # manage Docker volumes
+alias dkv='docker version'          # show the Docker version information
+alias dkw='docker wait'             # block until a container stops, then print its exit code
+alias dkx='docker stop'             # atop a running container
+
+## Container (C)
+alias dkC='docker container'             # manage containers
+alias dkCa='docker container attach'     # attach to a running container
+alias dkCcp='docker container cp'        # copy files/folders between a container and the local filesystem
+alias dkCd='docker container diff'       # inspect changes on a container's filesystem
+alias dkCe='docker container exec'       # run a command in a running container
+alias dkCin='docker container inspect'   # display detailed information on one or more containers
+alias dkCk='docker container kill'       # kill one or more running containers
+alias dkCl='docker container logs'       # fetch the logs of a container
+alias dkCls='docker container ls'        # list containers
+alias dkCp='docker container pause'      # pause all processes within one or more containers
+alias dkCpr='docker container prune'     # remove all stopped containers
+alias dkCrn='docker container rename'    # rename a container
+alias dkCS='docker container restart'    # restart one or more containers
+alias dkCrm='docker container rm'        # remove one or more containers
+alias dkCr='docker container run'        # run a command in a new container
+alias dkCR='docker container run -it --rm'   # run an interactive command in a new container and automatically remove the container when it exits
+alias dkCRe='docker container run -it --rm --entrypoint /bin/bash'   # like dkCR and set entry point to /bin/bash
+alias dkCs='docker container start'      # start one or more stopped containers
+alias dkCss='docker container stats'     # display a live stream of container(s) resource usage statistics
+alias dkCx='docker container stop'       # stop one or more running containers
+alias dkCtop='docker container top'      # display the running processes of a container
+alias dkCP='docker container unpause'    # unpause all processes within one or more containers
+alias dkCup='docker container update'    # update configuration of one or more containers
+alias dkCw='docker container wait'       # block until one or more containers stop, then print their exit codes
+
+## Image (I)
+alias dkI='docker image'              # manage images
+alias dkIb='docker image build'       # build an image from a Dockerfile
+alias dkIh='docker image history'     # show the history of an image
+alias dkIim='docker image import'     # import the contents from a tarball to create a filesystem image
+alias dkIin='docker image inspect'    # display detailed information on one or more images
+alias dkIls='docker image ls'         # list images
+alias dkIpr='docker image prune'      # remove unused images
+alias dkIpl='docker image pull'       # pull an image or a repository from a registry
+alias dkIph='docker image push'       # push an image or a repository to a registry
+alias dkIrm='docker image rm'         # remove one or more images
+alias dkIsv='docker image save'       # aave one or more images to a tar archive (streamed to STDOUT by default)
+alias dkIt='docker image tag'         # tag an image into a repository
+
+## Volume (V)
+alias dkV='docker volume'               # manage volumes
+alias dkVin='docker volume inspect'     # display detailed information on one or more volumes
+alias dkVls='docker volume ls'          # list volumes
+alias dkVpr='docker volume prune'       # remove all unused volumes
+alias dkVrm='docker volume rm'          # remove one or more volumes
+
+## Network (N)
+alias dkN='docker network'                 # manage networks
+alias dkNs='docker network connect'        # connect a container to a network
+alias dkNx='docker network disconnect'     # disconnects a container from a network
+alias dkNin='docker network inspect'       # displays detailed information on a network
+alias dkNls='docker network ls'            # lists all the networks created by the user
+alias dkNpr='docker network prune'         # remove all unused networks
+alias dkNrm='docker network rm'            # deletes one or more networks
+
+## System (Y)
+alias dkY='docker system'             # manage Docker
+alias dkYdf='docker system df'        # show docker filesystem usage
+alias dkYpr='docker system prune'     # remove unused data
+
+## Stack (K)
+alias dkK='docker stack'              # manage Docker stacks
+alias dkKls='docker stack ls'         # list stacks
+alias dkKps='docker stack ps'         # llst the tasks in the stack
+alias dkKrm='docker stack rm'         # remove the stack
+
+## Swarm (W)
+alias dkW='docker swarm'              # manage Docker Swarm
+
+## CleanUp (rm)
+# Clean up exited containers (docker < 1.13)
+alias dkrmC='docker rm $(docker ps -qaf status=exited)'
+# Clean up dangling images (docker < 1.13)
+alias dkrmI='docker rmi $(docker images -qf dangling=true)'
+# Clean up dangling volumes (docker < 1.13)
+alias dkrmV='docker volume rm $(docker volume ls -qf dangling=true)'
+
+# Docker Compose (c)
+alias dkc='docker-compose'               # dkc is short for docker-compose
+alias dkcb='docker-compose build'        # dkcb Build or rebuild services
+alias dkcB='docker-compose build --no-cache'     # dkcB Build or rebuild services and do not use cache when building the image
+alias dkcd='docker-compose down'         # dkcd Stop and remove containers, networks, images, and volumes
+alias dkce='docker-compose exec'         # dkce Execute a command in a running container
+alias dkck='docker-compose kill'         # dkck Kill containers
+alias dkcl='docker-compose logs'         # dkcl View output from containers
+alias dkcls='docker-compose ps'          # dkcls is alias for dkcps
+alias dkcp='docker-compose pause'        # dkcp Pause services
+alias dkcP='docker-compose unpause'      # dkcP Unpause services
+alias dkcpl='docker-compose pull'        # dkcpl Pull service images
+alias dkcph='docker-compose push'        # dkcph Push service images
+alias dkcps='docker-compose ps'          # dkcps List containers
+alias dkcr='docker-compose run'          # dkcr Run a one-off command
+alias dkcR='docker-compose run --rm'     # dkcR Run a one-off command and remove container after run.
+alias dkcrm='docker-compose rm'          # dkcrm Remove stopped containers
+alias dkcs='docker-compose start'        # dkcs Start services
+alias dkcsc='docker-compose scale'       # dkcsc Set number of containers for a service
+alias dkcS='docker-compose restart'      # dkcS Restart services
+alias dkcu='docker-compose up'           # dkcu Create and start containers
+alias dkcU='docker-compose up -d'        # dkcU Create and start containers in detached mode: Run containers in the background, print new container names
+alias dkcv='docker-compose version'      # dkcV Show the Docker-Compose version information
+alias dkcx='docker-compose stop'         # dkcx Stop services

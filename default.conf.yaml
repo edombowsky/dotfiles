@@ -34,5 +34,7 @@
     ~/.vim: vim
     ~/.bash_prompts: default/bash_prompts
     ~/.aliases: default/aliases
+    ~/.git-aliases: default/git-aliases
+    ~/.docker-aliases: default/docker-aliases
     ~/.functions: default/functions
     ~/.oh-my-zsh-theme.sh: default/oh-my-zsh-theme.sh
