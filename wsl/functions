@@ -81,4 +81,14 @@ refresh_de() {
     cd $CURRDIR
 }
 
+# Use Windows' git when working under C:\ drive
+# See: https://markentier.tech/posts/2020/10/faster-git-under-wsl2/
+function git() {
+  if $(pwd -P | grep -q "^\/mnt\/c\/*"); then
+    git.exe "$@"
+  else
+    command git "$@"
+  fi
+}
+
 # echo "$( date +%T%z ) End sourcing .wsl_functions..."
