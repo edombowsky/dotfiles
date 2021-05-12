@@ -267,7 +267,7 @@ weather() {
 rj() { rg --type java "$@"; }
 rs() { rg --type scala "$@"; }
 rx() { rg --type xml "$@"; }
-rjsi() { rg --type js "$@"; }
+rjs() { rg --type js --type ts "$@"; }
 
 # Print the list of your Git commits this month
 # Explanation
