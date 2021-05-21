@@ -194,7 +194,7 @@ alias deqa10='ssh qa10'
 alias wfmint='ssh int'
 alias wfmstg='ssh stg'
 
-[[ -f ~/.git-docker ]] && source ~/.git-docker
+[[ -f ~/.docker-aliases ]] && source ~/.docker-aliases
 [[ -f ~/.git-aliases ]] && source ~/.git-aliases
 
 # -------------------------------
