@@ -1,6 +1,6 @@
 [user]
-	name = Earl Dombowsky
-	email = earl.dombowsky@hitachi-powergrids.com
+    name = Earl Dombowsky
+    email = earl.dombowsky@hitachi-powergrids.com
 
 [core]
     excludesfile = /Users/caeadom/.gitignore_global
@@ -70,8 +70,8 @@
 [difftool "sublimerge_wsl"]
     cmd = subl -n --wait \"$REMOTE\" \"$LOCAL\" --command \"sublimerge_diff_views {\\\"left_read_only\\\": true, \\\"right_read_only\\\": true}\"
 [difftool "sourcetree"]
-	cmd = /usr/local/bin/bcomp \"$LOCAL\" \"$REMOTE\"
-	path = -ro
+    cmd = /usr/local/bin/bcomp \"$LOCAL\" \"$REMOTE\"
+    path = -ro
 
 # Taken from https://lukas.zapletalovi.com/2012/09/three-way-git-merging-with-meld.html
 #
@@ -105,8 +105,8 @@
 [mergetool "sublimerge"]
     cmd = subl -n --wait <THEIRS> <BASE> <MINE> <MERGED> --command sublimerge_diff_views
 [mergetool "sourcetree"]
-	cmd = /usr/local/bin/bcomp \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
-	trustExitCode = true
+    cmd = /usr/local/bin/bcomp \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+    trustExitCode = true
 
 # When I want to see plain git marks in the file that is being merged
 # (the middle file). I have a separate merge tool configured and use
@@ -190,7 +190,7 @@
     remotes = remote -v
     contributors = shortlog --summary --numbered --email
     current-branch = rev-parse --abbrev-ref HEAD
-    
+
     # Switch to a branch, creating it if necessary
     go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 
@@ -271,7 +271,7 @@
     # --------------------------------------------------------------------------
     tags = tag -l
     # show last tag
-	lasttag = describe --tags --abbrev=0
+    lasttag = describe --tags --abbrev=0
 
     branches = branch -a
     remotes = remote -v
@@ -403,7 +403,7 @@
     # One liner with colours
     l1c = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
 
-    # log a list of commits with only the commit name and SHA. Useful to have a 
+    # log a list of commits with only the commit name and SHA. Useful to have a
     # quick overview of the branches on the repo.
     l2 = log --graph --oneline --decorate --all
 
@@ -439,51 +439,51 @@
     latest = for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short)'
 
     # check what was in the last commit
-	dl = "!git ll -1"
+    dl = "!git ll -1"
 
     # Show content (full diff) of a commit given a revision:
-	dr  = "!f() { git diff "$1"^.."$1"; }; f"
-	lc  = "!f() { git ll "$1"^.."$1"; }; f"
-	diffr  = "!f() { git diff "$1"^.."$1"; }; f"
+    dr  = "!f() { git diff "$1"^.."$1"; }; f"
+    lc  = "!f() { git ll "$1"^.."$1"; }; f"
+    diffr  = "!f() { git diff "$1"^.."$1"; }; f"
 
     # show recent branches
-	short-recent = "for-each-ref --count=25 --sort=committerdate refs/heads/ --format='%(refname:short)'"
+    short-recent = "for-each-ref --count=25 --sort=committerdate refs/heads/ --format='%(refname:short)'"
 
     # --------------------------------------------------------------------------
     # Using fzf
     # --------------------------------------------------------------------------
     # fuzzy add using fzf
-	fza = "!git ls-files -m -o --exclude-standard | fzf --print0 -m --preview 'git diff {}' --preview-window=top:10:wrap | xargs -0 -t -o git add --all"
+    fza = "!git ls-files -m -o --exclude-standard | fzf --print0 -m --preview 'git diff {}' --preview-window=top:10:wrap | xargs -0 -t -o git add --all"
 
     # fuzzy restore using fzf
-	fzr = "!git ls-files -m --exclude-standard | fzf --print0 -m --preview 'git diff {}' --preview-window=top:10:wrap | xargs -0 -t -o git restore"
+    fzr = "!git ls-files -m --exclude-standard | fzf --print0 -m --preview 'git diff {}' --preview-window=top:10:wrap | xargs -0 -t -o git restore"
 
     # fuzzy restore staged using fzf
-	fzrs = "!git diff --name-only --staged | fzf --print0 -m --preview 'git diff {}' --preview-window=top:10:wrap | xargs -0 -t -o git restore --staged"
+    fzrs = "!git diff --name-only --staged | fzf --print0 -m --preview 'git diff {}' --preview-window=top:10:wrap | xargs -0 -t -o git restore --staged"
 
     # fuzzy switch branch...  /fish/functions/fco.fish seems better
-	fco = "!git short-recent | fzf --print0 | xargs -0 -t git checkout"
+    fco = "!git short-recent | fzf --print0 | xargs -0 -t git checkout"
 
     # fuzzy fix staged changes into existing commit
-	ffix = !HASH=`git log --pretty=oneline | head -n 100 | fzf` && git fixit `echo ${HASH} | awk '{ print $1 }'`
+    ffix = !HASH=`git log --pretty=oneline | head -n 100 | fzf` && git fixit `echo ${HASH} | awk '{ print $1 }'`
 
     # fuzzy rebase interactive choose existing commit to start from
-	frebase = !HASH=`git log --pretty=oneline | head -n 100 | fzf` && git rebase -i `echo ${HASH} | awk '{ print $1 }'`^
+    frebase = !HASH=`git log --pretty=oneline | head -n 100 | fzf` && git rebase -i `echo ${HASH} | awk '{ print $1 }'`^
 
     # fuzzy edit untracked/modified files
-	fed = !FILES=`git status -s | awk '{ print $2 }' | fzf -x -m` && code ${FILES}
+    fed = !FILES=`git status -s | awk '{ print $2 }' | fzf -x -m` && code ${FILES}
 
     # fuzzy edit files in conflict state
-	fedconflicts = !FILES=`git status -s | grep '^[UMDA]\\{2\\} ' | awk '{ print $2 }' | fzf -x -m` && code ${FILES}
+    fedconflicts = !FILES=`git status -s | grep '^[UMDA]\\{2\\} ' | awk '{ print $2 }' | fzf -x -m` && code ${FILES}
 
     # fuzzy gitgrep working tree for pattern and choose file(s) to edit
-	fgrep = !sh -c 'FILES=`git grep -l -A 0 -B 0 $1 $2 | fzf -x -m` && code `echo ${FILES} | cut -d':' -f1 | xargs`' -
+    fgrep = !sh -c 'FILES=`git grep -l -A 0 -B 0 $1 $2 | fzf -x -m` && code `echo ${FILES} | cut -d':' -f1 | xargs`' -
 
     # fuzzy select past commit, and edit current state of file(s) changed in it
-	fedlog = !HASH=`git log --pretty=oneline | head -n 50 | fzf` && HASHZ=`echo ${HASH} | awk '{ print $1 }'` && FILES=`git show --pretty='format:' --name-only $HASHZ | grep -v -e '^$' | fzf -x -m` && code ${FILES}
+    fedlog = !HASH=`git log --pretty=oneline | head -n 50 | fzf` && HASHZ=`echo ${HASH} | awk '{ print $1 }'` && FILES=`git show --pretty='format:' --name-only $HASHZ | grep -v -e '^$' | fzf -x -m` && code ${FILES}
 
     # fuzzy reset back to prior commit
-	freset = !HASH=`git log --pretty=oneline | head -n 50 | fzf` && git reset --soft `echo ${HASH} | awk '{ print $1 }'`^
+    freset = !HASH=`git log --pretty=oneline | head -n 50 | fzf` && git reset --soft `echo ${HASH} | awk '{ print $1 }'`^
 
     # --------------------------------------------------------------------------
     #                                                                       grep
@@ -532,7 +532,7 @@
 [diff-so-fancy]
     stripLeadingSymbols = false
 [pull]
-	rebase = true
+    rebase = true
 [include]
     path = ~/.gitconfig-pat
 [include]
