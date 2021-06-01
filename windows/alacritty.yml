@@ -168,7 +168,7 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-# For more colour schemes: https://github.com/alacritty/alacritty/wiki/Color-schemes 
+# For more colour schemes: https://github.com/alacritty/alacritty/wiki/Color-schemes
 # and https://github.com/eendroroy/alacritty-theme
 #
 
@@ -297,7 +297,7 @@ colors:
 #     - { index: 19, color: "0x586e75" }
 #     - { index: 20, color: "0x839496" }
 #     - { index: 21, color: "0xeee8d5" }
-  
+
 # Visual Bell
 #
 # Any time the BEL code is received, Alacritty "rings" the visual bell. Once
@@ -385,7 +385,7 @@ shell:
 # Startup directory
 #
 # Directory the shell is started in. If this is unset, or `None`, the working
-# directory of the parent process will be used. 
+# directory of the parent process will be used.
 working_directory: C:\Users\caeadom
 
 # WinPTY backend (Windows only)
@@ -596,9 +596,11 @@ mouse_bindings:
 # If the same trigger is assigned to multiple actions, all of them are executed
 # at once.
 key_bindings:
-  - { key: V,    mods: Control, action: Paste            }
-  - { key: C,    mods: Control, action: Copy             }
-  - { key: N,    mods: Control, action: SpawnNewInstance }
+  - { key: V,      mods: Control, action: Paste            }
+  - { key: C,      mods: Control, action: Copy             }
+  - { key: N,      mods: Control, action: SpawnNewInstance }
+  - { key: Comma,  mods: Control, command:
+      {program: "sh", args: ["-c","open ~/.config/alacritty/alacritty.yml"]}}
 
   #- { key: Paste,                                action: Paste          }
   #- { key: Copy,                                 action: Copy           }
