@@ -70,8 +70,8 @@
 [difftool "sublimerge_wsl"]
     cmd = subl -n --wait \"$REMOTE\" \"$LOCAL\" --command \"sublimerge_diff_views {\\\"left_read_only\\\": true, \\\"right_read_only\\\": true}\"
 [difftool "sourcetree"]
-    cmd = /usr/local/bin/bcomp \"$LOCAL\" \"$REMOTE\"
-    path = -ro
+	cmd = /usr/local/bin/bcomp \"$LOCAL\" \"$REMOTE\"
+	path = -ro
 
 # Taken from https://lukas.zapletalovi.com/2012/09/three-way-git-merging-with-meld.html
 #
@@ -105,8 +105,8 @@
 [mergetool "sublimerge"]
     cmd = subl -n --wait <THEIRS> <BASE> <MINE> <MERGED> --command sublimerge_diff_views
 [mergetool "sourcetree"]
-    cmd = /usr/local/bin/bcomp \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
-    trustExitCode = true
+	cmd = /usr/local/bin/bcomp \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+	trustExitCode = true
 
 # When I want to see plain git marks in the file that is being merged
 # (the middle file). I have a separate merge tool configured and use
