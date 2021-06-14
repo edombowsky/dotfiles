@@ -411,7 +411,7 @@ repo() {
         echo "repo not found so go to $REPO_BASE_DIR"
         cd "$REPO_BASE_DIR"
     else
-        repo_path=$(find "$REPO_BASE_DIR" -maxdepth 4 -type d -name "*$1*" | head -n 1)
+        repo_path=$(find "$REPO_BASE_DIR" -maxdepth 3 -type d -name "*$1*" | head -n 1)
         if [[ -z "${repo_path}" ]]; then
             echo "repo not found so go to $REPO_BASE_DIR"
             cd "$REPO_BASE_DIR"
