@@ -32,8 +32,12 @@
                "background": "#0000ff",
                "powerline_symbol": "\uE0B4",
                "properties": {
-                  "style": "full",
-                  "postfix": " "
+                  "style": "agnoster",
+                  "postfix": " ",
+                  "enable_hyperlink": true,
+                  "mapped_locations": {
+                     "/Users/caeadom/Documents/projects": "..projects"
+                  }
                }
             },
             {
