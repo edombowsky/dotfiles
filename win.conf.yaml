@@ -25,3 +25,4 @@
     ~/AppData/Roaming/alacritty/alacritty.yml: windows/alacritty.yml
     ~/AppData/Local/nvim/init.vim: config/nvim/init.vim
     ~/bin/windows: windows/bin
+    ~/.powerlevel10k_modern.omp.json: windows/powerlevel10k_modern.omp.json
