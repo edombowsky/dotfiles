@@ -38,3 +38,5 @@
     ~/.docker-aliases: default/docker-aliases
     ~/.functions: default/functions
     ~/.oh-my-zsh-theme.sh: default/oh-my-zsh-theme.sh
+    ~/bin/diff-so-fancy: diff-so-fancy/diff-so-fancy
+    ~/bin/lib: diff-so-fancy/lib

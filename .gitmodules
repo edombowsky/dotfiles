@@ -13,3 +13,6 @@
 [submodule "vim/pack/tpope/start/vim-fugitive"]
 	path = vim/pack/tpope/start/vim-fugitive
 	url = git@github.com:tpope/vim-fugitive.git
+[submodule "diff-so-fancy"]
+	path = diff-so-fancy
+	url = git@github.com:so-fancy/diff-so-fancy.git

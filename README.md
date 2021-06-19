@@ -30,6 +30,8 @@ cd bundle
 git submodule add git@github.com:VundleVim/Vundle.vim.git
 git submodule add git@github.com:vim-airline/vim-airline.git
 git submodule add git@github.com:vim-airline/vim-airline-themes.git
+
+git submodule add git@github.com:so-fancy/diff-so-fancy.git
 ```
 
 ### Maintaining submodules at latest commits
@@ -40,7 +42,7 @@ git submodule foreach git pull origin master
 # Now the submodules are in the state you want, so
 git commit -am "Pulled down update to sub-modules"
 
-# A quicker method is the following that will fetch the latest changes from 
+# A quicker method is the following that will fetch the latest changes from
 # upstream in each submodule, merge them in, and check out the latest revision
 # of the submodule
 git submodule update --remote --merge
