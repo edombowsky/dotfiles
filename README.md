@@ -60,6 +60,7 @@ I have utilised the method outlined in the following [pull request](https://gith
 ### Dependencies
 
 - [dotbot](https://github.com/anishathalye/dotbot): A tool that bootstraps your dotfiles
+- [delta](https://github.com/dandavison/delta) - A viewer for git and diff output
 
 #### Bash prompts
 
