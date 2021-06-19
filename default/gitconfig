@@ -1,6 +1,6 @@
 [user]
-    name = Earl Dombowsky
-    email = earl.dombowsky@hitachi-powergrids.com
+	name = Earl Dombowsky
+	email = earl.dombowsky@hitachi-powergrids.com
 
 [core]
     excludesfile = /Users/caeadom/.gitignore_global

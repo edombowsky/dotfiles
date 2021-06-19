@@ -411,13 +411,18 @@ repo() {
         echo "repo not found so go to $REPO_BASE_DIR"
         cd "$REPO_BASE_DIR"
     else
-        repo_path=$(find "$REPO_BASE_DIR" -maxdepth 3 -type d -name "*$1*" | head -n 1)
+        repo_path=$(find "$REPO_BASE_DIR" -maxdepth 3 -type d -name "*$1*")
         if [[ -z "${repo_path}" ]]; then
             echo "repo not found so go to $REPO_BASE_DIR"
             cd "$REPO_BASE_DIR"
         else
-            echo "found $repo_path"
-            cd "$repo_path"
+            tokens=( $repo_path )
+            if [[ ${#tokens[@]} > 1 ]]; then
+                select d in $repo_path; do test -n "$d" && break; echo ">>> Invalid Selection"; done
+                cd "$d"
+            else
+                cd $repo_path
+            fi
         fi
     fi
 }
