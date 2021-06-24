@@ -10,7 +10,8 @@
     # Tell Git which whitespace problems it should recognize, namely any
     # whitespace at the end of a line, as well as mixed spaces and tabs:
     whitespace = trailing-space,space-before-tab
-    pager = diff-so-fancy | less --tabs=4 -RFX
+    # pager = diff-so-fancy | less --tabs=4 -RFX
+    pager = delta
 
 [pager]
     # pre-seed less pager with a search pattern, so you can move between files with n/N keys:
@@ -36,8 +37,8 @@
     line-numbers-minus-style = "#444444"
     line-numbers-zero-style = "#444444"
     line-numbers-plus-style = "#444444"
-    line-numbers-left-format = "{nm:>4}┊"
-    line-numbers-right-format = "{np:>4}│"
+    line-numbers-left-format = "{nm:>4} ┊"
+    line-numbers-right-format = "{np:>4} │"
     line-numbers-left-style = blue
     line-numbers-right-style = blue
     line-numbers-minus-style = 124
@@ -66,6 +67,7 @@
     # Enable the recording of resolved conflicts, so that identical hunks
     # can be resolved automatically later on.
     enabled = true
+    autoupdate = 1     # so that your index is also updated
 
 [filter "lfs"]
     clean = git-lfs clean %f
@@ -224,7 +226,6 @@
     br = branch
     co = checkout
 
-    branches = branch -vv
     remotes = remote -v
     contributors = shortlog --summary --numbered --email
     current-branch = rev-parse --abbrev-ref HEAD
@@ -243,11 +244,22 @@
     as = !git add . && git status
 
     # --------------------------------------------------------------------------
+    #                                                                     branch
+    # --------------------------------------------------------------------------
+    branches = branch -vv
+    b = branch
+    ba = branch -a
+    bd = branch -d
+	bdd = branch -D
+
+    # --------------------------------------------------------------------------
     #                                                                     commit
     # --------------------------------------------------------------------------
+    c = commit
     cm = commit -m                    # commit with message
     ca = commit -am                   # commit all with message
     ci = commit                       # commit
+    cad = commit -a --amend
 
     # --------------------------------------------------------------------------
     #                                                                      fetch
@@ -261,6 +273,7 @@
     # --------------------------------------------------------------------------
     pl = pull
     plo = pull origin
+    refresh = !git fetch -p && git pull
 
     # --------------------------------------------------------------------------
     #                                                                       push
@@ -338,7 +351,6 @@
     mt = mergetool
     wc = whatchanged -n 1
     ls = ls-files
-    refresh = !git fetch -p && git pull
     gc = !git gc --prune=now
 
     # --------------------------------------------------------------------------
