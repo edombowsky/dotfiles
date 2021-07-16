@@ -48,7 +48,31 @@
                "powerline_symbol": "\uE0B4",
                "properties": {
                   "style": "full",
-                  "prefix": " "
+                  "prefix": " ",
+                  "display_status": true,
+                  "display_stash_count": true
+               }
+            },
+            {
+               "type": "java",
+               "style": "powerline",
+               "powerline_symbol": "\uE0B0",
+               "foreground": "#ffffff",
+               "background": "#4063D8",
+               "properties": {
+                  "prefix": " \uE738 ",
+                  "display_mode": "files"
+               }
+            },
+            {
+               "type": "node",
+               "style": "powerline",
+               "powerline_symbol": "\uE0B0",
+               "foreground": "#ffffff",
+               "background": "#6CA35E",
+               "properties": {
+                  "prefix": " \uE718 ",
+                  "display_mode": "files"
                }
             }
          ]
@@ -75,7 +99,8 @@
                "leading_diamond": "\uE0B6",
                "display_version": true,
                "properties": {
-                  "postfix": " <#000000>\uE0B6</>"
+                  "postfix": " <#000000>\uE0B6</>",
+                  "display_mode": "files"
                }
             },
             {
