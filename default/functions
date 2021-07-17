@@ -420,7 +420,7 @@ repo() {
             repo_array=($(echo $repo_path | tr ";" "\n"))
             # echo DEBUG:: REPO_ARRAY = $repo_array
             # echo DEBUG:: REPO_ARRAY size = ${#repo_array[@]}
-            if [[ ${#repo_path[@]} > 1 ]]; then
+            if [[ ${#repo_array[@]} > 1 ]]; then
                 select d in $repo_array; do test -n "$d" && break; echo ">>> Invalid Selection"; done
                 cd "$d"
             else
